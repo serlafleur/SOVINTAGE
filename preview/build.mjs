@@ -145,11 +145,12 @@ const index = readJson(path.join(THEME, "templates/index.json"));
 const mission = readJson(path.join(THEME, "templates/page.mission.json"));
 const headerGroup = readJson(path.join(THEME, "sections/header-group.json"));
 
-// Aperçu seulement : lien « Notre mission » dans le menu (à ajouter dans l'éditeur de thème, voir README)
-function headerWithMission() {
+// Menu essentiel (à reproduire dans l'éditeur de thème, voir README) : Le drop · La collection · Notre mission · Contact.
+// La Signature, Matières et Sur mesure restent accessibles depuis l'accueil ; le panier reste en icône dans la barre.
+function essentialMenu() {
   const h = structuredClone(headerGroup.sections.svf_header);
   h.blocks.l_mission = { type: "link", settings: { label: "Notre mission", label_menu: "Notre <em>mission</em>", link: "/pages/notre-mission", in_bar: true } };
-  h.block_order.splice(h.block_order.indexOf("l_mesure"), 0, "l_mission");
+  h.block_order = ["l_drop", "l_coll", "l_mission", "l_contact"];
   return h;
 }
 // Les liens Shopify pointent vers les fichiers de l'aperçu
@@ -161,7 +162,7 @@ const relink = (html) => html
 async function page({ mobile, template = index, tpl = { name: "index", suffix: null }, label }) {
   const g = { ...globals, template: tpl, request: { path: tpl.name === "index" ? "/" : "/pages/notre-mission", design_mode: false } };
   const head = tpl.name === "index" ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
-  let header = await renderSection("svf-header", "svf_header", mobile ? headerWithMission() : headerGroup.sections.svf_header, g);
+  let header = await renderSection("svf-header", "svf_header", mobile ? essentialMenu() : headerGroup.sections.svf_header, g);
   // « Avant » : le thème tel qu'il est en ligne, sans les deux lignes qui chargent la couche mobile
   if (!mobile) header = header.replace(/<link[^>]*svf-mobile\.css[^>]*>|<script[^>]*svf-mobile\.js[^>]*><\/script>/g, "");
   const sections = [];

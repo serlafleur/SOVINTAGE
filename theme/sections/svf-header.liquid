@@ -88,7 +88,6 @@
         {%- assign c0 = href | slice: 0 -%}{%- if c0 == '#' -%}{%- assign href = home | append: href -%}{%- endif -%}
         <li style="--i:{{ forloop.index0 }}"><a href="{{ href }}">{{ b.settings.label_menu | default: b.settings.label }}</a></li>
       {%- endfor -%}
-      <li style="--i:{{ section.blocks.size }}"><a href="{{ routes.cart_url }}">Panier</a></li>
     </ul>
   </div>
 </div>

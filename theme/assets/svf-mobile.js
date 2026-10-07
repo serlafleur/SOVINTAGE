@@ -52,13 +52,12 @@
       new MutationObserver(label).observe(cart, { childList: true, subtree: true, characterData: true });
     }
 
-    /* Bas du menu : Instagram et langue · devise, repris de la page */
-    if (!$(".svfm-menu-foot", menu)) {
+    /* Bas du menu : lien Instagram, repris de la page */
+    if (!$(".svfm-menu-foot", menu) && ($(".svf-ig-center a[href*='instagram']") || $("a[href*='instagram.com']"))) {
       var ig = $(".svf-ig-center a[href*='instagram']") || $("a[href*='instagram.com']");
-      var fx = $(".svf-hd-fx", root);
       var foot = document.createElement("div");
       foot.className = "svfm-menu-foot svfm-only";
-      foot.innerHTML = (ig ? '<a href="' + ig.href + '" target="_blank" rel="noopener">Instagram · ' + (ig.textContent.trim().charAt(0) === "@" ? ig.textContent.trim() : "@sovintagefrip") + "</a>" : "<span></span>") + (fx ? "<span>" + fx.textContent + "</span>" : "");
+      foot.innerHTML = '<a href="' + ig.href + '" target="_blank" rel="noopener">Instagram · ' + (ig.textContent.trim().charAt(0) === "@" ? ig.textContent.trim() : "@sovintagefrip") + "</a>";
       menu.appendChild(foot);
     }
 

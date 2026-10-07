@@ -43,6 +43,18 @@ shopify theme push --theme 211137102214 \
 
 Le bureau a été vérifié : à 1 280 px, les 577 éléments mesurés de l’accueil ont les mêmes positions et tailles avec et sans la couche.
 
+## Menu : quatre entrées
+
+**Le drop · La collection · Notre mission · Contact.** Le panier reste en icône dans la barre ; La Signature, Matières et Sur mesure restent accessibles depuis l'accueil (et Sur mesure depuis Contact).
+
+- Code : `sections/svf-header.liquid` n'ajoute plus « Panier » à la fin du menu plein écran ; le bas du menu ne garde que le lien Instagram.
+- Éditeur de thème › « SVF · En-tête » (à faire à la main, ces liens sont des réglages et non du code) :
+  1. supprimer les liens **La Signature** (`#svf-signature`), **Matières** (`#svf-matieres`) et **Sur mesure** (`#svf-mesure`) ;
+  2. ajouter le lien **Notre mission** : libellé « Notre mission », libellé du menu `Notre <em>mission</em>`, adresse `/pages/notre-mission`, affiché dans la barre ;
+  3. ordre : Le drop, Collection, Notre mission, Contact.
+
+`theme/sections/header-group.json` reste la copie des réglages en ligne relevés le 7 octobre 2026 : ne pas le pousser tel quel, il écraserait ces réglages.
+
 ## Page « Notre mission »
 
 Fichiers : `theme/sections/svf-mission.liquid` (section, styles inclus via `{% stylesheet %}`) et `theme/templates/page.mission.json` (contenu de départ).
@@ -51,7 +63,7 @@ La section charge elle-même les styles et scripts svf (`snippets/svf-head`), ca
 Mise en ligne :
 1. Ajouter les deux fichiers au thème (ou `shopify theme push --theme 211137102214 --only sections/svf-mission.liquid --only templates/page.mission.json`).
 2. *Boutique en ligne › Pages › Ajouter une page* : titre « Notre mission », modèle **page.mission**. L’adresse devient `/pages/notre-mission`.
-3. Éditeur de thème › en-tête « SVF · En-tête » › ajouter un lien : libellé « Notre mission », libellé du menu `Notre <em>mission</em>`, adresse `/pages/notre-mission`.
+3. Ajouter le lien dans l’en-tête (voir « Menu : quatre entrées » ci-dessus).
 
 Contenu : les phrases reprennent des textes déjà présents sur le site (accueil, sur mesure, contact). Sont nouveaux et à valider : le libellé « Ce qui nous anime », le titre « Trois façons de faire », les verbes « Retrouver / Créer / Accompagner », les titres des trois engagements et les liaisons de phrase. Tout se modifie dans l’éditeur de thème.
 
