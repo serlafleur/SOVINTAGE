@@ -43,6 +43,18 @@ shopify theme push --theme 211137102214 \
 
 Le bureau a été vérifié : à 1 280 px, les 577 éléments mesurés de l’accueil ont les mêmes positions et tailles avec et sans la couche.
 
+## Page « Notre mission »
+
+Fichiers : `theme/sections/svf-mission.liquid` (section, styles inclus via `{% stylesheet %}`) et `theme/templates/page.mission.json` (contenu de départ).
+La section charge elle-même les styles et scripts svf (`snippets/svf-head`), car `layout/theme.liquid` ne les charge pas pour ce template.
+
+Mise en ligne :
+1. Ajouter les deux fichiers au thème (ou `shopify theme push --theme 211137102214 --only sections/svf-mission.liquid --only templates/page.mission.json`).
+2. *Boutique en ligne › Pages › Ajouter une page* : titre « Notre mission », modèle **page.mission**. L’adresse devient `/pages/notre-mission`.
+3. Éditeur de thème › en-tête « SVF · En-tête » › ajouter un lien : libellé « Notre mission », libellé du menu `Notre <em>mission</em>`, adresse `/pages/notre-mission`.
+
+Contenu : les phrases reprennent des textes déjà présents sur le site (accueil, sur mesure, contact). Sont nouveaux et à valider : le libellé « Ce qui nous anime », le titre « Trois façons de faire », les verbes « Retrouver / Créer / Accompagner », les titres des trois engagements et les liaisons de phrase. Tout se modifie dans l’éditeur de thème.
+
 ## Aperçu local
 
 `preview/build.mjs` rend les vraies sections Liquid de `theme/` avec les réglages de `templates/index.json` et `sections/header-group.json`, en simulant les filtres Shopify utilisés (`image_url`, `file_url`, `money`…). Les quatre produits (Cravates Signatures, 40,00 €) reprennent les données de la boutique.
@@ -50,7 +62,7 @@ Le bureau a été vérifié : à 1 280 px, les 577 éléments mesurés de l’ac
 ```sh
 cd preview
 npm install
-npm run build        # dist/index.html (comparatif), dist/mobile.html, dist/avant.html
+npm run build        # dist/index.html (comparatif), dist/mobile.html, dist/avant.html, dist/mission.html
 npm run shoot        # captures + contrôle débordement / cibles tactiles (Chromium requis)
 ```
 

@@ -1,0 +1,72 @@
+{
+  "sections": {
+    "main": {
+      "type": "svf-mission",
+      "settings": {
+        "eyebrow": "Notre mission",
+        "heading": "Une histoire à porter",
+        "heading_em": "autrement.",
+        "lede": "<p>Un vêtement retrouvé. Une création SoVintage. Un regard singulier sur le vêtement.</p>",
+        "image": "shopify://shop_images/IMG_2415.jpg",
+        "image_caption": "Signature Neige · Crépuscule FW26",
+        "manifesto_label": "Ce qui nous anime",
+        "manifesto": "L’existant rencontre la création.",
+        "manifesto_text": "<p>Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>",
+        "pillars_heading": "Trois façons",
+        "pillars_heading_em": "de faire.",
+        "quote": "Une cravate, une présence.",
+        "quote_text": "<p>La fausse fourrure bouscule les codes et dessine une autre silhouette.</p>",
+        "quote_sig": "ombre",
+        "cta_heading": "Votre envie,",
+        "cta_heading_em": "notre point de départ.",
+        "cta_label": "Découvrir le drop",
+        "cta_url": "/#svf-drop",
+        "cta2_label": "Prendre rendez-vous",
+        "cta2_url": "/pages/contact"
+      },
+      "blocks": {
+        "retrouver": {
+          "type": "pillar",
+          "settings": {
+            "label": "Retrouver",
+            "title": "La seconde main, sélectionnée.",
+            "text": "<p>Des pièces de seconde main sélectionnées : un vêtement retrouvé, à porter autrement.</p>",
+            "kind": "image",
+            "image": "shopify://shop_images/IMG_2394.jpg",
+            "sig": "ombre", "frame": 1, "wall": "stone",
+            "link_label": "Voir les looks",
+            "link_url": "/pages/collection"
+          }
+        },
+        "creer": {
+          "type": "pillar",
+          "settings": {
+            "label": "Créer",
+            "title": "Des créations originales.",
+            "text": "<p>Des créations SoVintage, comme les Cravates Signatures en fausse fourrure, qui donnent une nouvelle place à cet accessoire.</p>",
+            "kind": "image",
+            "image": "shopify://shop_images/IMG_2401.jpg",
+            "sig": "ombre", "frame": 1, "wall": "green",
+            "link_label": "Découvrir le drop",
+            "link_url": "/#svf-drop"
+          }
+        },
+        "accompagner": {
+          "type": "pillar",
+          "settings": {
+            "label": "Accompagner",
+            "title": "Une allure qui vous ressemble.",
+            "text": "<p>Un accompagnement personnalisé ou un vêtement imaginé pour vous : stylisme pour les particuliers, recherche et styling pour les shootings, clips et tapis rouges.</p>",
+            "kind": "image",
+            "image": "shopify://shop_images/IMG_2430.jpg",
+            "sig": "brume", "frame": 1, "wall": "tobacco",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": ["retrouver", "creer", "accompagner"]
+    }
+  },
+  "order": ["main"]
+}

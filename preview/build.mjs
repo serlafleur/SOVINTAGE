@@ -95,6 +95,18 @@ class FormTag extends Tag {
 }
 engine.registerTag("form", FormTag);
 
+// {% stylesheet %} des sections : Shopify le regroupe dans une feuille ; ici, une balise <style> à la place
+class StylesheetTag extends Tag {
+  constructor(token, remain, liquid) {
+    super(token, remain, liquid);
+    this.tpls = [];
+    const stream = liquid.parser.parseStream(remain).on("tag:endstylesheet", () => stream.stop()).on("template", (t) => this.tpls.push(t)).on("end", () => { throw new Error("stylesheet non fermé"); });
+    stream.start();
+  }
+  *render(ctx, emitter) { emitter.write("<style>"); yield this.liquid.renderer.renderTemplates(this.tpls, ctx, emitter); emitter.write("</style>"); }
+}
+engine.registerTag("stylesheet", StylesheetTag);
+
 const kw = (args) => Object.fromEntries(args.filter(Array.isArray));
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 engine.registerFilter("image_url", (img) => (img && img.src) || "");
@@ -121,35 +133,50 @@ const globals = {
   localization: { language: { iso_code: "fr" } },
 };
 
-async function renderSection(type, id, data, tag = "div") {
+async function renderSection(type, id, data, g = globals, tag = "div") {
   const src = fs.readFileSync(path.join(THEME, "sections", `${type}.liquid`), "utf8");
   const schema = JSON.parse((src.match(/{%\s*schema\s*%}([\s\S]*?){%\s*endschema\s*%}/) || [, "{}"])[1]);
-  const html = await engine.parseAndRender(src, { ...globals, section: sectionObject(id, data) });
+  const html = await engine.parseAndRender(src, { ...g, section: sectionObject(id, data) });
   return `<${schema.tag || tag} id="shopify-section-template--index__${id}" class="shopify-section ${schema.class || ""}">${html}</${schema.tag || tag}>`;
 }
 
-/* ---------- Page ---------- */
+/* ---------- Pages ---------- */
 const index = readJson(path.join(THEME, "templates/index.json"));
+const mission = readJson(path.join(THEME, "templates/page.mission.json"));
 const headerGroup = readJson(path.join(THEME, "sections/header-group.json"));
 
-async function page({ mobile }) {
-  const head = await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), globals);
-  let header = await renderSection("svf-header", "svf_header", headerGroup.sections.svf_header);
+// Aperçu seulement : lien « Notre mission » dans le menu (à ajouter dans l'éditeur de thème, voir README)
+function headerWithMission() {
+  const h = structuredClone(headerGroup.sections.svf_header);
+  h.blocks.l_mission = { type: "link", settings: { label: "Notre mission", label_menu: "Notre <em>mission</em>", link: "/pages/notre-mission", in_bar: true } };
+  h.block_order.splice(h.block_order.indexOf("l_mesure"), 0, "l_mission");
+  return h;
+}
+// Les liens Shopify pointent vers les fichiers de l'aperçu
+const relink = (html) => html
+  .replace(/href="\/pages\/notre-mission"/g, 'href="mission.html"')
+  .replace(/href="\/#/g, 'href="mobile.html#')
+  .replace(/href="\/"/g, 'href="mobile.html"');
+
+async function page({ mobile, template = index, tpl = { name: "index", suffix: null }, label }) {
+  const g = { ...globals, template: tpl, request: { path: tpl.name === "index" ? "/" : "/pages/notre-mission", design_mode: false } };
+  const head = tpl.name === "index" ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
+  let header = await renderSection("svf-header", "svf_header", mobile ? headerWithMission() : headerGroup.sections.svf_header, g);
   // « Avant » : le thème tel qu'il est en ligne, sans les deux lignes qui chargent la couche mobile
   if (!mobile) header = header.replace(/<link[^>]*svf-mobile\.css[^>]*>|<script[^>]*svf-mobile\.js[^>]*><\/script>/g, "");
   const sections = [];
-  for (const id of index.order) {
-    const s = index.sections[id];
+  for (const id of template.order) {
+    const s = template.sections[id];
     if (s.disabled) continue;
-    sections.push(await renderSection(s.type, id, s));
+    sections.push(await renderSection(s.type, id, s, g));
   }
-  return `<!doctype html>
+  return relink(`<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B1A10">
-<title>SOVINTAGEFRIP — ${mobile ? "maquette mobile" : "thème actuel"}</title>
+<title>SOVINTAGEFRIP — ${label}</title>
 <style>
   /* Socle minimal à la place d'Horizon (le thème réel fournit ces styles) */
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -166,7 +193,7 @@ ${sections.join("\n")}
 </main>
 <footer class="pv-foot"><p>Pied de page Horizon (non simulé dans l’aperçu) · © 2026 Sovintagefrip</p></footer>
 </body>
-</html>`;
+</html>`);
 }
 
 fs.rmSync(DIST, { recursive: true, force: true });
@@ -174,6 +201,7 @@ fs.mkdirSync(path.join(DIST, "assets"), { recursive: true });
 for (const f of fs.readdirSync(path.join(THEME, "assets"))) fs.copyFileSync(path.join(THEME, "assets", f), path.join(DIST, "assets", f));
 fs.cpSync(path.join(here, "media"), path.join(DIST, "media"), { recursive: true });
 if (fs.existsSync(path.join(here, "showcase.html"))) fs.copyFileSync(path.join(here, "showcase.html"), path.join(DIST, "index.html"));
-fs.writeFileSync(path.join(DIST, "mobile.html"), await page({ mobile: true }));
-fs.writeFileSync(path.join(DIST, "avant.html"), await page({ mobile: false }));
+fs.writeFileSync(path.join(DIST, "mobile.html"), await page({ mobile: true, label: "maquette mobile" }));
+fs.writeFileSync(path.join(DIST, "avant.html"), await page({ mobile: false, label: "thème actuel" }));
+fs.writeFileSync(path.join(DIST, "mission.html"), await page({ mobile: true, template: mission, tpl: { name: "page", suffix: "mission" }, label: "Notre mission" }));
 console.log("dist/ prêt :", fs.readdirSync(DIST).join(", "));

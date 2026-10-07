@@ -1,0 +1,190 @@
+{%- comment -%}
+  Page « Notre mission » (template page.mission). Conçue d'abord pour le téléphone, puis élargie sur grand écran.
+  Ouverture (titre + photo), manifeste, engagements (blocs), citation, appel à l'action.
+  Les styles svf (polices, murs, boutons, svf.js) sont chargés ici, car layout/theme.liquid ne les charge pas pour ce template.
+{%- endcomment -%}
+{%- unless template.suffix contains 'look' or template.suffix contains 'contact' or template.suffix == 'signature' or template.name == 'index' or template.name == '404' -%}
+  {%- render 'svf-head' -%}
+{%- endunless -%}
+
+<article class="svf svf-mission" data-svf="mission" aria-labelledby="svf-mi-{{ section.id }}">
+  {%- comment -%} 1. Ouverture {%- endcomment -%}
+  <header class="svf-mi-open">
+    <div class="svf-mi-open-text">
+      {%- if section.settings.eyebrow != blank -%}<p class="svf-mono svf-muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="svf-mi-title" id="svf-mi-{{ section.id }}">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h1>
+      <div class="svf-copy svf-mi-lede">{{ section.settings.lede }}</div>
+    </div>
+    <figure class="svf-mi-open-fig">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1400', sizes: '(min-width: 861px) 45vw, 100vw', alt: section.settings.image.alt, class: 'svf-photo' }}
+      {%- else -%}
+        {%- render 'svf-tile', kind: 'tie', sig: 'ombre', frame: 1, wall: 'green', alt: 'Cravate Signature Ombre' -%}
+      {%- endif -%}
+      {%- if section.settings.image_caption != blank -%}<figcaption class="svf-tile-cap svf-mono">{{ section.settings.image_caption }}</figcaption>{%- endif -%}
+    </figure>
+  </header>
+
+  {%- comment -%} 2. Manifeste {%- endcomment -%}
+  {%- if section.settings.manifesto != blank -%}
+    <section class="svf-mi-manifesto" aria-labelledby="svf-mi-m-{{ section.id }}">
+      <h2 class="svf-label svf-muted" id="svf-mi-m-{{ section.id }}">{{ section.settings.manifesto_label }}</h2>
+      <p class="svf-mi-big svf-rv">{{ section.settings.manifesto }}</p>
+      <div class="svf-copy">{{ section.settings.manifesto_text }}</div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} 3. Engagements : un bloc par engagement {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    <section class="svf-mi-pillars" aria-labelledby="svf-mi-p-{{ section.id }}">
+      <h2 class="svf-h svf-rv" id="svf-mi-p-{{ section.id }}">{{ section.settings.pillars_heading }} <em>{{ section.settings.pillars_heading_em }}</em></h2>
+      <ul class="svf-mi-list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="svf-mi-pillar" {{ block.shopify_attributes }}>
+            <figure class="svf-mi-pillar-fig">
+              {%- render 'svf-tile', kind: block.settings.kind, sig: block.settings.sig, frame: block.settings.frame, wall: block.settings.wall, image: block.settings.image, x: 50, y: 12, z: 3.4, bg: '#1A1917', alt: block.settings.title -%}
+            </figure>
+            <p class="svf-label svf-mi-verb">{{ block.settings.label }}</p>
+            <h3 class="svf-mi-pillar-title">{{ block.settings.title }}</h3>
+            <div class="svf-copy">{{ block.settings.text }}</div>
+            {%- if block.settings.link_label != blank and block.settings.link_url != blank -%}
+              <a class="svf-link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} 4. Citation {%- endcomment -%}
+  {%- if section.settings.quote != blank -%}
+    <figure class="svf-mi-quote">
+      <div class="svf-mi-quote-fig" aria-hidden="true">
+        {%- render 'svf-tile', kind: 'macro', sig: section.settings.quote_sig, frame: 1, x: 49, y: 12, z: 3.4, bg: '#1A1917' -%}
+      </div>
+      <blockquote class="svf-mi-big svf-rv"><p>{{ section.settings.quote }}</p></blockquote>
+      {%- if section.settings.quote_text != blank -%}<figcaption class="svf-copy">{{ section.settings.quote_text }}</figcaption>{%- endif -%}
+    </figure>
+  {%- endif -%}
+
+  {%- comment -%} 5. Appel à l'action {%- endcomment -%}
+  <section class="svf-mi-cta" aria-labelledby="svf-mi-c-{{ section.id }}">
+    <h2 class="svf-h" id="svf-mi-c-{{ section.id }}">{{ section.settings.cta_heading }} <em>{{ section.settings.cta_heading_em }}</em></h2>
+    <div class="svf-mi-ctas">
+      {%- if section.settings.cta_label != blank -%}<a class="svf-btn" href="{{ section.settings.cta_url | default: '/' }}">{{ section.settings.cta_label }}</a>{%- endif -%}
+      {%- if section.settings.cta2_label != blank -%}<a class="svf-btn svf-btn-ghost" href="{{ section.settings.cta2_url | default: '/pages/contact' }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+    </div>
+  </section>
+</article>
+
+{% stylesheet %}
+  /* Page Notre mission — mobile d'abord, s'appuie sur les jetons de svf.css (--svf-bg, --svf-fg, --svf-muted, --svf-line) */
+  .svf-mission{padding-block:24px 0}
+  .svf-mission .svf-mi-title{font-family:var(--svf-serif);font-weight:400;font-size:clamp(44px,13vw,104px);line-height:.92;letter-spacing:-.025em;text-wrap:balance;margin-top:12px}
+  .svf-mission .svf-mi-title em{font-style:italic}
+  .svf-mission .svf-mi-big{font-family:var(--svf-serif);font-weight:400;font-size:clamp(30px,8.6vw,64px);line-height:1.04;letter-spacing:-.015em;text-wrap:balance;margin:0}
+  .svf-mission .svf-mi-big p{margin:0}
+
+  .svf-mission .svf-mi-open{display:grid;gap:22px}
+  .svf-mission .svf-mi-lede{margin-top:16px;font-size:16px}
+  .svf-mission .svf-mi-open-fig{position:relative;margin:0 calc(var(--svf-gutter) * -1);aspect-ratio:4/5;overflow:hidden;background:#D9D7DA}
+  .svf-mission .svf-mi-open-fig .svf-photo{object-position:50% 0}
+  /* Dégradé sous la légende : texte clair lisible même sur une photo claire */
+  .svf-mission .svf-mi-open-fig::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28%;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6));pointer-events:none;z-index:1}
+
+  .svf-mission .svf-mi-manifesto{display:grid;gap:18px;padding-block:72px 64px;border-bottom:1px solid var(--svf-line)}
+
+  .svf-mission .svf-mi-pillars{padding-block:64px;display:grid;gap:32px}
+  .svf-mission .svf-mi-list{list-style:none;margin:0;padding:0;display:grid;gap:44px}
+  .svf-mission .svf-mi-pillar{display:grid;gap:10px;align-content:start;min-width:0}
+  .svf-mission .svf-mi-pillar-fig{position:relative;margin:0 0 8px;aspect-ratio:4/3;overflow:hidden}
+  .svf-mission .svf-mi-pillar-fig .svf-photo{object-position:50% 25%}
+  .svf-mission .svf-mi-verb{color:var(--svf-muted)}
+  .svf-mission .svf-mi-pillar-title{font-family:var(--svf-serif);font-weight:400;font-size:clamp(26px,7vw,34px);line-height:1.08;margin:0}
+  .svf-mission .svf-mi-pillar .svf-link{justify-self:start}
+
+  .svf-mission .svf-mi-quote{--svf-fg:#1B5C2D;--svf-muted:#3F5C47;margin:0 calc(var(--svf-gutter) * -1);padding:56px var(--svf-gutter);display:grid;gap:22px;background:radial-gradient(80% 70% at 50% 40%,#F1F5F2 0%,#DCE7DF 100%);color:var(--svf-fg)}
+  .svf-mission .svf-mi-quote-fig{position:relative;width:min(56%,240px);aspect-ratio:1;overflow:hidden;border-radius:50%}
+  .svf-mission .svf-mi-quote blockquote{margin:0}
+  .svf-mission .svf-mi-quote figcaption{max-width:40ch}
+
+  .svf-mission .svf-mi-cta{display:grid;gap:24px;padding-block:72px 88px}
+  .svf-mission .svf-mi-ctas{display:grid;gap:10px}
+  .svf-mission .svf-mi-ctas .svf-btn{display:flex;align-items:center;justify-content:center;min-height:52px;width:100%}
+  .svf-mission .svf-btn-ghost{background:transparent;color:var(--svf-fg);box-shadow:inset 0 0 0 1px var(--svf-fg)}
+
+  @media (min-width:861px){
+    .svf-mission{padding-block:48px 0}
+    .svf-mission .svf-mi-open{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:end}
+    .svf-mission .svf-mi-open-fig{margin:0}
+    .svf-mission .svf-mi-open-text{padding-bottom:12px}
+    .svf-mission .svf-mi-manifesto{grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:clamp(32px,6vw,96px);padding-block:clamp(96px,11vw,160px)}
+    .svf-mission .svf-mi-manifesto .svf-mi-big,.svf-mission .svf-mi-manifesto .svf-copy{grid-column:2}
+    .svf-mission .svf-mi-pillars{padding-block:clamp(96px,11vw,150px);gap:48px}
+    .svf-mission .svf-mi-list{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:clamp(20px,2.4vw,36px)}
+    .svf-mission .svf-mi-pillar-fig{aspect-ratio:4/5}
+    .svf-mission .svf-mi-quote{grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:clamp(32px,5vw,80px);padding-block:clamp(80px,9vw,130px)}
+    .svf-mission .svf-mi-quote-fig{grid-row:1/3;width:clamp(200px,22vw,320px)}
+    .svf-mission .svf-mi-quote blockquote{align-self:end}
+    .svf-mission .svf-mi-quote figcaption{align-self:start}
+    .svf-mission .svf-mi-cta{grid-template-columns:minmax(0,1fr) auto;align-items:end;padding-block:clamp(96px,11vw,150px)}
+    .svf-mission .svf-mi-ctas{grid-auto-flow:column}
+    .svf-mission .svf-mi-ctas .svf-btn{width:auto;padding-inline:30px}
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SVF · Notre mission",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "header", "content": "Ouverture" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Notre mission" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Une histoire à porter" },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "autrement." },
+    { "type": "richtext", "id": "lede", "label": "Introduction", "default": "<p>Un vêtement retrouvé. Une création SoVintage. Un regard singulier sur le vêtement.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Photo (portrait 4:5)" },
+    { "type": "text", "id": "image_caption", "label": "Légende de la photo" },
+    { "type": "header", "content": "Manifeste" },
+    { "type": "text", "id": "manifesto_label", "label": "Libellé", "default": "Ce qui nous anime" },
+    { "type": "text", "id": "manifesto", "label": "Phrase", "default": "L’existant rencontre la création." },
+    { "type": "richtext", "id": "manifesto_text", "label": "Texte", "default": "<p>Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>" },
+    { "type": "header", "content": "Engagements" },
+    { "type": "text", "id": "pillars_heading", "label": "Titre", "default": "Trois façons" },
+    { "type": "text", "id": "pillars_heading_em", "label": "Titre (italique)", "default": "de faire." },
+    { "type": "header", "content": "Citation" },
+    { "type": "text", "id": "quote", "label": "Citation", "default": "Une cravate, une présence." },
+    { "type": "richtext", "id": "quote_text", "label": "Texte", "default": "<p>La fausse fourrure bouscule les codes et dessine une autre silhouette.</p>" },
+    { "type": "select", "id": "quote_sig", "label": "Gros plan", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+    { "type": "header", "content": "Appel à l’action" },
+    { "type": "text", "id": "cta_heading", "label": "Titre", "default": "Votre envie," },
+    { "type": "text", "id": "cta_heading_em", "label": "Titre (italique)", "default": "notre point de départ." },
+    { "type": "text", "id": "cta_label", "label": "Bouton principal", "default": "Découvrir le drop" },
+    { "type": "text", "id": "cta_url", "label": "Destination", "default": "/#svf-drop" },
+    { "type": "text", "id": "cta2_label", "label": "Bouton secondaire", "default": "Prendre rendez-vous" },
+    { "type": "text", "id": "cta2_url", "label": "Destination", "default": "/pages/contact" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Engagement",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Verbe", "default": "Retrouver" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "La seconde main, sélectionnée." },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Des pièces de seconde main sélectionnées : un vêtement retrouvé, à porter autrement.</p>" },
+        { "type": "select", "id": "kind", "label": "Visuel", "default": "tie", "options": [ { "value": "image", "label": "Photo" }, { "value": "tie", "label": "Cravate sur un mur" }, { "value": "macro", "label": "Gros plan" }, { "value": "garment", "label": "Illustration" } ] },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "select", "id": "sig", "label": "Cravate", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+        { "type": "range", "id": "frame", "label": "Angle de vue", "min": 1, "max": 72, "step": 1, "default": 1 },
+        { "type": "select", "id": "wall", "label": "Mur", "default": "green", "options": [
+          { "value": "green", "label": "Vert" }, { "value": "char", "label": "Anthracite" }, { "value": "tobacco", "label": "Tabac" }, { "value": "oxblood", "label": "Bordeaux" }, { "value": "slate", "label": "Ardoise" }, { "value": "olive", "label": "Olive" }, { "value": "stone", "label": "Pierre" }, { "value": "sand", "label": "Sable" }, { "value": "mist", "label": "Brume claire" } ] },
+        { "type": "text", "id": "link_label", "label": "Lien (facultatif)" },
+        { "type": "text", "id": "link_url", "label": "Destination du lien" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SVF · Notre mission", "blocks": [ { "type": "pillar" } ] }]
+}
+{% endschema %}
