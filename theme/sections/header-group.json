@@ -18,7 +18,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "CRÉPUSCULE — PREMIER DROP DE 20 PIÈCES",
+            "text": "CRÉPUSCULE — EXPLOREZ LA COLLECTION",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "letter_spacing": "normal",
@@ -108,8 +108,8 @@
         "l_drop": {
           "type": "link",
           "settings": {
-            "label": "Le drop",
-            "label_menu": "",
+            "label": "Cravates",
+            "label_menu": "Les <em>cravates</em>",
             "link": "#svf-drop",
             "in_bar": true
           }

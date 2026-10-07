@@ -71,14 +71,14 @@
       ],
       "settings": {
         "top_left": "N°01 — Collection FW26",
-        "top_center": "Premier drop · 20 Cravates Signatures",
+        "top_center": "Collection Crépuscule",
         "top_right": "Lookbook · Crépuscule",
         "heading": "Crépuscule",
         "heading_em": ".",
         "lede_em": "Une cravate, une présence.",
         "lede": "La fausse fourrure bouscule les codes et dessine une autre silhouette.",
-        "cta_label": "Explorer le drop",
-        "cta_link": "#svf-drop",
+        "cta_label": "Explorez la collection",
+        "cta_link": "/pages/collection",
         "cta2_label": "Voir les looks",
         "cta2_link": "#svf-silhouettes",
         "image_a": "shopify://shop_images/IMG_2401.jpg",
@@ -139,8 +139,8 @@
         "heading": "Une cravate,",
         "heading_em": "une présence.",
         "text": "<p>La fausse fourrure bouscule les codes et dessine une autre silhouette. Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>",
-        "link_label": "Explorer le drop",
-        "link_url": "#svf-drop",
+        "link_label": "Explorez la collection",
+        "link_url": "/pages/collection",
         "picker_label": "Choisir sa Signature",
         "wall": "green"
       }
@@ -192,12 +192,12 @@
         "drop_neige"
       ],
       "settings": {
-        "eyebrow": "01 / Le premier drop",
-        "heading": "20 pièces.",
-        "heading_em": "Votre signature.",
-        "text": "<p>Un drop de 20 Cravates Signatures. Trouvez celle qui accompagnera votre allure.</p>",
+        "eyebrow": "01 / Cravates Signatures",
+        "heading": "Les Cravates",
+        "heading_em": "Signatures.",
+        "text": "<p>En fausse fourrure, trois perles à l’encolure. Trouvez celle qui accompagnera votre allure.</p>",
         "hint": "Survolez une cravate pour la faire tourner",
-        "price_placeholder": "Prix au drop",
+        "price_placeholder": "Sur demande",
         "product_label": "Voir la pièce"
       }
     },
@@ -732,11 +732,11 @@
         "eyebrow": "N°01 — Collection FW26",
         "heading": "Crépuscule",
         "heading_em": ".",
-        "subheading": "Premier drop · 20 Cravates Signatures",
-        "cta_label": "Explorer le drop",
-        "cta_link": "#svf-drop",
-        "cta2_label": "Voir les looks",
-        "cta2_link": "#svf-silhouettes",
+        "subheading": "",
+        "cta_label": "Explorez la collection",
+        "cta_link": "/pages/collection",
+        "cta2_label": "Les Cravates Signatures",
+        "cta2_link": "#svf-drop",
         "studio": "#D9D7DA"
       }
     }

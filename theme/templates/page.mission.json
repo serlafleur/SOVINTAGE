@@ -19,8 +19,8 @@
         "quote_sig": "ombre",
         "cta_heading": "Votre envie,",
         "cta_heading_em": "notre point de départ.",
-        "cta_label": "Découvrir le drop",
-        "cta_url": "/#svf-drop",
+        "cta_label": "Explorez la collection",
+        "cta_url": "/pages/collection",
         "cta2_label": "Prendre rendez-vous",
         "cta2_url": "/pages/contact"
       },
@@ -33,7 +33,9 @@
             "text": "<p>Des pièces de seconde main sélectionnées : un vêtement retrouvé, à porter autrement.</p>",
             "kind": "image",
             "image": "shopify://shop_images/IMG_2394.jpg",
-            "sig": "ombre", "frame": 1, "wall": "stone",
+            "sig": "ombre",
+            "frame": 1,
+            "wall": "stone",
             "link_label": "Voir les looks",
             "link_url": "/pages/collection"
           }
@@ -46,8 +48,10 @@
             "text": "<p>Des créations SoVintage, comme les Cravates Signatures en fausse fourrure, qui donnent une nouvelle place à cet accessoire.</p>",
             "kind": "image",
             "image": "shopify://shop_images/IMG_2401.jpg",
-            "sig": "ombre", "frame": 1, "wall": "green",
-            "link_label": "Découvrir le drop",
+            "sig": "ombre",
+            "frame": 1,
+            "wall": "green",
+            "link_label": "Voir les Cravates Signatures",
             "link_url": "/#svf-drop"
           }
         },
@@ -59,14 +63,22 @@
             "text": "<p>Un accompagnement personnalisé ou un vêtement imaginé pour vous : stylisme pour les particuliers, recherche et styling pour les shootings, clips et tapis rouges.</p>",
             "kind": "image",
             "image": "shopify://shop_images/IMG_2430.jpg",
-            "sig": "brume", "frame": 1, "wall": "tobacco",
+            "sig": "brume",
+            "frame": 1,
+            "wall": "tobacco",
             "link_label": "",
             "link_url": ""
           }
         }
       },
-      "block_order": ["retrouver", "creer", "accompagner"]
+      "block_order": [
+        "retrouver",
+        "creer",
+        "accompagner"
+      ]
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
