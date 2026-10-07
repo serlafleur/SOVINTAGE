@@ -34,7 +34,7 @@ shopify theme push --theme 211137102214 \
 | Section | Thème actuel sur téléphone | Avec la couche mobile |
 | --- | --- | --- |
 | En-tête | logo et « Panier (0) » se chevauchent à 390 px, boutons hauts de 17 px | icône panier + compteur (nom accessible « Panier, n article »), cibles 44 px, menu en fenêtre modale : focus piégé, fond inerte, Échap, défilement bloqué |
-| Bannière | titre coupé, défilement automatique sans pause | titre ajusté à l’écran, lookbook à faire glisser (scroll-snap), légende et repères synchronisés, défilement automatique coupé |
+| Bannière | titre coupé, défilement automatique sans pause, deux écrans avant le bouton | tout tient sur un écran : surtitre, titre ajusté, lookbook à faire glisser (scroll-snap), nom du look avec position et flèches, bouton. L’accroche, la description du look et les deux gros plans sont masqués sur mobile car repris dans les sections suivantes. Défilement automatique coupé |
 | Le drop | « Voir la pièce » visible au survol uniquement | bouton toujours visible, carte entière cliquable, bouton « 360° » vers la scène sur la bonne Signature |
 | Signature 360° | pastilles 26 px, texte secondaire à 3,5:1 | pastilles 68 px, indication « glissez pour faire tourner », contraste 4,8:1 |
 | Silhouettes | carrousel calculé au pointeur | bande à faire glisser, synchronisée avec la fiche du look |

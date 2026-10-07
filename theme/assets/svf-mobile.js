@@ -107,17 +107,14 @@
     if (!track || n < 1) return null;
     var prevB = $("[data-ed-prev]", root), nextB = $("[data-ed-next]", root);
     var numEl = $("[data-ed-num]", root), lookEl = $("[data-ed-look]", root), descEl = $("[data-ed-desc]", root);
-    var cap = $(".svf-ed-cap", root), title = $(".svf-ed-title", root);
+    var title = $(".svf-ed-title", root);
     var active = false, cur = 0, raf = 0;
 
-    var dots = $(".svfm-dots", cap);
-    if (!dots && cap && n > 1) { dots = document.createElement("span"); dots.className = "svfm-dots"; dots.setAttribute("aria-hidden", "true"); dots.innerHTML = slides.map(function () { return "<span></span>"; }).join(""); cap.appendChild(dots); }
 
     function caption(i) {
       if (numEl) numEl.textContent = pad(i + 1) + " / " + pad(n);
       if (lookEl && lookEl.textContent !== slides[i].dataset.look) lookEl.textContent = slides[i].dataset.look;
       if (descEl && descEl.textContent !== slides[i].dataset.desc) descEl.textContent = slides[i].dataset.desc;
-      if (dots) $$("span", dots).forEach(function (d, j) { d.classList.toggle("is-on", j === i); });
       slides.forEach(function (s, j) { s.classList.toggle("is-on", j === i); s.classList.remove("is-prev"); s.setAttribute("aria-hidden", j === i ? "false" : "true"); });
       if (prevB) prevB.disabled = i === 0;
       if (nextB) nextB.disabled = i === n - 1;

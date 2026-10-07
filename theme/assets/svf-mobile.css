@@ -5,7 +5,7 @@
    Le comportement associé est dans svf-mobile.js ; sans JavaScript, la page reste lisible et navigable. */
 
 /* Éléments ajoutés par svf-mobile.js : invisibles sur grand écran */
-.svfm-only,.svfm-dots,.svfm-turn,.svfm-drag-hint,.svfm-bag{display:none}
+.svfm-only,.svfm-turn,.svfm-drag-hint,.svfm-bag{display:none}
 
 @media (max-width:860px){
   /* ---------- Socle ---------- */
@@ -41,39 +41,31 @@
   .svf-hd-root .svfm-menu-foot a{display:inline-flex;align-items:center;font:inherit;min-height:44px;padding:0}
   html.svfm-lock,html.svfm-lock body{overflow:hidden}
 
-  /* ---------- Bannière éditoriale : titre, lookbook à faire glisser, accroche, puis gros plans ---------- */
-  .svf-hero .svf-ed{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:none;column-gap:10px;row-gap:0;height:auto;padding:10px var(--svf-gutter) 28px}
+  /* ---------- Bannière éditoriale : un seul écran — surtitre, titre, lookbook, nom du look, bouton ----------
+     Masqué sur mobile car repris juste en dessous : l'accroche (texte identique dans « Une cravate, une présence »),
+     les deux gros plans (Ombre et Sable, présentés dans le drop), la description du look et la mention « Lookbook ». */
+  .svf-hero .svf-ed{display:flex;flex-direction:column;height:auto;padding:12px var(--svf-gutter) 32px}
   .svf-hero .svf-ed-grid{display:contents}
-  .svf-hero .svf-ed-top{grid-column:1/-1;grid-row:auto;order:0;padding-bottom:6px}
-  .svf-hero .svf-ed-title{grid-column:1/-1;grid-row:auto;order:1;position:relative;top:auto;transform:none;margin:4px 0 14px;text-align:left;font-size:18.5vw;line-height:.84;white-space:nowrap}
-  .svf-hero .svf-ed-main{grid-column:1/-1;grid-row:auto;order:2;height:auto;align-items:stretch}
-  .svf-hero .svf-ed-foot{grid-column:1/-1;grid-row:auto;order:3;display:grid;gap:18px;padding:22px 0 28px}
-  .svf-hero .svf-ed-l{order:4}
-  .svf-hero .svf-ed-r{order:5}
-  .svf-hero .svf-ed-l,.svf-hero .svf-ed-r{grid-row:auto;grid-column:auto;margin:0;align-self:start;transform:none}
-  .svf-hero .svf-ed-img{width:100%;aspect-ratio:4/5}
-  .svf-hero .svf-ed-r figcaption{text-align:left}
+  .svf-hero .svf-ed-top{order:0;padding-bottom:2px}
+  .svf-hero .svf-ed-top .svf-mono:not(:first-child),.svf-hero .svf-ed-l,.svf-hero .svf-ed-r,.svf-hero .svf-ed-lede,.svf-hero .svf-ed-desc,.svf-hero .svf-ed-prog{display:none}
+  .svf-hero .svf-ed-top .svf-mono{color:#3F5C47}
+  .svf-hero .svf-ed-title{order:1;position:relative;top:auto;transform:none;margin:2px 0 14px;text-align:left;font-size:18.5vw;line-height:.84;white-space:nowrap}
+  .svf-hero .svf-ed-main{order:2;height:auto;align-items:stretch}
+  .svf-hero .svf-ed-foot{order:3;display:block;padding-top:18px}
   /* Lookbook : bande native à faire glisser, une photo à la fois, la suivante dépasse pour inviter au geste */
   .svf-hero .svf-ed-slides{display:flex;gap:8px;flex:none;width:auto;max-width:none;height:auto;aspect-ratio:auto;margin-inline:calc(var(--svf-gutter) * -1);padding-inline:var(--svf-gutter);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--svf-gutter);scrollbar-width:none;mix-blend-mode:normal;cursor:auto;touch-action:pan-x pan-y}
   .svf-hero .svf-ed-slides::-webkit-scrollbar{display:none}
   .svf-hero .svf-ed-slide,.svf-hero .svf-ed-slide.is-on,.svf-hero .svf-ed-slide.is-prev{position:relative;inset:auto;flex:0 0 86%;aspect-ratio:4/5;overflow:hidden;clip-path:none;transform:none;transition:none;scroll-snap-align:start;scroll-snap-stop:always;background:#cfcdd0;z-index:auto}
   .svf-hero .svf-ed-slide img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
-  .svf-hero .svf-ed-cap{max-width:none;grid-template-columns:auto 1fr auto;gap:4px 12px;padding-top:12px}
-  .svf-hero .svf-ed-look{font-size:22px}
-  .svf-hero .svf-ed-nav{gap:2px;margin-right:-10px}
+  /* Légende sur une ligne : nom du look · position · flèches */
+  .svf-hero .svf-ed-cap{max-width:none;display:flex;align-items:center;gap:10px;padding-top:8px}
+  .svf-hero .svf-ed-look{order:0;flex:1;min-width:0;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .svf-hero [data-ed-num]{order:1;font-variant-numeric:tabular-nums;color:#3F5C47}
+  .svf-hero .svf-ed-nav{order:2;gap:0;margin-right:-12px}
   .svf-hero .svf-ed-nav button{width:44px;height:44px;font-size:15px}
   .svf-hero .svf-ed-nav button:disabled{opacity:.3;cursor:default}
-  .svf-hero .svf-ed-prog{display:none}
-  .svf-hero .svfm-dots{grid-column:1/-1;display:flex;gap:4px;padding-top:6px}
-  .svf-hero .svfm-dots span{flex:1;height:2px;background:rgba(27,92,45,.18);transition:background .4s}
-  .svf-hero .svfm-dots span.is-on{background:#1B5C2D}
-  .svf-hero .svf-ed-desc{color:#3F5C47}
-  .svf-hero .svf-ed-side figcaption{color:#3F5C47}
-  .svf-hero .svf-ed-lede{max-width:none;font-size:16px}
-  .svf-hero .svf-ed-lede em{font-size:21px}
-  .svf-hero .svf-ed-ctas{gap:8px 22px;flex-wrap:wrap}
-  .svf-hero .svf-ed-ctas .svf-btn{flex:1 1 100%;background:#1B5C2D;color:#F1F5F2}
-  .svf-hero .svf-ed-top .svf-mono:last-child{text-align:right}
+  .svf-hero .svf-ed-ctas{display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap}
+  .svf-hero .svf-ed-ctas .svf-btn{flex:1 1 auto;background:#1B5C2D;color:#F1F5F2}
 
   /* ---------- Une cravate, une présence ---------- */
   .svf-intro .svf-intro-grid{gap:36px}
