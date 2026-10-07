@@ -12,6 +12,7 @@ Appliqué au thème non publié **SOVINTAGEFRIP — Crépuscule 360** (ID 211137
 Page créée et publiée : **Notre mission** (`/pages/notre-mission`, modèle `page.mission`).
 Puis, depuis le commit `473a634` : `sections/svf-hero-studio.liquid` (nouvelle bannière) et `templates/index.json` (bannière studio en tête ; ancienne bannière et Matières désactivées).
 Puis, depuis le commit `ce69b75` : `assets/svf.js`, `sections/svf-look.liquid`, les 9 `templates/page.look-*.json` et `templates/page.collection-looks.json` (vraies pièces, descriptions, conseils d’entretien, pièces vendues).
+Puis, depuis le commit `f4b2259` : `snippets/svf-fonts.liquid`, `assets/svf-type.css`, `snippets/svf-head.liquid`, `sections/svf-header.liquid`, `assets/svf-mobile.css` (charte typographique).
 
 Le thème en ligne reste **Horizon** : tant que Crépuscule 360 n’est pas publié, ces changements se voient avec l’aperçu du thème
 (`https://sovintagefrip.com/?preview_theme_id=211137102214`). Sous Horizon, la page Notre mission s’affiche avec le modèle de page par défaut et son texte de secours.
