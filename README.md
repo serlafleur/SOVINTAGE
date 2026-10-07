@@ -15,6 +15,7 @@ Puis, depuis le commit `ce69b75` : `assets/svf.js`, `sections/svf-look.liquid`, 
 Puis, depuis le commit `f4b2259` : `snippets/svf-fonts.liquid`, `assets/svf-type.css`, `snippets/svf-head.liquid`, `sections/svf-header.liquid`, `assets/svf-mobile.css` (charte typographique).
 Puis, depuis les commits `ed1374e` et suivant : `sections/svf-drop.liquid`, `svf-hero-studio.liquid`, `svf-header.liquid`, `svf-intro.liquid`, `svf-lettre.liquid`, `svf-mission.liquid`, `svf-404.liquid`, `svf-hero.liquid`, `templates/index.json`, `templates/page.mission.json`, `sections/header-group.json` (plus de « premier drop » ni de « 20 cravates » : bouton « Explorez la collection », section « Les Cravates Signatures », menu « Cravates »).
 Fiches produit des quatre Cravates Signatures : « Pièce du premier drop Crépuscule FW26 » devient « Pièce de la collection Crépuscule FW26 ».
+Puis : 13 produits créés et publiés (pièces des looks, dont les deux vendues), cravates à 35 € avec leurs textes « Les quatre Signatures », et les 9 `templates/page.look-*.json` liés à ces produits (détail dans `catalogue/README.md`).
 
 Le thème en ligne reste **Horizon** : tant que Crépuscule 360 n’est pas publié, ces changements se voient avec l’aperçu du thème
 (`https://sovintagefrip.com/?preview_theme_id=211137102214`). Sous Horizon, la page Notre mission s’affiche avec le modèle de page par défaut et son texte de secours.
@@ -94,8 +95,7 @@ Les pages Horizon hors sections svf (fiche produit par défaut, panier, compte) 
 ## Pages look
 
 Les pièces viennent de la liste fournie par la marque (7 octobre 2026). Deux pièces sont vendues : **Noir Rebelle** (Eliot) et **Bordeaux Impérial** (Florian). Elles restent affichées avec « Vendu », hors sélection et hors panier.
-Les pièces disponibles n’ont pas encore de produit Shopify : elles affichent « Sur demande » et un lien de réservation vers `/pages/contact`. Pour les vendre en ligne, créer le produit (prix, taille) puis le lier au bloc de la pièce dans l’éditeur ; un produit épuisé s’affiche automatiquement comme vendu.
-Les pantalons et vestes d’exemple de la maquette (avec prix d’exemple) ont été retirés. Les cravates Signature restent liées à leurs produits (40,00 €).
+Chaque pièce est liée à son produit Shopify (créés le 7 octobre 2026 depuis le dossier de commercialisation, voir `catalogue/README.md`) : prix, taille et ajout au panier viennent du produit. Les deux pièces vendues ont un stock à 0. Les cravates Signature sont à 35,00 €.
 
 ## Aperçu local
 

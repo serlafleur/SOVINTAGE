@@ -38,12 +38,19 @@ const ALT = {
 };
 
 /* ---------- Produits : données lues dans la boutique (4 Cravates Signatures, 40,00 €) ---------- */
-const PRODUCTS = Object.fromEntries(
-  ["ombre", "brume", "sable", "neige"].map((k) => [
-    `cravate-signature-${k}`,
-    { handle: `cravate-signature-${k}`, url: `#produit-${k}`, price: 4000, available: true, title: `Cravate Signature ${k[0].toUpperCase() + k.slice(1)}`, has_only_default_variant: true, selected_or_first_available_variant: { id: 1000 + k.length } },
-  ])
-);
+/* Produits : données du catalogue (catalogue/crepuscule-fw26.json), comme dans la boutique */
+const CATALOGUE = JSON.parse(fs.readFileSync(path.join(here, "..", "catalogue", "crepuscule-fw26.json"), "utf8"));
+const cents = (s) => Math.round(parseFloat(s) * 100);
+const PRODUCTS = Object.fromEntries([
+  ...CATALOGUE.ties.map((t, i) => [
+    t.handle,
+    { handle: t.handle, url: `#produit-${t.sig.toLowerCase()}`, price: cents(t.price), available: true, title: `Cravate Signature ${t.sig}`, has_only_default_variant: true, selected_or_first_available_variant: { id: 1000 + i } },
+  ]),
+  ...CATALOGUE.pieces.map((p, i) => [
+    p.handle,
+    { handle: p.handle, url: `#produit-${p.handle}`, price: cents(p.price), available: !p.sold, title: p.title, has_only_default_variant: false, variants: [{ id: 2000 + i, title: p.size }], selected_or_first_available_variant: { id: 2000 + i } },
+  ]),
+]);
 
 function hydrateSettings(settings = {}) {
   const out = {};

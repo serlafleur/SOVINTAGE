@@ -22,7 +22,8 @@
             "sizes": "",
             "visual": "furcoat",
             "color": "#5C1F24",
-            "tweed": false
+            "tweed": false,
+            "product": "bordeaux-imperial"
           }
         },
         "piece_2": {
@@ -39,7 +40,8 @@
             "sizes": "",
             "visual": "blazer",
             "color": "#6A2328",
-            "tweed": false
+            "tweed": false,
+            "product": "rouge-heritage"
           }
         },
         "piece_3": {

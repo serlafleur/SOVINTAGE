@@ -22,7 +22,8 @@
             "sizes": "",
             "visual": "corset",
             "color": "#1E1C1B",
-            "tweed": false
+            "tweed": false,
+            "product": "noir-sculptural"
           }
         },
         "piece_2": {
@@ -39,7 +40,8 @@
             "sizes": "",
             "visual": "blazer",
             "color": "#3E3A38",
-            "tweed": true
+            "tweed": true,
+            "product": "tweed-obscur"
           }
         }
       },

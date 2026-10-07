@@ -22,7 +22,8 @@
             "sizes": "",
             "visual": "furcoat",
             "color": "#5A3B2A",
-            "tweed": false
+            "tweed": false,
+            "product": "chocolat-sauvage"
           }
         },
         "piece_2": {
@@ -39,7 +40,8 @@
             "sizes": "",
             "visual": "blazer",
             "color": "#7A7A76",
-            "tweed": false
+            "tweed": false,
+            "product": "gris-glace"
           }
         },
         "piece_3": {

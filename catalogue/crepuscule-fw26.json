@@ -1,0 +1,336 @@
+{
+  "source": "Dossier site internet mise à jour — Crépuscule FW26, commercialisation (reçu le 7 octobre 2026)",
+  "pieces": [
+    {
+      "handle": "noir-rebelle",
+      "name": "Noir Rebelle",
+      "kind": "Veste en similicuir",
+      "title": "Noir Rebelle — Veste en similicuir",
+      "look": "eliot",
+      "look_name": "Eliot",
+      "block": "piece_1",
+      "line": "Menswear",
+      "product_type": "Veste",
+      "size": "S",
+      "composition": [
+        "100 % polyester"
+      ],
+      "cost": "20.00",
+      "price": "55.00",
+      "sold": true,
+      "photo": null,
+      "subtitle": "La veste noire en similicuir pour homme.",
+      "story": "Une allure affirmée, un esprit libre, une élégance qui ne cherche pas à suivre les règles.",
+      "care": "Nettoyer les petites taches avec un chiffon doux légèrement humide. Éviter le lavage en machine, les produits abrasifs et la chaleur directe, qui peuvent abîmer ou craqueler le revêtement. Laisser sécher à l’air libre et ranger sur un cintre."
+    },
+    {
+      "handle": "chocolat-sauvage",
+      "name": "Chocolat Sauvage",
+      "kind": "Fausse fourrure marron",
+      "title": "Chocolat Sauvage — Fausse fourrure marron",
+      "look": "oscar",
+      "look_name": "Oscar",
+      "block": "piece_1",
+      "line": "Menswear",
+      "product_type": "Fourrure",
+      "size": "L",
+      "composition": [
+        "100 % polyester"
+      ],
+      "cost": "30.00",
+      "price": "85.00",
+      "sold": false,
+      "photo": "IMG_2428.jpg",
+      "subtitle": "La fourrure marron, à l’allure unisexe.",
+      "story": "Une présence enveloppante, une matière généreuse et un caractère naturel.",
+      "care": "Retirer délicatement les poussières avec une brosse douce. Éviter le repassage, le sèche-linge et les sources de chaleur. Pour une tache, tamponner légèrement avec un chiffon humide sans frotter. Éviter de tremper entièrement la fourrure afin de préserver son volume et sa texture."
+    },
+    {
+      "handle": "gris-glace",
+      "name": "Gris Glacé",
+      "kind": "Blazer gris",
+      "title": "Gris Glacé — Blazer gris",
+      "look": "oscar",
+      "look_name": "Oscar",
+      "block": "piece_2",
+      "line": "Menswear",
+      "product_type": "Blazer",
+      "size": "S",
+      "composition": [
+        "67 % polyester, 29 % rayonne, 4 % élasthanne",
+        "Doublure : 100 % polyester"
+      ],
+      "cost": "8.18",
+      "price": "45.00",
+      "sold": false,
+      "photo": "IMG_2428.jpg",
+      "subtitle": "Le blazer gris élégant.",
+      "story": "Une allure froide et maîtrisée, presque architecturale.",
+      "care": "Traiter rapidement les petites taches avec un chiffon légèrement humide. Éviter de détremper le blazer afin de préserver sa coupe. Pour le défroisser, privilégier la vapeur à distance, sans humidifier excessivement le tissu. Éviter le sèche-linge."
+    },
+    {
+      "handle": "bordeaux-imperial",
+      "name": "Bordeaux Impérial",
+      "kind": "Fausse fourrure bordeaux",
+      "title": "Bordeaux Impérial — Fausse fourrure bordeaux",
+      "look": "florian",
+      "look_name": "Florian",
+      "block": "piece_1",
+      "line": "Menswear",
+      "product_type": "Fourrure",
+      "size": "L",
+      "composition": [
+        "100 % polyester"
+      ],
+      "cost": "30.00",
+      "price": "90.00",
+      "sold": true,
+      "photo": "IMG_2420.jpg",
+      "subtitle": "La fourrure bordeaux.",
+      "story": "Une pièce théâtrale, profonde et majestueuse.",
+      "care": "Entretenir la fourrure avec une brosse douce, dans le sens du poil. Pour les petites taches, tamponner sans frotter avec un chiffon légèrement humide. Ne pas repasser, ne pas utiliser de sèche-linge et éviter les sources de chaleur. Laisser sécher naturellement sur un cintre solide."
+    },
+    {
+      "handle": "rouge-heritage",
+      "name": "Rouge Héritage",
+      "kind": "Blazer bordeaux",
+      "title": "Rouge Héritage — Blazer bordeaux",
+      "look": "florian",
+      "look_name": "Florian",
+      "block": "piece_2",
+      "line": "Menswear",
+      "product_type": "Blazer",
+      "size": "L",
+      "composition": [
+        "68 % laine, 24 % polyamide, 8 % cachemire",
+        "Doublure : 100 % polyester"
+      ],
+      "cost": "10.15",
+      "price": "55.00",
+      "sold": false,
+      "photo": "IMG_2420.jpg",
+      "subtitle": "Le blazer bordeaux.",
+      "story": "Une élégance intemporelle, avec une personnalité forte.",
+      "care": "Cette pièce associe une matière plus raffinée, avec de la laine et du cachemire mentionnés dans sa composition. La manipuler avec soin pour préserver sa structure et son toucher. Utiliser une brosse à vêtements douce et éviter les frottements répétés. Ne pas laver en machine ni repasser directement à haute température. Pour les plis, utiliser délicatement la vapeur à distance. Éviter de suspendre des accessoires lourds qui pourraient déformer les épaules."
+    },
+    {
+      "handle": "noir-heritage",
+      "name": "Noir Héritage",
+      "kind": "Blazer noir à revers en fausse fourrure",
+      "title": "Noir Héritage — Blazer noir à revers en fausse fourrure",
+      "look": "jules",
+      "look_name": "Jules",
+      "block": "piece_1",
+      "line": "Menswear",
+      "product_type": "Blazer",
+      "size": "S",
+      "composition": [],
+      "cost": "15.75",
+      "price": "65.00",
+      "sold": false,
+      "photo": "IMG_2400.jpg",
+      "subtitle": "Le blazer noir à larges revers en fourrure.",
+      "story": "Une silhouette sculpturale, entre tailoring classique et texture audacieuse.",
+      "care": "Sa matière principale présente une texture dense et raffinée, dont la composition exacte reste inconnue. Manipuler le blazer avec précaution et éviter les frottements, qui peuvent accrocher les fibres. Retirer les poussières avec une brosse très douce et ne pas frotter les taches.\nÉviter le lavage en machine, l’immersion et le repassage direct. Entretenir séparément les revers en fausse fourrure avec une brosse douce. Préserver les coutures et la structure du vêtement."
+    },
+    {
+      "handle": "gris-couture",
+      "name": "Gris Couture",
+      "kind": "Ensemble tweed, veste et jupe",
+      "title": "Gris Couture — Ensemble tweed, veste et jupe",
+      "look": "aori",
+      "look_name": "Aori",
+      "block": "piece_1",
+      "line": "Womenswear",
+      "product_type": "Ensemble",
+      "size": "XS",
+      "composition": [
+        "100 % polyester"
+      ],
+      "cost": "37.69",
+      "price": "75.00",
+      "sold": false,
+      "photo": "IMG_2394.jpg",
+      "subtitle": "L’ensemble tweed gris, veste et jupe.",
+      "story": "Une référence au vestiaire couture, aux finitions précieuses et au luxe parisien.",
+      "care": "Préserver la texture du tweed en évitant les frottements intenses et les lavages agressifs. Utiliser une brosse douce pour retirer les poussières. Éviter de tordre le tissu ou de l’essorer fortement, car cela peut déformer la coupe. Pour les petites taches, tamponner délicatement sans frotter. Éviter le repassage direct et utiliser une pattemouille si nécessaire."
+    },
+    {
+      "handle": "sable-dore",
+      "name": "Sable Doré",
+      "kind": "Blazer beige à boutons dorés",
+      "title": "Sable Doré — Blazer beige à boutons dorés",
+      "look": "mayi",
+      "look_name": "Mayi",
+      "block": "piece_1",
+      "line": "Womenswear",
+      "product_type": "Blazer",
+      "size": "XS",
+      "composition": [],
+      "cost": "6.03",
+      "price": "45.00",
+      "sold": false,
+      "photo": "IMG_2406.jpg",
+      "subtitle": "Le blazer beige à boutons dorés.",
+      "story": "Une élégance lumineuse, subtile et raffinée.",
+      "care": "Pour les petites taches, utiliser un chiffon doux légèrement humide, sans frotter excessivement. Éviter les produits agressifs et protéger les boutons dorés des frottements répétés. Sécher sur cintre et éviter le sèche-linge."
+    },
+    {
+      "handle": "sable-essentiel",
+      "name": "Sable Essentiel",
+      "kind": "Pantalon beige",
+      "title": "Sable Essentiel — Pantalon beige",
+      "look": "mayi",
+      "look_name": "Mayi",
+      "block": "piece_2",
+      "line": "Womenswear",
+      "product_type": "Pantalon",
+      "size": "XS",
+      "composition": [
+        "Extérieur : 79 % polyester, 19 % viscose, 2 % élasthanne",
+        "Doublure de poche : 100 % polyester"
+      ],
+      "cost": "5.42",
+      "price": "25.00",
+      "sold": false,
+      "photo": "IMG_2406.jpg",
+      "subtitle": "Le pantalon beige assorti.",
+      "story": "Une pièce sobre qui prolonge la ligne du tailleur.",
+      "care": "Laver à l’envers avec des couleurs similaires, idéalement à 30 °C maximum si le tissu est compatible avec le lavage en machine. Utiliser une lessive douce et éviter le sèche-linge. Pour conserver une ligne nette, faire sécher sur cintre et repasser à basse température si nécessaire."
+    },
+    {
+      "handle": "neige-royale",
+      "name": "Neige Royale",
+      "kind": "Fausse fourrure blanche",
+      "title": "Neige Royale — Fausse fourrure blanche",
+      "look": "clementine",
+      "look_name": "Clémentine",
+      "block": "piece_1",
+      "line": "Womenswear",
+      "product_type": "Fourrure",
+      "size": "XS",
+      "composition": [
+        "100 % polyester"
+      ],
+      "cost": "10.95",
+      "price": "45.00",
+      "sold": false,
+      "photo": "IMG_2471.jpg",
+      "subtitle": "La fourrure blanche pour femme.",
+      "story": "Une silhouette lumineuse, affirmée et sophistiquée.",
+      "care": "Entretenir régulièrement la fourrure avec une brosse douce pour conserver son volume. Nettoyer les petites taches dès leur apparition avec un chiffon blanc légèrement humide, sans frotter. Éviter le repassage, le sèche-linge, les produits blanchissants et la chaleur directe. Laisser sécher naturellement et éviter de ranger la pièce comprimée afin de préserver son aspect."
+    },
+    {
+      "handle": "tweed-obscur",
+      "name": "Tweed Obscur",
+      "kind": "Blazer en tweed",
+      "title": "Tweed Obscur — Blazer en tweed",
+      "look": "rose",
+      "look_name": "Rose",
+      "block": "piece_2",
+      "line": "Womenswear",
+      "product_type": "Blazer",
+      "size": "S",
+      "composition": [
+        "Extérieur : 38 % polyester, 31 % acrylique, 26 % coton"
+      ],
+      "cost": "8.18",
+      "price": "45.00",
+      "sold": false,
+      "photo": null,
+      "subtitle": "",
+      "story": "Une interprétation contemporaine du tweed, pensée autour de la texture, de la structure et du détail.",
+      "care": "Éviter le lavage en machine et privilégier un nettoyage localisé des taches. Manipuler délicatement, éviter les frottements et ne pas appliquer le fer directement sur le tweed, qui pourrait être endommagé par la chaleur."
+    },
+    {
+      "handle": "noir-sculptural",
+      "name": "Noir Sculptural",
+      "kind": "Corset en fourrure",
+      "title": "Noir Sculptural — Corset en fourrure",
+      "look": "rose",
+      "look_name": "Rose",
+      "block": "piece_1",
+      "line": "Womenswear",
+      "product_type": "Corset",
+      "size": "S",
+      "composition": [],
+      "cost": "30.00",
+      "price": "65.00",
+      "sold": false,
+      "photo": null,
+      "subtitle": "",
+      "story": "Pièce audacieuse et structurée qui joue sur les volumes, les textures et les contrastes pour affirmer une silhouette avec caractère.",
+      "care": "Manipuler avec le plus grand soin. Ne pas laver ni repasser. Éviter toute source de chaleur afin de préserver les matières et la structure du corset."
+    },
+    {
+      "handle": "chocolat-nocturne",
+      "name": "Chocolat Nocturne",
+      "kind": "Veste manteau",
+      "title": "Chocolat Nocturne — Veste manteau",
+      "look": "zeina",
+      "look_name": "Zeina",
+      "block": "piece_1",
+      "line": "Womenswear",
+      "product_type": "Veste",
+      "size": "S",
+      "composition": [
+        "Extérieur : 100 % polyuréthane",
+        "Revêtement intérieur : 100 % polyester",
+        "Fausse fourrure : 100 % polyester"
+      ],
+      "cost": "25.00",
+      "price": "65.00",
+      "sold": false,
+      "photo": "IMG_2454.jpg",
+      "subtitle": "",
+      "story": "Veste d’hiver au caractère affirmé, mêlant un extérieur brun foncé à l’aspect cuir et une doublure effet fourrure assortie.",
+      "care": "Éviter le lavage en machine, le repassage et toute source de chaleur directe. Nettoyer délicatement les petites taches avec un chiffon doux légèrement humide, après avoir vérifié les consignes de l’étiquette.\nNettoyage à sec."
+    }
+  ],
+  "ties": [
+    {
+      "handle": "cravate-signature-ombre",
+      "sig": "Ombre",
+      "evoque": "Ombre évoque le contraste entre lumière et obscurité, le mystère et une présence plus discrète. Une teinte profonde qui laisse la matière s’exprimer.",
+      "valeurs": "La présence, le caractère, la confiance en soi. Porter ce que l’on est sans chercher à se justifier.",
+      "price": "35.00",
+      "cost": "7.96",
+      "composition": [
+        "100 % polyester"
+      ]
+    },
+    {
+      "handle": "cravate-signature-brume",
+      "sig": "Brume",
+      "evoque": "Brume évoque les paysages d’hiver enveloppés de brume. Une image de profondeur, de calme et de sobriété, qui correspond à ce gris anthracite aux nuances froides.",
+      "valeurs": "La maturité, la subtilité et la réflexion. Une personnalité qui prend le temps de comprendre, d’observer et de choisir ce qui lui correspond.",
+      "price": "35.00",
+      "cost": "7.96",
+      "composition": [
+        "100 % polyester"
+      ]
+    },
+    {
+      "handle": "cravate-signature-neige",
+      "sig": "Neige",
+      "evoque": "Neige évoque la pureté, la lumière et le renouveau.",
+      "valeurs": "Le commencement, la page blanche, la possibilité de recommencer. Peu importe les erreurs du passé ou les chemins qui n’ont pas fonctionné : on peut toujours reprendre une nouvelle page, recommencer et avancer vers ce que l’on souhaite construire.",
+      "price": "35.00",
+      "cost": "7.96",
+      "composition": [
+        "100 % polyester"
+      ]
+    },
+    {
+      "handle": "cravate-signature-sable",
+      "sig": "Sable",
+      "evoque": "Sable évoque les tonalités naturelles et chaleureuses de la matière.",
+      "valeurs": "La liberté, l’assurance naturelle et l’élégance sans effort. Une invitation à affirmer son style à sa manière, sans chercher à correspondre aux attentes extérieures.",
+      "price": "35.00",
+      "cost": "7.96",
+      "composition": [
+        "100 % polyester"
+      ]
+    }
+  ]
+}

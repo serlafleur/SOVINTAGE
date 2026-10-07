@@ -22,7 +22,8 @@
             "sizes": "",
             "visual": "blazer",
             "color": "#CDB892",
-            "tweed": false
+            "tweed": false,
+            "product": "sable-dore"
           }
         },
         "piece_2": {
@@ -39,7 +40,8 @@
             "sizes": "",
             "visual": "trousers",
             "color": "#C3AE8A",
-            "tweed": false
+            "tweed": false,
+            "product": "sable-essentiel"
           }
         },
         "piece_3": {

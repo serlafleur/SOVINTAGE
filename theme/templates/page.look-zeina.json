@@ -22,7 +22,8 @@
             "sizes": "",
             "visual": "jacket",
             "color": "#3B2618",
-            "tweed": false
+            "tweed": false,
+            "product": "chocolat-nocturne"
           }
         }
       },
