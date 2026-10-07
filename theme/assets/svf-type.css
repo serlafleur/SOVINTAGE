@@ -1,0 +1,38 @@
+/* SOVINTAGEFRIP — charte typographique. Deux familles, sobres et lisibles :
+   Montserrat (principale) pour les titres, noms de collections et de pièces, logo et menu ;
+   Montaser Arabic (secondaire) pour les textes, descriptions, informations pratiques et l'interface.
+   Toutes les sections svf-* passent par trois variables (--svf-serif, --svf-sans, --svf-mono) : on les redirige
+   ici vers ces deux familles. Le préfixe « html » l'emporte sur svf.css, quel que soit l'ordre de chargement. */
+
+:root{
+  --svf-font-display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --svf-font-text:"Montaser Arabic","Montserrat","Helvetica Neue",Arial,sans-serif;
+}
+html .svf,html .svf-hd-root{--svf-serif:var(--svf-font-display);--svf-sans:var(--svf-font-text);--svf-mono:var(--svf-font-text)}
+html .svf{font-family:var(--svf-font-text)}
+
+/* Titres larges : Montserrat Light, interlettrage légèrement resserré */
+html .svf :is(.svf-h,.svf-hs-title,.svf-ed-title,.svf-lk-name,.svf-mi-title,.svf-mi-big,.svf-ghost-word,.svf-wm,.svf-mark,.svf-nf-code,.svf-pd-title,.svf-pd-ghost,.svf-ct-h1,.svf-ct-done h2){font-weight:300;letter-spacing:-.02em}
+html .svf .svf-mark{letter-spacing:-.02em;padding-right:0}
+/* Titres moyens et noms de pièces : Montserrat Regular */
+html .svf :is(.svf-lk-nm,.svf-lk-detail h2,.svf-mi-pillar-title,.svf-acc-btn .t,.svf-co-txt strong,.svf-ed-look,.svf-card-name em,.svf-sw span,.svf-pd-sw span,.svf-ct-h3,.svf-ct-brief h3,.svf-nf-h,[data-v="name"]){font-weight:400;letter-spacing:-.005em}
+/* Montserrat est plus large que l'ancienne police de titre : tailles recalées pour que les mots tiennent */
+html .svf-hs .svf-hs-title{font-size:clamp(40px,12.6vw,96px);line-height:.95}
+@media (min-width:861px){html .svf-hs .svf-hs-title{font-size:clamp(64px,6.6vw,120px)}}
+html .svf .svf-lk-name{font-size:clamp(40px,5vw,80px);line-height:1;overflow-wrap:anywhere}
+html .svf .svf-lk-nm{font-size:18px}
+html .svf :is(.svf-card-name em,.svf-ed-look){font-size:16px}
+html .svf .svf-sw span{font-size:14px}
+html .svf .svf-mi-title{font-size:clamp(36px,10vw,88px);line-height:1}
+html .svf .svf-mi-big{font-size:clamp(26px,7vw,52px);line-height:1.12}
+html .svf .svf-ghost-word{font-size:clamp(110px,22vw,380px)}
+/* Prix et totaux : informations pratiques, police de texte */
+html .svf :is(.svf-lk-total b,.svf-pd-price [data-pd-price],.svf-ct-range output){font-family:var(--svf-font-text);font-weight:400;letter-spacing:0}
+/* Accroches en italique de l'ancienne police : même famille que le texte, sans italique décoratif */
+html .svf .svf-ed-lede em{font-family:var(--svf-font-text);font-style:normal;font-weight:600;font-size:inherit}
+
+/* En-tête : logo et menu en Montserrat, liens de la barre en police de texte */
+html .svf-hd-root .svf-hd{font-family:var(--svf-font-text)}
+html .svf-hd-root .svf-hd .svf-hd-logo{font-family:var(--svf-font-display);font-weight:600}
+html .svf-hd-root .svf-hd-menu a{font-family:var(--svf-font-display);font-weight:300;letter-spacing:-.01em}
+html .svf-hd-root .svfm-menu-foot{font-family:var(--svf-font-text)}

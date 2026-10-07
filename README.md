@@ -79,6 +79,15 @@ Mise en ligne :
 
 Contenu : les phrases reprennent des textes déjà présents sur le site (accueil, sur mesure, contact). Sont nouveaux et à valider : le libellé « Ce qui nous anime », le titre « Trois façons de faire », les verbes « Retrouver / Créer / Accompagner », les titres des trois engagements et les liaisons de phrase. Tout se modifie dans l’éditeur de thème.
 
+## Typographie
+
+Deux familles, jamais plus (`snippets/svf-fonts.liquid`, `assets/svf-type.css`) :
+- **Montserrat** (principale) : titres, noms de collections et de pièces, logo, menu.
+- **Montaser Arabic** (secondaire) : textes, descriptions, informations pratiques, interface (boutons, prix, légendes).
+
+Les anciennes polices (Bodoni Moda, Archivo, IBM Plex Mono) ne sont plus chargées. Montaser Arabic n’est pas sur Google Fonts : tant que ses fichiers ne sont pas déposés dans *Contenu › Fichiers* et déclarés dans `snippets/svf-fonts.liquid` (`text_font_regular`, `text_font_bold`), les textes s’affichent en Montserrat.
+Les pages Horizon hors sections svf (fiche produit par défaut, panier, compte) utilisent les polices réglées dans *Paramètres du thème › Typographie*.
+
 ## Pages look
 
 Les pièces viennent de la liste fournie par la marque (7 octobre 2026). Deux pièces sont vendues : **Noir Rebelle** (Eliot) et **Bordeaux Impérial** (Florian). Elles restent affichées avec « Vendu », hors sélection et hors panier.

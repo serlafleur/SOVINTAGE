@@ -157,7 +157,9 @@ function essentialMenu() {
   return h;
 }
 // Les liens Shopify pointent vers les fichiers de l'aperçu
+const OLD_FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">';
 const relink = (html) => html
+  .replace(/https:\/\/fonts\.googleapis\.com\/css2\?family=Montserrat[^"]*/g, "media/fonts/montserrat.css")
   .replace(/href="\/pages\/notre-mission"/g, 'href="mission.html"')
   .replace(/href="\/pages\/(look-[a-z]+)"/g, 'href="$1.html"')
   .replace(/href="\/#/g, 'href="mobile.html#')
@@ -166,10 +168,14 @@ const relink = (html) => html
 async function page({ mobile, template = index, tpl = { name: "index", suffix: null }, label }) {
   const g = { ...globals, template: tpl, request: { path: tpl.name === "index" ? "/" : "/pages/notre-mission", design_mode: false } };
   // Comme layout/theme.liquid : svf-head pour l'accueil et les pages look (la page mission le charge elle-même)
-  const head = tpl.name === "index" || String(tpl.suffix || "").includes("look") ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
+  let head = tpl.name === "index" || String(tpl.suffix || "").includes("look") ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
   let header = await renderSection("svf-header", "svf_header", mobile ? essentialMenu() : headerBefore.sections.svf_header, g);
   // « Avant » : le thème tel qu'il est en ligne, sans les deux lignes qui chargent la couche mobile
   if (!mobile) header = header.replace(/<link[^>]*svf-mobile\.css[^>]*>|<script[^>]*svf-mobile\.js[^>]*><\/script>/g, "");
+  // « Avant » garde aussi ses polices d'origine (Bodoni Moda, Archivo, IBM Plex Mono), sans la charte typographique
+  const unType = (h) => mobile ? h : h.replace(/<link[^>]*svf-type\.css[^>]*>/g, "").replace(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com\/css2\?family=Montserrat[^>]*>/g, OLD_FONTS);
+  header = unType(header);
+  head = unType(head);
   const sections = [];
   for (const id of template.order) {
     const s = template.sections[id];

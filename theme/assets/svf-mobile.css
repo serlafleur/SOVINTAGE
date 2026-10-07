@@ -38,7 +38,7 @@
   .svf-hd-root .svf-hd-menu{align-content:start;padding:calc(var(--svf-hd-h,56px) + 24px) var(--hd-gutter) calc(env(safe-area-inset-bottom,0px) + 24px);overflow-y:auto;overscroll-behavior:contain;grid-template-rows:auto 1fr auto}
   .svf-hd-root .svf-hd-menu a{display:inline-block;padding:5px 0;font-size:clamp(34px,10vw,48px)}
   .svf-hd-root .svf-hd-menu a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
-  .svf-hd-root .svfm-menu-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;align-self:end;padding-top:28px;border-top:1px solid var(--hd-line);font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.02em;opacity:.8}
+  .svf-hd-root .svfm-menu-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;align-self:end;padding-top:28px;border-top:1px solid var(--hd-line);font:500 11px/1.4 var(--svf-font-text,"Montserrat",Arial,sans-serif);letter-spacing:.02em;opacity:.8}
   .svf-hd-root .svfm-menu-foot a{display:inline-flex;align-items:center;font:inherit;min-height:44px;padding:0}
   html.svfm-lock,html.svfm-lock body{overflow:hidden}
 

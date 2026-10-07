@@ -1,0 +1,24 @@
+{%- comment -%}
+  Charte typographique SOVINTAGEFRIP : deux familles, jamais plus.
+  - Police principale, MONTSERRAT : titres, noms de collections et de pièces, logo, menu.
+  - Police secondaire, MONTASER ARABIC : textes, descriptions, informations pratiques, interface du site.
+  Montaser Arabic n'est pas hébergée par Google Fonts : déposez ses fichiers .woff2 dans Contenu › Fichiers,
+  puis indiquez leurs noms ci-dessous. Tant qu'ils sont vides, les textes s'affichent en Montserrat.
+  Rendu par snippets/svf-head.liquid et sections/svf-header.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign text_font_regular = ''
+  assign text_font_bold = ''
+-%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..700;1,300..700&display=swap">
+{%- if text_font_regular != blank -%}
+  <style>
+    @font-face{font-family:"Montaser Arabic";src:url("{{ text_font_regular | file_url }}") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+    {%- if text_font_bold != blank -%}
+    @font-face{font-family:"Montaser Arabic";src:url("{{ text_font_bold | file_url }}") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+    {%- endif -%}
+  </style>
+{%- endif -%}
+{{ 'svf-type.css' | asset_url | stylesheet_tag }}
