@@ -89,8 +89,7 @@
         "caption_b_text": "Blond miel, mèches longues,\nenvers jacquard ivoire",
         "studio": "#D9D7DA",
         "autoplay": 6
-      },
-      "disabled": true
+      }
     },
     "svf_intro": {
       "type": "svf-intro",
@@ -534,8 +533,7 @@
         "text": "<p>Des textures à regarder de près. Nos Cravates Signatures en fausse fourrure donnent une nouvelle place à cet accessoire.</p>",
         "link_label": "Explorer les pièces",
         "link_url": "#svf-drop"
-      },
-      "disabled": true
+      }
     },
     "svf_mesure": {
       "type": "svf-sur-mesure",
@@ -724,25 +722,9 @@
         "success": "C’est noté. Vous serez prévenu·e des prochaines pièces en avant-première.",
         "wordmark": "SOVINTAGEFRIP"
       }
-    },
-    "svf_hero_studio": {
-      "type": "svf-hero-studio",
-      "settings": {
-        "image": "shopify://shop_images/IMG_2421.jpg",
-        "eyebrow": "N°01 — Collection FW26",
-        "heading": "Crépuscule",
-        "heading_em": ".",
-        "subheading": "Premier drop · 20 Cravates Signatures",
-        "cta_label": "Explorer le drop",
-        "cta_link": "#svf-drop",
-        "cta2_label": "Voir les looks",
-        "cta2_link": "#svf-silhouettes",
-        "studio": "#D9D7DA"
-      }
     }
   },
   "order": [
-    "svf_hero_studio",
     "svf_hero",
     "svf_intro",
     "svf_drop",

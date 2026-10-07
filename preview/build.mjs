@@ -144,6 +144,9 @@ async function renderSection(type, id, data, g = globals, tag = "div") {
 const index = readJson(path.join(THEME, "templates/index.json"));
 const mission = readJson(path.join(THEME, "templates/page.mission.json"));
 const headerGroup = readJson(path.join(THEME, "sections/header-group.json"));
+// « Avant » : réglages d'accueil et d'en-tête tels qu'ils étaient avant nos changements (7 octobre 2026)
+const indexBefore = readJson(path.join(here, "reference/index.json"));
+const headerBefore = readJson(path.join(here, "reference/header-group.json"));
 
 // Menu essentiel (à reproduire dans l'éditeur de thème, voir README) : Le drop · La collection · Notre mission · Contact.
 // La Signature, Matières et Sur mesure restent accessibles depuis l'accueil ; le panier reste en icône dans la barre.
@@ -162,7 +165,7 @@ const relink = (html) => html
 async function page({ mobile, template = index, tpl = { name: "index", suffix: null }, label }) {
   const g = { ...globals, template: tpl, request: { path: tpl.name === "index" ? "/" : "/pages/notre-mission", design_mode: false } };
   const head = tpl.name === "index" ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
-  let header = await renderSection("svf-header", "svf_header", mobile ? essentialMenu() : headerGroup.sections.svf_header, g);
+  let header = await renderSection("svf-header", "svf_header", mobile ? essentialMenu() : headerBefore.sections.svf_header, g);
   // « Avant » : le thème tel qu'il est en ligne, sans les deux lignes qui chargent la couche mobile
   if (!mobile) header = header.replace(/<link[^>]*svf-mobile\.css[^>]*>|<script[^>]*svf-mobile\.js[^>]*><\/script>/g, "");
   const sections = [];
@@ -203,6 +206,6 @@ for (const f of fs.readdirSync(path.join(THEME, "assets"))) fs.copyFileSync(path
 fs.cpSync(path.join(here, "media"), path.join(DIST, "media"), { recursive: true });
 if (fs.existsSync(path.join(here, "showcase.html"))) fs.copyFileSync(path.join(here, "showcase.html"), path.join(DIST, "index.html"));
 fs.writeFileSync(path.join(DIST, "mobile.html"), await page({ mobile: true, label: "maquette mobile" }));
-fs.writeFileSync(path.join(DIST, "avant.html"), await page({ mobile: false, label: "thème actuel" }));
+fs.writeFileSync(path.join(DIST, "avant.html"), await page({ mobile: false, template: indexBefore, label: "thème d’origine" }));
 fs.writeFileSync(path.join(DIST, "mission.html"), await page({ mobile: true, template: mission, tpl: { name: "page", suffix: "mission" }, label: "Notre mission" }));
 console.log("dist/ prêt :", fs.readdirSync(DIST).join(", "));
