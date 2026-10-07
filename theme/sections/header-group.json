@@ -114,39 +114,12 @@
             "in_bar": true
           }
         },
-        "l_sig": {
-          "type": "link",
-          "settings": {
-            "label": "La Signature",
-            "label_menu": "La <em>Signature</em>",
-            "link": "#svf-signature",
-            "in_bar": true
-          }
-        },
         "l_coll": {
           "type": "link",
           "settings": {
             "label": "Collection",
             "label_menu": "La <em>collection</em>",
             "link": "/pages/collection",
-            "in_bar": true
-          }
-        },
-        "l_mat": {
-          "type": "link",
-          "settings": {
-            "label": "Matières",
-            "label_menu": "",
-            "link": "#svf-matieres",
-            "in_bar": false
-          }
-        },
-        "l_mesure": {
-          "type": "link",
-          "settings": {
-            "label": "Sur mesure",
-            "label_menu": "",
-            "link": "#svf-mesure",
             "in_bar": true
           }
         },
@@ -158,14 +131,21 @@
             "link": "/pages/contact",
             "in_bar": true
           }
+        },
+        "l_mission": {
+          "type": "link",
+          "settings": {
+            "label": "Notre mission",
+            "label_menu": "Notre <em>mission</em>",
+            "link": "/pages/notre-mission",
+            "in_bar": true
+          }
         }
       },
       "block_order": [
         "l_drop",
-        "l_sig",
         "l_coll",
-        "l_mat",
-        "l_mesure",
+        "l_mission",
         "l_contact"
       ],
       "settings": {

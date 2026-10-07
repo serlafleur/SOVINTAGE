@@ -53,7 +53,7 @@ Le bureau a été vérifié : à 1 280 px, les 577 éléments mesurés de l’ac
   2. ajouter le lien **Notre mission** : libellé « Notre mission », libellé du menu `Notre <em>mission</em>`, adresse `/pages/notre-mission`, affiché dans la barre ;
   3. ordre : Le drop, Collection, Notre mission, Contact.
 
-`theme/sections/header-group.json` reste la copie des réglages en ligne relevés le 7 octobre 2026 : ne pas le pousser tel quel, il écraserait ces réglages.
+`theme/sections/header-group.json` contient ces quatre liens : c'est la version envoyée dans le thème Crépuscule 360 le 7 octobre 2026. Si l'en-tête est modifié ensuite dans l'éditeur, récupérer la version en ligne avant de repousser ce fichier.
 
 ## Page « Notre mission »
 
