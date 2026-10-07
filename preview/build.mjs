@@ -41,7 +41,7 @@ const ALT = {
 const PRODUCTS = Object.fromEntries(
   ["ombre", "brume", "sable", "neige"].map((k) => [
     `cravate-signature-${k}`,
-    { handle: `cravate-signature-${k}`, url: `#produit-${k}`, price: 4000, available: true, title: `Cravate Signature ${k[0].toUpperCase() + k.slice(1)}` },
+    { handle: `cravate-signature-${k}`, url: `#produit-${k}`, price: 4000, available: true, title: `Cravate Signature ${k[0].toUpperCase() + k.slice(1)}`, has_only_default_variant: true, selected_or_first_available_variant: { id: 1000 + k.length } },
   ])
 );
 
@@ -159,12 +159,14 @@ function essentialMenu() {
 // Les liens Shopify pointent vers les fichiers de l'aperçu
 const relink = (html) => html
   .replace(/href="\/pages\/notre-mission"/g, 'href="mission.html"')
+  .replace(/href="\/pages\/(look-[a-z]+)"/g, 'href="$1.html"')
   .replace(/href="\/#/g, 'href="mobile.html#')
   .replace(/href="\/"/g, 'href="mobile.html"');
 
 async function page({ mobile, template = index, tpl = { name: "index", suffix: null }, label }) {
   const g = { ...globals, template: tpl, request: { path: tpl.name === "index" ? "/" : "/pages/notre-mission", design_mode: false } };
-  const head = tpl.name === "index" ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
+  // Comme layout/theme.liquid : svf-head pour l'accueil et les pages look (la page mission le charge elle-même)
+  const head = tpl.name === "index" || String(tpl.suffix || "").includes("look") ? await engine.parseAndRender(fs.readFileSync(path.join(THEME, "snippets/svf-head.liquid"), "utf8"), g) : "";
   let header = await renderSection("svf-header", "svf_header", mobile ? essentialMenu() : headerBefore.sections.svf_header, g);
   // « Avant » : le thème tel qu'il est en ligne, sans les deux lignes qui chargent la couche mobile
   if (!mobile) header = header.replace(/<link[^>]*svf-mobile\.css[^>]*>|<script[^>]*svf-mobile\.js[^>]*><\/script>/g, "");
@@ -207,5 +209,9 @@ fs.cpSync(path.join(here, "media"), path.join(DIST, "media"), { recursive: true 
 if (fs.existsSync(path.join(here, "showcase.html"))) fs.copyFileSync(path.join(here, "showcase.html"), path.join(DIST, "index.html"));
 fs.writeFileSync(path.join(DIST, "mobile.html"), await page({ mobile: true, label: "maquette mobile" }));
 fs.writeFileSync(path.join(DIST, "avant.html"), await page({ mobile: false, template: indexBefore, label: "thème d’origine" }));
+for (const f of fs.readdirSync(path.join(THEME, "templates")).filter((f) => /^page\.look-.+\.json$/.test(f))) {
+  const id = f.replace(/^page\.|\.json$/g, "");
+  fs.writeFileSync(path.join(DIST, `${id}.html`), await page({ mobile: true, template: readJson(path.join(THEME, "templates", f)), tpl: { name: "page", suffix: id }, label: id }));
+}
 fs.writeFileSync(path.join(DIST, "mission.html"), await page({ mobile: true, template: mission, tpl: { name: "page", suffix: "mission" }, label: "Notre mission" }));
 console.log("dist/ prêt :", fs.readdirSync(DIST).join(", "));

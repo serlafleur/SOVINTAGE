@@ -1,0 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_look": {
+      "type": "svf-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "name": "Chocolat Nocturne",
+            "subtitle": "",
+            "story": "Veste d’hiver au caractère affirmé, mêlant un extérieur brun foncé à l’aspect cuir et une doublure effet fourrure assortie.",
+            "care": "Éviter le lavage en machine, le repassage et toute source de chaleur directe. Nettoyer délicatement les petites taches avec un chiffon doux légèrement humide, après avoir vérifié les consignes de l’étiquette.\nNettoyage à sec.",
+            "sold": false,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "jacket",
+            "color": "#3B2618",
+            "tweed": false
+          }
+        }
+      },
+      "block_order": [
+        "piece_1"
+      ],
+      "settings": {
+        "kicker": "(Look 09 / 09) · Crépuscule FW26",
+        "name": "Zeina",
+        "description": "<p>Une veste d’hiver brune, à l’aspect cuir.</p>",
+        "photo": "shopify://shop_images/IMG_2454.jpg",
+        "fallback_sig": "sable",
+        "collection_link": "/pages/collection",
+        "contact_link": "/pages/contact",
+        "prev_label": "Rose",
+        "prev_link": "/pages/look-rose",
+        "next_label": "Eliot",
+        "next_link": "/pages/look-eliot"
+      }
+    }
+  },
+  "order": [
+    "svf_look"
+  ]
+}

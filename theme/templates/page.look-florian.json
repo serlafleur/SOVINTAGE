@@ -1,0 +1,87 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_look": {
+      "type": "svf-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "name": "Bordeaux Impérial",
+            "subtitle": "La fourrure bordeaux.",
+            "story": "Une pièce théâtrale, profonde et majestueuse.",
+            "care": "Entretenir la fourrure avec une brosse douce, dans le sens du poil. Pour les petites taches, tamponner sans frotter avec un chiffon légèrement humide. Ne pas repasser, ne pas utiliser de sèche-linge et éviter les sources de chaleur. Laisser sécher naturellement sur un cintre solide.",
+            "sold": true,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "furcoat",
+            "color": "#5C1F24",
+            "tweed": false
+          }
+        },
+        "piece_2": {
+          "type": "piece",
+          "settings": {
+            "name": "Rouge Héritage",
+            "subtitle": "Le blazer bordeaux.",
+            "story": "Une élégance intemporelle, avec une personnalité forte.",
+            "care": "Cette pièce associe une matière plus raffinée, avec de la laine et du cachemire mentionnés dans sa composition. La manipuler avec soin pour préserver sa structure et son toucher. Utiliser une brosse à vêtements douce et éviter les frottements répétés. Ne pas laver en machine ni repasser directement à haute température. Pour les plis, utiliser délicatement la vapeur à distance. Éviter de suspendre des accessoires lourds qui pourraient déformer les épaules.",
+            "sold": false,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "blazer",
+            "color": "#6A2328",
+            "tweed": false
+          }
+        },
+        "piece_3": {
+          "type": "piece",
+          "settings": {
+            "name": "Cravate Signature Ombre",
+            "subtitle": "",
+            "story": "",
+            "care": "",
+            "sold": false,
+            "origin": "Création SoVintage",
+            "material": "Fausse fourrure noir profond, envers velours noir, trois perles",
+            "product": "cravate-signature-ombre",
+            "price": "",
+            "sizes": "",
+            "visual": "tie-ombre",
+            "color": "#1F1E1D",
+            "tweed": false
+          }
+        }
+      },
+      "block_order": [
+        "piece_1",
+        "piece_2",
+        "piece_3"
+      ],
+      "settings": {
+        "kicker": "(Look 03 / 09) · Crépuscule FW26",
+        "name": "Florian",
+        "description": "<p>Les nuances bordeaux rencontrent la Signature Ombre.</p>",
+        "photo": "shopify://shop_images/IMG_2420.jpg",
+        "fallback_sig": "ombre",
+        "collection_link": "/pages/collection",
+        "contact_link": "/pages/contact",
+        "prev_label": "Oscar",
+        "prev_link": "/pages/look-oscar",
+        "next_label": "Jules",
+        "next_link": "/pages/look-jules"
+      }
+    }
+  },
+  "order": [
+    "svf_look"
+  ]
+}

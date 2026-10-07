@@ -387,7 +387,9 @@
     var stage = $(".svf-lk-stage", root), rows = $$(".svf-lk-row", root), cards = $$(".svf-lk-card", root), detail = $(".svf-lk-detail", root);
     var bFull = $("[data-lk-full]", root), bDec = $("[data-lk-dec]", root), addBtn = $("[data-lk-add]", root), msg = $("[data-lk-msg]", root);
     if (!rows.length) return;
-    var sel = -1, inc = rows.map(function () { return true; }), size = rows.map(function () { return 0; });
+    /* Pièce vendue (data-sold) : visible et consultable, jamais sélectionnée ni ajoutée au panier */
+    var sold = rows.map(function (r) { return r.hasAttribute("data-sold"); });
+    var sel = -1, inc = rows.map(function (r, i) { return !sold[i]; }), size = rows.map(function () { return 0; });
     var cur = (window.Shopify && Shopify.currency && Shopify.currency.active) || "EUR";
     var money = function (cents) { try { return new Intl.NumberFormat(document.documentElement.lang || "fr-FR", { style: "currency", currency: cur }).format(cents / 100); } catch (e) { return (cents / 100).toFixed(2) + " €"; } };
     function mode(dec) { stage.classList.toggle("is-dec", dec); bFull.setAttribute("aria-pressed", String(!dec)); bDec.setAttribute("aria-pressed", String(dec)); }
@@ -396,9 +398,10 @@
       cards.forEach(function (c, i) { c.classList.toggle("is-dim", (sel >= 0 && i !== sel) || !inc[i]); });
       if (sel < 0) detail.innerHTML = "<p>" + detail.dataset.empty + "</p>";
       else {
-        var r = rows[sel], sizes = (r.dataset.sizes || "").split("|").filter(Boolean);
-        detail.innerHTML = '<p class="svf-mono">' + r.dataset.og + "</p><h2>" + r.dataset.name + "</h2>" + (r.dataset.mat ? "<p>" + r.dataset.mat + "</p>" : "") +
-          (sizes.length ? '<div class="svf-lk-sizes" role="group" aria-label="Taille">' + sizes.map(function (s, j) { return '<button type="button" data-size="' + j + '" aria-pressed="' + (j === size[sel]) + '">' + s + "</button>"; }).join("") + "</div>" : "") +
+        var r = rows[sel], sizes = (r.dataset.sizes || "").split("|").filter(Boolean), tpl = r.dataset.detail && document.getElementById(r.dataset.detail);
+        var sizesHtml = sizes.length ? '<div class="svf-lk-sizes" role="group" aria-label="Taille">' + sizes.map(function (s, j) { return '<button type="button" data-size="' + j + '" aria-pressed="' + (j === size[sel]) + '">' + s + "</button>"; }).join("") + "</div>" : "";
+        if (tpl) detail.innerHTML = tpl.innerHTML + sizesHtml;
+        else detail.innerHTML = (r.dataset.og ? '<p class="svf-mono">' + r.dataset.og + "</p>" : "") + "<h2>" + r.dataset.name + "</h2>" + (r.dataset.mat ? "<p>" + r.dataset.mat + "</p>" : "") + sizesHtml +
           (r.dataset.variants ? "" : '<p class="svf-mono">Pas encore en vente en ligne.</p>');
       }
       var n = 0, tot = 0, buyable = 0;
@@ -406,13 +409,13 @@
       $("[data-lk-count]", root).textContent = "Sélection · " + n + (n > 1 ? " pièces" : " pièce");
       $("[data-lk-total]", root).textContent = money(tot);
       addBtn.disabled = !buyable;
-      if (msg) msg.textContent = buyable < n ? "Les pièces non encore en vente ne sont pas ajoutées au panier." : "";
+      if (msg) msg.textContent = buyable < n ? "Les pièces « sur demande » se réservent par message : elles ne sont pas ajoutées au panier." : "";
     }
     bFull.addEventListener("click", function () { mode(false); });
     bDec.addEventListener("click", function () { mode(true); });
     function pick(i) { sel = sel === i ? -1 : i; refresh(); }
     rows.forEach(function (r, i) {
-      $("input", r).addEventListener("change", function (e) { inc[i] = e.target.checked; refresh(); });
+      $("input", r).addEventListener("change", function (e) { if (sold[i]) { e.target.checked = false; return; } inc[i] = e.target.checked; refresh(); });
       r.addEventListener("click", function (e) { if (e.target.closest("input")) return; pick(i); });
     });
     cards.forEach(function (c, i) { c.addEventListener("click", function () { if (!stage.classList.contains("is-dec")) mode(true); pick(i); }); });

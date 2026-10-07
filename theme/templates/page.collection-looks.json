@@ -13,7 +13,7 @@
           "settings": {
             "image": "",
             "name": "Look Eliot",
-            "pieces": "Veste de costume noire, Pantalon à pinces noir, Cravate Signature Ombre",
+            "pieces": "Noir Rebelle (vendu), Cravate Signature Ombre",
             "link": "/pages/look-eliot",
             "sig": "ombre"
           }
@@ -23,7 +23,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2428.jpg",
             "name": "Look Oscar",
-            "pieces": "Manteau en fausse fourrure marron, Blazer gris, Pantalon gris anthracite, Cravate Signature Brume",
+            "pieces": "Chocolat Sauvage, Gris Glacé, Cravate Signature Brume",
             "link": "/pages/look-oscar",
             "sig": "brume"
           }
@@ -33,7 +33,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2420.jpg",
             "name": "Look Florian",
-            "pieces": "Blazer bordeaux, Pantalon bordeaux, Cravate Signature Ombre",
+            "pieces": "Bordeaux Impérial (vendu), Rouge Héritage, Cravate Signature Ombre",
             "link": "/pages/look-florian",
             "sig": "ombre"
           }
@@ -43,7 +43,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2400.jpg",
             "name": "Look Jules",
-            "pieces": "Blazer à revers en fourrure, Pantalon droit noir, Cravate Signature Ombre",
+            "pieces": "Noir Héritage, Cravate Signature Ombre",
             "link": "/pages/look-jules",
             "sig": "ombre"
           }
@@ -53,7 +53,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2394.jpg",
             "name": "Look Aori",
-            "pieces": "Veste en tweed, Jupe en tweed",
+            "pieces": "Gris Couture",
             "link": "/pages/look-aori",
             "sig": "sable"
           }
@@ -63,7 +63,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2406.jpg",
             "name": "Look Mayi",
-            "pieces": "Veste beige, Pantalon beige, Cravate Signature Sable",
+            "pieces": "Sable Doré, Sable Essentiel, Cravate Signature Sable",
             "link": "/pages/look-mayi",
             "sig": "sable"
           }
@@ -73,7 +73,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2471.jpg",
             "name": "Look Clémentine",
-            "pieces": "Veste blanche, Pantalon blanc cassé, Cravate Signature Neige",
+            "pieces": "Neige Royale, Cravate Signature Neige",
             "link": "/pages/look-clementine",
             "sig": "neige"
           }
@@ -83,7 +83,7 @@
           "settings": {
             "image": "",
             "name": "Look Rose",
-            "pieces": "Veste en tweed, Corset en fausse fourrure, Jupe en tweed",
+            "pieces": "Noir Sculptural, Tweed Obscur",
             "link": "/pages/look-rose",
             "sig": "brume"
           }
@@ -93,7 +93,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_2454.jpg",
             "name": "Look Zeina",
-            "pieces": "Veste d’hiver aspect cuir, Pantalon noir",
+            "pieces": "Chocolat Nocturne",
             "link": "/pages/look-zeina",
             "sig": "sable"
           }

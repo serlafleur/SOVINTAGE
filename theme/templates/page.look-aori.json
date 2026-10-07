@@ -1,0 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_look": {
+      "type": "svf-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "name": "Gris Couture",
+            "subtitle": "L’ensemble tweed gris, veste et jupe.",
+            "story": "Une référence au vestiaire couture, aux finitions précieuses et au luxe parisien.",
+            "care": "Préserver la texture du tweed en évitant les frottements intenses et les lavages agressifs. Utiliser une brosse douce pour retirer les poussières. Éviter de tordre le tissu ou de l’essorer fortement, car cela peut déformer la coupe. Pour les petites taches, tamponner délicatement sans frotter. Éviter le repassage direct et utiliser une pattemouille si nécessaire.",
+            "sold": false,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "blazer",
+            "color": "#807C76",
+            "tweed": true
+          }
+        }
+      },
+      "block_order": [
+        "piece_1"
+      ],
+      "settings": {
+        "kicker": "(Look 05 / 09) · Crépuscule FW26",
+        "name": "Aori",
+        "description": "<p>Une silhouette en tweed, veste et jupe.</p>",
+        "photo": "shopify://shop_images/IMG_2394.jpg",
+        "fallback_sig": "sable",
+        "collection_link": "/pages/collection",
+        "contact_link": "/pages/contact",
+        "prev_label": "Jules",
+        "prev_link": "/pages/look-jules",
+        "next_label": "Mayi",
+        "next_link": "/pages/look-mayi"
+      }
+    }
+  },
+  "order": [
+    "svf_look"
+  ]
+}

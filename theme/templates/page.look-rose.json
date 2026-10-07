@@ -1,0 +1,68 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_look": {
+      "type": "svf-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "name": "Noir Sculptural",
+            "subtitle": "",
+            "story": "Pièce audacieuse et structurée qui joue sur les volumes, les textures et les contrastes pour affirmer une silhouette avec caractère.",
+            "care": "Manipuler avec le plus grand soin. Ne pas laver ni repasser. Éviter toute source de chaleur afin de préserver les matières et la structure du corset.",
+            "sold": false,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "corset",
+            "color": "#1E1C1B",
+            "tweed": false
+          }
+        },
+        "piece_2": {
+          "type": "piece",
+          "settings": {
+            "name": "Tweed Obscur",
+            "subtitle": "",
+            "story": "Une interprétation contemporaine du tweed, pensée autour de la texture, de la structure et du détail.",
+            "care": "Éviter le lavage en machine et privilégier un nettoyage localisé des taches. Manipuler délicatement, éviter les frottements et ne pas appliquer le fer directement sur le tweed, qui pourrait être endommagé par la chaleur.",
+            "sold": false,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "blazer",
+            "color": "#3E3A38",
+            "tweed": true
+          }
+        }
+      },
+      "block_order": [
+        "piece_1",
+        "piece_2"
+      ],
+      "settings": {
+        "kicker": "(Look 08 / 09) · Crépuscule FW26",
+        "name": "Rose",
+        "description": "<p>Tweed et corset en fourrure : un jeu de textures.</p>",
+        "photo": "",
+        "fallback_sig": "brume",
+        "collection_link": "/pages/collection",
+        "contact_link": "/pages/contact",
+        "prev_label": "Clémentine",
+        "prev_link": "/pages/look-clementine",
+        "next_label": "Zeina",
+        "next_link": "/pages/look-zeina"
+      }
+    }
+  },
+  "order": [
+    "svf_look"
+  ]
+}

@@ -1,6 +1,7 @@
 {%- comment -%}
   Page d'un look : la tenue complète (photo) se décompose en pièces. Chaque pièce est un bloc ;
   liée à un produit, elle affiche son prix, ses tailles (variantes) et part dans le panier Shopify.
+  Une pièce vendue reste visible avec la mention « Vendu » ; sa fiche (description, conseil d'entretien) reste consultable.
 {%- endcomment -%}
 <section class="svf svf-lk" data-svf="look" aria-labelledby="svf-lk-{{ section.id }}">
   <div class="svf-lk-bar">
@@ -19,7 +20,7 @@
         </div>
         <div class="svf-lk-pieces">
           {%- for b in section.blocks -%}
-            <button type="button" class="svf-lk-card" style="--i:{{ forloop.index0 }}" aria-label="{{ b.settings.name | escape }}">
+            <button type="button" class="svf-lk-card{% if b.settings.sold %} is-sold{% endif %}" style="--i:{{ forloop.index0 }}" aria-label="{{ b.settings.name | escape }}{% if b.settings.sold %}, vendu{% endif %}">
               <span class="svf-lk-vis">
                 {%- if b.settings.image != blank -%}
                   {{ b.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}
@@ -30,6 +31,7 @@
                   <span class="svf-lk-svg" data-svf-garment="{{ b.settings.visual }}" data-color="{{ b.settings.color }}"{% if b.settings.tweed %} data-tweed{% endif %}{% if b.settings.fur != blank %} data-fur="{{ b.settings.fur }}"{% endif %}></span>
                 {%- endif -%}
               </span>
+              {%- if b.settings.sold -%}<span class="svf-lk-sold svf-mono" aria-hidden="true">Vendu</span>{%- endif -%}
               <span class="svf-lk-lab svf-mono">{{ b.settings.name }}</span>
             </button>
           {%- endfor -%}
@@ -67,8 +69,12 @@
                     endunless
                   endfor
                 endif
-              else
+              elsif b.settings.price != blank
                 assign cents = b.settings.price | plus: 0 | times: 100
+              endif
+              assign sold = b.settings.sold
+              if p != blank and p.available == false
+                assign sold = true
               endif
               if sizes == ''
                 assign parts = b.settings.sizes | split: ','
@@ -81,15 +87,32 @@
                 endfor
               endif
             -%}
-            <li class="svf-lk-row" data-name="{{ b.settings.name | escape }}" data-og="{{ b.settings.origin | escape }}" data-mat="{{ b.settings.material | escape }}" data-sizes="{{ sizes | escape }}" data-price="{{ cents }}"{% if variants != '' %} data-variants="{{ variants }}"{% endif %} {{ b.shopify_attributes }}>
-              <input type="checkbox" checked aria-label="Inclure {{ b.settings.name | escape }}">
-              <div><span class="svf-lk-nm">{{ b.settings.name }}</span><br><span class="svf-lk-og">{{ b.settings.origin }}</span></div>
-              <span class="svf-lk-pr">{% if cents > 0 %}{{ cents | money }}{% else %}—{% endif %}</span>
+            <li class="svf-lk-row{% if sold %} is-sold{% endif %}" data-name="{{ b.settings.name | escape }}" data-og="{{ b.settings.origin | escape }}" data-mat="{{ b.settings.subtitle | default: b.settings.material | escape }}" data-sizes="{% unless sold %}{{ sizes | escape }}{% endunless %}" data-price="{% if sold %}0{% else %}{{ cents }}{% endif %}"{% if variants != '' and sold == false %} data-variants="{{ variants }}"{% endif %}{% if sold %} data-sold{% endif %} data-detail="svf-lk-d-{{ b.id }}" {{ b.shopify_attributes }}>
+              <input type="checkbox"{% if sold %} disabled{% else %} checked{% endif %} aria-label="{% if sold %}{{ b.settings.name | escape }}, vendu{% else %}Inclure {{ b.settings.name | escape }}{% endif %}">
+              <div><span class="svf-lk-nm">{{ b.settings.name }}</span>{%- if b.settings.subtitle != blank -%}<br><span class="svf-lk-og">{{ b.settings.subtitle }}</span>{%- elsif b.settings.origin != blank -%}<br><span class="svf-lk-og">{{ b.settings.origin }}</span>{%- endif -%}</div>
+              <span class="svf-lk-pr">{% if sold %}<span class="svf-lk-badge">Vendu</span>{% elsif cents > 0 %}{{ cents | money }}{% else %}<span class="svf-lk-ask">Sur demande</span>{% endif %}</span>
             </li>
           {%- endfor -%}
         </ul>
       </div>
-      <div class="svf-lk-detail" aria-live="polite" data-empty="Sélectionnez une pièce, dans la liste ou sur la tenue, pour voir sa matière et choisir sa taille."></div>
+      <div class="svf-lk-detail" aria-live="polite" data-empty="Sélectionnez une pièce, dans la liste ou sur la tenue, pour voir sa description et son conseil d’entretien."></div>
+      {%- for b in section.blocks -%}
+        {%- assign p = b.settings.product -%}
+        {%- assign sold = b.settings.sold -%}
+        {%- if p != blank and p.available == false -%}{%- assign sold = true -%}{%- endif -%}
+        <template id="svf-lk-d-{{ b.id }}">
+          {%- if sold -%}<p class="svf-mono svf-lk-status is-sold">Vendu · cette pièce a trouvé preneur</p>{%- elsif b.settings.origin != blank -%}<p class="svf-mono">{{ b.settings.origin }}</p>{%- endif -%}
+          <h2>{{ b.settings.name }}</h2>
+          {%- if b.settings.subtitle != blank -%}<p class="svf-lk-sub">{{ b.settings.subtitle }}</p>{%- endif -%}
+          {%- if b.settings.story != blank -%}<p>{{ b.settings.story }}</p>{%- elsif b.settings.material != blank -%}<p>{{ b.settings.material }}</p>{%- endif -%}
+          {%- if b.settings.care != blank -%}
+            <details class="svf-lk-care"><summary>Conseil d’entretien</summary><p>{{ b.settings.care | newline_to_br }}</p></details>
+          {%- endif -%}
+          {%- unless sold -%}
+            {%- if p == blank -%}<p class="svf-mono">Disponible · <a href="{{ section.settings.contact_link | default: '/pages/contact' }}">écrivez-nous pour la réserver</a></p>{%- endif -%}
+          {%- endunless -%}
+        </template>
+      {%- endfor -%}
       <div class="svf-lk-total"><span class="svf-label" data-lk-count></span><b data-lk-total></b></div>
       <button class="svf-lk-add" type="button" data-lk-add>Ajouter la sélection au panier</button>
       <p class="svf-mono svf-muted" data-lk-msg aria-live="polite"></p>
@@ -100,6 +123,22 @@
     </div>
   </div>
 </section>
+
+{% stylesheet %}
+  /* Pièces vendues : visibles (désirabilité), mais exclues de la sélection et du panier */
+  .svf-lk .svf-lk-row.is-sold{cursor:pointer}
+  .svf-lk .svf-lk-row.is-sold .svf-lk-nm{color:var(--svf-muted)}
+  .svf-lk .svf-lk-badge{display:inline-block;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-family:var(--svf-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  .svf-lk .svf-lk-ask{font-family:var(--svf-mono);font-size:11px;color:var(--svf-muted)}
+  .svf-lk .svf-lk-card.is-sold .svf-lk-vis{filter:grayscale(.6)}
+  .svf-lk .svf-lk-sold{position:absolute;top:8px;left:8px;z-index:2;padding:3px 8px;background:#1D2A21;color:#F1F5F2;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+  .svf-lk .svf-lk-detail .svf-lk-sub{color:var(--svf-fg)}
+  .svf-lk .svf-lk-detail .svf-lk-status.is-sold{color:var(--svf-fg)}
+  .svf-lk .svf-lk-care{border-top:1px solid var(--svf-line);padding-top:10px}
+  .svf-lk .svf-lk-care summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-family:var(--svf-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--svf-fg)}
+  .svf-lk .svf-lk-care p{margin-top:6px;line-height:1.6}
+  .svf-lk .svf-lk-detail a{text-decoration:underline;text-underline-offset:3px}
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -114,6 +153,7 @@
     { "type": "image_picker", "id": "photo", "label": "Photo de la tenue complète (portrait 2:3)" },
     { "type": "select", "id": "fallback_sig", "label": "Cravate affichée sans photo", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
     { "type": "text", "id": "collection_link", "label": "Adresse de la collection", "default": "/pages/collection" },
+    { "type": "text", "id": "contact_link", "label": "Adresse pour réserver une pièce sans produit lié", "default": "/pages/contact" },
     { "type": "text", "id": "prev_label", "label": "Look précédent · nom" },
     { "type": "text", "id": "prev_link", "label": "Look précédent · adresse" },
     { "type": "text", "id": "next_label", "label": "Look suivant · nom" },
@@ -124,12 +164,16 @@
       "type": "piece",
       "name": "Pièce",
       "settings": [
-        { "type": "text", "id": "name", "label": "Nom", "default": "Veste de costume noire" },
-        { "type": "select", "id": "origin", "label": "Origine", "default": "Seconde main", "options": [ { "value": "Seconde main", "label": "Seconde main" }, { "value": "Création SoVintage", "label": "Création SoVintage" } ] },
-        { "type": "text", "id": "material", "label": "Matière", "default": "Laine peignée" },
+        { "type": "text", "id": "name", "label": "Nom", "default": "Noir Rebelle" },
+        { "type": "text", "id": "subtitle", "label": "Présentation courte", "info": "Ex. : La veste noire en similicuir pour homme." },
+        { "type": "textarea", "id": "story", "label": "Description" },
+        { "type": "textarea", "id": "care", "label": "Conseil d’entretien" },
+        { "type": "checkbox", "id": "sold", "label": "Vendue", "default": false, "info": "La pièce reste affichée avec la mention « Vendu », hors sélection et hors panier. Un produit lié épuisé est aussi affiché comme vendu." },
+        { "type": "select", "id": "origin", "label": "Origine", "default": "", "options": [ { "value": "", "label": "Non affichée" }, { "value": "Seconde main", "label": "Seconde main" }, { "value": "Création SoVintage", "label": "Création SoVintage" } ] },
+        { "type": "text", "id": "material", "label": "Matière (facultatif)" },
         { "type": "product", "id": "product", "label": "Produit lié", "info": "Prix, tailles (variantes) et ajout au panier viennent du produit." },
-        { "type": "text", "id": "price", "label": "Prix sans produit lié (en euros)", "default": "120" },
-        { "type": "text", "id": "sizes", "label": "Tailles sans produit lié", "default": "48 · pièce unique", "info": "Séparez les tailles par des virgules : S, M, L" },
+        { "type": "text", "id": "price", "label": "Prix sans produit lié (en euros)", "info": "Vide : « Sur demande »." },
+        { "type": "text", "id": "sizes", "label": "Tailles sans produit lié", "info": "Séparez les tailles par des virgules : S, M, L" },
         { "type": "image_picker", "id": "image", "label": "Photo de la pièce (détourée de préférence)" },
         { "type": "select", "id": "visual", "label": "Illustration sans photo", "default": "blazer", "options": [
           { "value": "blazer", "label": "Blazer / veste" }, { "value": "jacket", "label": "Veste zippée" }, { "value": "furcoat", "label": "Manteau en fourrure" }, { "value": "trousers", "label": "Pantalon" }, { "value": "skirt", "label": "Jupe" }, { "value": "corset", "label": "Corset" },

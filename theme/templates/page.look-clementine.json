@@ -1,0 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_look": {
+      "type": "svf-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "name": "Neige Royale",
+            "subtitle": "La fourrure blanche pour femme.",
+            "story": "Une silhouette lumineuse, affirmée et sophistiquée.",
+            "care": "Entretenir régulièrement la fourrure avec une brosse douce pour conserver son volume. Nettoyer les petites taches dès leur apparition avec un chiffon blanc légèrement humide, sans frotter. Éviter le repassage, le sèche-linge, les produits blanchissants et la chaleur directe. Laisser sécher naturellement et éviter de ranger la pièce comprimée afin de préserver son aspect.",
+            "sold": false,
+            "origin": "",
+            "material": "",
+            "price": "",
+            "sizes": "",
+            "visual": "furcoat",
+            "color": "#EEECE6",
+            "tweed": false
+          }
+        },
+        "piece_2": {
+          "type": "piece",
+          "settings": {
+            "name": "Cravate Signature Neige",
+            "subtitle": "",
+            "story": "",
+            "care": "",
+            "sold": false,
+            "origin": "Création SoVintage",
+            "material": "Fausse fourrure blanc neige, envers jacquard cachemire argent, trois perles",
+            "product": "cravate-signature-neige",
+            "price": "",
+            "sizes": "",
+            "visual": "tie-neige",
+            "color": "#1F1E1D",
+            "tweed": false
+          }
+        }
+      },
+      "block_order": [
+        "piece_1",
+        "piece_2"
+      ],
+      "settings": {
+        "kicker": "(Look 07 / 09) · Crépuscule FW26",
+        "name": "Clémentine",
+        "description": "<p>Une silhouette blanche et la Signature Neige.</p>",
+        "photo": "shopify://shop_images/IMG_2471.jpg",
+        "fallback_sig": "neige",
+        "collection_link": "/pages/collection",
+        "contact_link": "/pages/contact",
+        "prev_label": "Mayi",
+        "prev_link": "/pages/look-mayi",
+        "next_label": "Rose",
+        "next_link": "/pages/look-rose"
+      }
+    }
+  },
+  "order": [
+    "svf_look"
+  ]
+}
