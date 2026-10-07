@@ -5,6 +5,15 @@ Elle s’ajoute au thème sans modifier `svf.css`, `svf-2.css`, `svf.js` ni les 
 
 Aperçu interactif (avant / après) : https://claude.ai/artifact/2t2PbWJFuS9o6SqVmkW6ob
 
+## État dans Shopify (7 octobre 2026)
+
+Appliqué au thème non publié **SOVINTAGEFRIP — Crépuscule 360** (ID 211137102214), fichiers envoyés depuis le commit `da256ea` et vérifiés par empreinte MD5 :
+`assets/svf-mobile.css`, `assets/svf-mobile.js`, `sections/svf-header.liquid`, `sections/svf-mission.liquid`, `templates/page.mission.json`, `sections/header-group.json` (menu à quatre liens).
+Page créée et publiée : **Notre mission** (`/pages/notre-mission`, modèle `page.mission`).
+
+Le thème en ligne reste **Horizon** : tant que Crépuscule 360 n’est pas publié, ces changements se voient avec l’aperçu du thème
+(`https://sovintagefrip.com/?preview_theme_id=211137102214`). Sous Horizon, la page Notre mission s’affiche avec le modèle de page par défaut et son texte de secours.
+
 ## Intégration dans Shopify
 
 1. **Ajouter les deux fichiers** dans *Boutique en ligne › Thèmes › Crépuscule 360 › Modifier le code › assets* :
