@@ -13,6 +13,8 @@ Page créée et publiée : **Notre mission** (`/pages/notre-mission`, modèle `p
 Puis, depuis le commit `473a634` : `sections/svf-hero-studio.liquid` (nouvelle bannière) et `templates/index.json` (bannière studio en tête ; ancienne bannière et Matières désactivées).
 Puis, depuis le commit `ce69b75` : `assets/svf.js`, `sections/svf-look.liquid`, les 9 `templates/page.look-*.json` et `templates/page.collection-looks.json` (vraies pièces, descriptions, conseils d’entretien, pièces vendues).
 Puis, depuis le commit `f4b2259` : `snippets/svf-fonts.liquid`, `assets/svf-type.css`, `snippets/svf-head.liquid`, `sections/svf-header.liquid`, `assets/svf-mobile.css` (charte typographique).
+Puis, depuis les commits `ed1374e` et suivant : `sections/svf-drop.liquid`, `svf-hero-studio.liquid`, `svf-header.liquid`, `svf-intro.liquid`, `svf-lettre.liquid`, `svf-mission.liquid`, `svf-404.liquid`, `svf-hero.liquid`, `templates/index.json`, `templates/page.mission.json`, `sections/header-group.json` (plus de « premier drop » ni de « 20 cravates » : bouton « Explorez la collection », section « Les Cravates Signatures », menu « Cravates »).
+Fiches produit des quatre Cravates Signatures : « Pièce du premier drop Crépuscule FW26 » devient « Pièce de la collection Crépuscule FW26 ».
 
 Le thème en ligne reste **Horizon** : tant que Crépuscule 360 n’est pas publié, ces changements se voient avec l’aperçu du thème
 (`https://sovintagefrip.com/?preview_theme_id=211137102214`). Sous Horizon, la page Notre mission s’affiche avec le modèle de page par défaut et son texte de secours.
@@ -47,7 +49,7 @@ shopify theme push --theme 211137102214 \
 | --- | --- | --- |
 | En-tête | logo et « Panier (0) » se chevauchent à 390 px, boutons hauts de 17 px | icône panier + compteur (nom accessible « Panier, n article »), cibles 44 px, menu en fenêtre modale : focus piégé, fond inerte, Échap, défilement bloqué |
 | Bannière | carrousel en rideau à lecture automatique, titre derrière les photos, gros plans, titre coupé sur mobile | remplacée par **SVF · Bannière studio** (`sections/svf-hero-studio.liquid`) : une photo, le titre, une ligne, un bouton, un lien ; aucun JavaScript ; bouton visible dès le premier écran de 320 px au bureau. L’ancienne bannière reste dans le thème, désactivée |
-| Le drop | « Voir la pièce » visible au survol uniquement | bouton toujours visible, carte entière cliquable, bouton « 360° » vers la scène sur la bonne Signature |
+| Cravates Signatures | « Voir la pièce » visible au survol uniquement | bouton toujours visible, carte entière cliquable, bouton « 360° » vers la scène sur la bonne Signature |
 | Signature 360° | pastilles 26 px, texte secondaire à 3,5:1 | pastilles 68 px, indication « glissez pour faire tourner », contraste 4,8:1 |
 | Silhouettes | carrousel calculé au pointeur | bande à faire glisser, synchronisée avec la fiche du look |
 | Matières | grille de cinq visuels en parallaxe | section désactivée sur l’accueil (réactivable dans l’éditeur) |
@@ -58,13 +60,13 @@ Le bureau a été vérifié : à 1 280 px, les 577 éléments mesurés de l’ac
 
 ## Menu : quatre entrées
 
-**Le drop · La collection · Notre mission · Contact.** Le panier reste en icône dans la barre ; La Signature, Matières et Sur mesure restent accessibles depuis l'accueil (et Sur mesure depuis Contact).
+**Cravates · La collection · Notre mission · Contact.** Le panier reste en icône dans la barre ; La Signature, Matières et Sur mesure restent accessibles depuis l'accueil (et Sur mesure depuis Contact).
 
 - Code : `sections/svf-header.liquid` n'ajoute plus « Panier » à la fin du menu plein écran ; le bas du menu ne garde que le lien Instagram.
 - Éditeur de thème › « SVF · En-tête » (à faire à la main, ces liens sont des réglages et non du code) :
   1. supprimer les liens **La Signature** (`#svf-signature`), **Matières** (`#svf-matieres`) et **Sur mesure** (`#svf-mesure`) ;
   2. ajouter le lien **Notre mission** : libellé « Notre mission », libellé du menu `Notre <em>mission</em>`, adresse `/pages/notre-mission`, affiché dans la barre ;
-  3. ordre : Le drop, Collection, Notre mission, Contact.
+  3. ordre : Cravates, Collection, Notre mission, Contact.
 
 `theme/sections/header-group.json` contient ces quatre liens : c'est la version envoyée dans le thème Crépuscule 360 le 7 octobre 2026. Si l'en-tête est modifié ensuite dans l'éditeur, récupérer la version en ligne avant de repousser ce fichier.
 
