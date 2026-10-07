@@ -1,0 +1,69 @@
+<section class="svf svf-looks svf-pad" data-svf="looks" id="svf-silhouettes" aria-labelledby="svf-looks-{{ section.id }}">
+  <div class="svf-looks-head">
+    {%- if section.settings.eyebrow != blank -%}<p class="svf-mono svf-muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2 class="svf-h svf-rv" id="svf-looks-{{ section.id }}">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h2>
+    <div class="svf-copy">{{ section.settings.intro }}</div>
+  </div>
+  <div class="svf-v-stage">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign kind = 'tie'
+        if block.settings.image != blank
+          assign kind = 'image'
+        elsif block.settings.sig == 'none'
+          assign kind = 'garment'
+        endif
+      -%}
+      <button class="svf-v-item" type="button" data-i="{{ forloop.index0 }}"
+        data-name="{{ block.settings.name | escape }}" data-sig="{{ block.settings.sig_label | default: '—' | escape }}" data-desc="{{ block.settings.description | strip_html | escape }}"
+        aria-label="Look {{ block.settings.name | escape }}" {{ block.shopify_attributes }}>
+        {%- render 'svf-tile', kind: kind, sig: block.settings.sig, frame: block.settings.frame, wall: block.settings.wall, image: block.settings.image, garment: block.settings.garment -%}
+      </button>
+    {%- endfor -%}
+  </div>
+  <dl class="svf-v-meta" aria-live="polite">
+    <div><dt>Look</dt><dd><span data-v="name"></span></dd></div>
+    <div><dt>Signature</dt><dd><span data-v="sig"></span></dd></div>
+    <div><dt>Silhouette</dt><dd><span data-v="desc"></span></dd></div>
+  </dl>
+  <div class="svf-v-nav">
+    <button type="button" data-svf-prev aria-label="Silhouette précédente">←</button>
+    <span class="svf-mono svf-v-count">01/{{ section.blocks.size | prepend: '0' | slice: -2, 2 }}</span>
+    <button type="button" data-svf-next aria-label="Silhouette suivante">→</button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Silhouettes",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Crépuscule · FW26" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Une histoire à porter" },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "autrement." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Un vêtement retrouvé. Une création SoVintage. Explorez les silhouettes de la collection.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Prénom", "default": "Eliot" },
+        { "type": "image_picker", "id": "image", "label": "Photo du look", "info": "Remplace la cravate ou l’illustration." },
+        { "type": "select", "id": "sig", "label": "Cravate affichée (sans photo)", "default": "ombre", "options": [
+          { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" }, { "value": "none", "label": "Aucune (illustration)" } ] },
+        { "type": "text", "id": "sig_label", "label": "Signature portée", "default": "Signature Ombre" },
+        { "type": "range", "id": "frame", "label": "Angle de vue", "min": 1, "max": 72, "step": 1, "default": 1 },
+        { "type": "select", "id": "garment", "label": "Illustration (si aucune cravate)", "default": "tweed", "options": [
+          { "value": "tweed", "label": "Veste en tweed" }, { "value": "tweed-rose", "label": "Tweed foncé" }, { "value": "leather", "label": "Veste aspect cuir" } ] },
+        { "type": "select", "id": "wall", "label": "Mur", "default": "char", "options": [
+          { "value": "green", "label": "Vert" }, { "value": "char", "label": "Anthracite" }, { "value": "tobacco", "label": "Tabac" }, { "value": "oxblood", "label": "Bordeaux" }, { "value": "slate", "label": "Ardoise" }, { "value": "olive", "label": "Olive" }, { "value": "stone", "label": "Pierre" }, { "value": "sand", "label": "Sable" }, { "value": "mist", "label": "Brume claire" } ] },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Une veste noire et la Cravate Signature Ombre.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SVF · Silhouettes", "blocks": [ { "type": "look" } ] }]
+}
+{% endschema %}

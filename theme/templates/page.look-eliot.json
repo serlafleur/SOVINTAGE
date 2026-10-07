@@ -1,0 +1,74 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_look": {
+      "type": "svf-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "name": "Veste de costume noire",
+            "origin": "Seconde main",
+            "material": "Laine peignée, doublure viscose",
+            "price": "120",
+            "sizes": "48 · pièce unique",
+            "visual": "blazer",
+            "color": "#1F1E1D",
+            "tweed": false
+          }
+        },
+        "piece_2": {
+          "type": "piece",
+          "settings": {
+            "name": "Pantalon à pinces noir",
+            "origin": "Seconde main",
+            "material": "Laine froide, taille haute",
+            "price": "85",
+            "sizes": "42 · pièce unique",
+            "visual": "trousers",
+            "color": "#262524",
+            "tweed": false
+          }
+        },
+        "piece_3": {
+          "type": "piece",
+          "settings": {
+            "name": "Cravate Signature Ombre",
+            "origin": "Création SoVintage",
+            "material": "Fausse fourrure noir profond, envers velours noir, trois perles",
+            "price": "40",
+            "sizes": "Taille unique",
+            "visual": "tie-ombre",
+            "color": "#1F1E1D",
+            "tweed": false,
+            "product": "cravate-signature-ombre"
+          }
+        }
+      },
+      "block_order": [
+        "piece_1",
+        "piece_2",
+        "piece_3"
+      ],
+      "settings": {
+        "kicker": "(Look 01 / 09) · Crépuscule FW26",
+        "name": "Eliot",
+        "description": "<p>Une veste noire et la Cravate Signature Ombre.</p>",
+        "photo": "",
+        "fallback_sig": "ombre",
+        "collection_link": "/pages/collection",
+        "prev_label": "Zeina",
+        "prev_link": "/pages/look-zeina",
+        "next_label": "Oscar",
+        "next_link": "/pages/look-oscar"
+      }
+    }
+  },
+  "order": [
+    "svf_look"
+  ]
+}

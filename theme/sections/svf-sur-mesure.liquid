@@ -1,0 +1,75 @@
+<section class="svf svf-mesure svf-pad" data-svf="mesure" id="svf-mesure" aria-labelledby="svf-m-{{ section.id }}">
+  <div class="svf-m-grid">
+    <div>
+      <p class="svf-mono svf-muted">{{ section.settings.eyebrow }}</p>
+      <div class="svf-m-intro">
+        <h2 class="svf-h svf-rv" id="svf-m-{{ section.id }}">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h2>
+        <div class="svf-copy">{{ section.settings.text }}</div>
+      </div>
+      <div class="svf-acc">
+        {%- for block in section.blocks -%}
+          <div class="svf-acc-item{% if forloop.first %} is-open{% endif %}" {{ block.shopify_attributes }}>
+            <h3>
+              <button class="svf-acc-btn" type="button" id="svf-accb-{{ block.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="svf-accp-{{ block.id }}" data-i="{{ forloop.index0 }}">
+                <span><span class="n">{{ block.settings.number }}</span><span class="t">{{ block.settings.title }}</span></span><i class="svf-pm" aria-hidden="true"></i>
+              </button>
+            </h3>
+            <div class="svf-acc-panel" id="svf-accp-{{ block.id }}" role="region" aria-labelledby="svf-accb-{{ block.id }}"><div><div class="svf-copy">{{ block.settings.text }}</div></div></div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}<a class="svf-link" href="{{ section.settings.link_url | default: '#svf-drop' }}">{{ section.settings.link_label }}</a>{%- endif -%}
+    </div>
+    <div class="svf-m-fig">
+      {%- for block in section.blocks -%}
+        <figure class="svf-m-slide{% if forloop.first %} is-on{% endif %}">
+          {%- render 'svf-tile', kind: block.settings.kind, sig: block.settings.sig, frame: block.settings.frame, wall: block.settings.wall, garment: block.settings.garment, image: block.settings.image, caption: block.settings.caption, alt: block.settings.title -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Sur mesure",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "03 / À votre mesure" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Votre envie," },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "notre point de départ." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un accompagnement personnalisé ou un vêtement imaginé pour vous.</p>" },
+    { "type": "text", "id": "link_label", "label": "Lien", "default": "Découvrir les pièces" },
+    { "type": "text", "id": "link_url", "label": "Destination du lien", "default": "#svf-drop" }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Numéro", "default": "01 / Stylisme" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Composer votre silhouette." },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un service de stylisme sur mesure pour donner forme à votre allure.</p>" },
+        { "type": "select", "id": "kind", "label": "Visuel", "default": "tie", "options": [ { "value": "tie", "label": "Cravate sur un mur" }, { "value": "garment", "label": "Illustration" }, { "value": "image", "label": "Photo" } ] },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "select", "id": "sig", "label": "Cravate", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+        { "type": "range", "id": "frame", "label": "Angle de vue", "min": 1, "max": 72, "step": 1, "default": 68 },
+        { "type": "select", "id": "garment", "label": "Illustration", "default": "tweed", "options": [ { "value": "tweed", "label": "Veste en tweed" }, { "value": "tweed-rose", "label": "Tweed foncé" }, { "value": "leather", "label": "Veste aspect cuir" } ] },
+        { "type": "select", "id": "wall", "label": "Mur", "default": "char", "options": [
+          { "value": "green", "label": "Vert" }, { "value": "char", "label": "Anthracite" }, { "value": "tobacco", "label": "Tabac" }, { "value": "oxblood", "label": "Bordeaux" }, { "value": "slate", "label": "Ardoise" }, { "value": "olive", "label": "Olive" }, { "value": "stone", "label": "Pierre" }, { "value": "sand", "label": "Sable" }, { "value": "mist", "label": "Brume claire" } ] },
+        { "type": "text", "id": "caption", "label": "Légende" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "SVF · Sur mesure",
+    "blocks": [
+      { "type": "service", "settings": { "number": "01 / Stylisme", "title": "Composer votre silhouette.", "text": "<p>Un service de stylisme sur mesure pour donner forme à votre allure.</p>", "kind": "tie", "sig": "ombre", "frame": 68, "wall": "char", "caption": "Stylisme · Signature Ombre" } },
+      { "type": "service", "settings": { "number": "02 / Création", "title": "Imaginer votre pièce.", "text": "<p>Un vêtement sur mesure, pensé autour de votre projet et de vos envies.</p>", "kind": "garment", "garment": "tweed", "wall": "stone", "caption": "Création · pièce sur mesure" } },
+      { "type": "service", "settings": { "number": "03 / L’existant", "title": "L’existant rencontre la création.", "text": "<p>Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>", "kind": "garment", "garment": "leather", "wall": "tobacco", "caption": "Seconde main sélectionnée" } }
+    ]
+  }]
+}
+{% endschema %}

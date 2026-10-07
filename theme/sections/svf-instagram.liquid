@@ -1,0 +1,80 @@
+{%- comment -%} Positions des 7 visuels (bureau puis mobile). Au-delà de 7 blocs, les visuels sont ignorés. {%- endcomment -%}
+{%- liquid
+  assign pos_1 = '--w:12%;--l:6%;--t:2%;--ar:4/3;--d:-14;--wm:34%;--lm:0;--tm:0'
+  assign pos_2 = '--w:13%;--l:24%;--t:0;--ar:3/4;--d:10;--wm:30%;--lm:35%;--tm:4%'
+  assign pos_3 = '--w:11.5%;--l:0;--t:36%;--ar:3/5;--d:-8'
+  assign pos_4 = '--w:12%;--l:17%;--t:60%;--ar:4/5;--d:16;--wm:32%;--lm:4%;--tm:70%'
+  assign pos_5 = '--w:23%;--r:0;--t:2%;--ar:4/3;--d:-10;--wm:34%;--rm:0;--tm:10%'
+  assign pos_6 = '--w:12%;--r:21%;--t:40%;--ar:4/5;--d:12'
+  assign pos_7 = '--w:20%;--r:0;--t:58%;--ar:1/1;--d:-12;--wm:38%;--rm:4%;--tm:68%'
+  assign speeds = '-0.4,0.5,0.8,-0.6,0.3,-0.8,0.6' | split: ','
+-%}
+<section class="svf svf-ig" data-svf="ig" id="svf-instagram" aria-labelledby="svf-ig-{{ section.id }}">
+  <div class="svf-ig-wall">
+    {%- for block in section.blocks limit: 7 -%}
+      {%- case forloop.index -%}
+        {%- when 1 -%}{%- assign pos = pos_1 -%}
+        {%- when 2 -%}{%- assign pos = pos_2 -%}
+        {%- when 3 -%}{%- assign pos = pos_3 -%}
+        {%- when 4 -%}{%- assign pos = pos_4 -%}
+        {%- when 5 -%}{%- assign pos = pos_5 -%}
+        {%- when 6 -%}{%- assign pos = pos_6 -%}
+        {%- else -%}{%- assign pos = pos_7 -%}
+      {%- endcase -%}
+      <div class="svf-ig-t{% if forloop.index == 3 or forloop.index == 6 %} is-hide-m{% endif %}" style="{{ pos }}" data-speed="{{ speeds[forloop.index0] }}" {{ block.shopify_attributes }}>
+        <a class="svf-ig-in" href="{{ section.settings.url }}" target="_blank" rel="noopener" aria-label="Instagram {{ section.settings.handle | escape }}">
+          {%- render 'svf-tile', kind: block.settings.kind, sig: block.settings.sig, frame: block.settings.frame, wall: block.settings.wall, x: block.settings.x, y: block.settings.y, z: block.settings.zoom, bg: block.settings.bg, image: block.settings.image -%}
+        </a>
+      </div>
+    {%- endfor -%}
+    <div class="svf-ig-center">
+      <p class="svf-mark" aria-hidden="true">S<span>V</span></p>
+      <h2 class="svf-label" id="svf-ig-{{ section.id }}">{{ section.settings.heading }}</h2>
+      <a class="svf-mono" href="{{ section.settings.url }}" target="_blank" rel="noopener">{{ section.settings.handle }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Instagram",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 7,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Suivez-nous sur Instagram" },
+    { "type": "text", "id": "handle", "label": "Compte", "default": "@sovintagefrip" },
+    { "type": "text", "id": "url", "label": "Lien du compte", "default": "https://www.instagram.com/sovintagefrip/" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Visuel",
+      "settings": [
+        { "type": "select", "id": "kind", "label": "Type", "default": "tie", "options": [ { "value": "tie", "label": "Cravate sur un mur" }, { "value": "macro", "label": "Gros plan" }, { "value": "image", "label": "Photo" } ] },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "select", "id": "sig", "label": "Cravate", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+        { "type": "range", "id": "frame", "label": "Angle de vue", "min": 1, "max": 72, "step": 1, "default": 1 },
+        { "type": "select", "id": "wall", "label": "Mur", "default": "green", "options": [
+          { "value": "green", "label": "Vert" }, { "value": "char", "label": "Anthracite" }, { "value": "tobacco", "label": "Tabac" }, { "value": "oxblood", "label": "Bordeaux" }, { "value": "slate", "label": "Ardoise" }, { "value": "olive", "label": "Olive" }, { "value": "stone", "label": "Pierre" }, { "value": "sand", "label": "Sable" }, { "value": "mist", "label": "Brume claire" } ] },
+        { "type": "range", "id": "x", "label": "Gros plan · horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "y", "label": "Gros plan · vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "zoom", "label": "Gros plan · zoom", "min": 1.5, "max": 5, "step": 0.1, "default": 3 },
+        { "type": "color", "id": "bg", "label": "Gros plan · fond", "default": "#1A1917" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "SVF · Instagram",
+    "blocks": [
+      { "type": "tile", "settings": { "kind": "macro", "sig": "neige", "frame": 1, "x": 49, "y": 12, "zoom": 3.2, "bg": "#2A3A2F" } },
+      { "type": "tile", "settings": { "kind": "tie", "sig": "neige", "frame": 68, "wall": "mist" } },
+      { "type": "tile", "settings": { "kind": "tie", "sig": "brume", "frame": 1, "wall": "char" } },
+      { "type": "tile", "settings": { "kind": "macro", "sig": "sable", "frame": 37, "x": 50, "y": 50, "zoom": 2.4, "bg": "#3A2E22" } },
+      { "type": "tile", "settings": { "kind": "tie", "sig": "sable", "frame": 4, "wall": "sand" } },
+      { "type": "tile", "settings": { "kind": "tie", "sig": "ombre", "frame": 6, "wall": "oxblood" } },
+      { "type": "tile", "settings": { "kind": "macro", "sig": "ombre", "frame": 1, "x": 50, "y": 55, "zoom": 2.2, "bg": "#161514" } }
+    ]
+  }]
+}
+{% endschema %}

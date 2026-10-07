@@ -1,0 +1,64 @@
+{%- comment -%} Page Collection : les looks défilent en bande, le look au point focal s'agrandit ; clic = page du look. {%- endcomment -%}
+<section class="svf svf-cv" data-svf="collection" aria-label="{{ section.settings.title | escape }}">
+  <div class="svf-cv-bar svf-cv-top">
+    <a href="{{ routes.root_url }}">{{ section.settings.brand }}</a>
+    <a class="svf-cv-mid" href="{{ routes.root_url }}">(Retour)</a>
+    <nav aria-label="Collection"><button type="button" data-cv-strip aria-pressed="true">Looks</button><button type="button" data-cv-index aria-pressed="false">Index</button><a href="{{ routes.root_url }}">Accueil</a></nav>
+  </div>
+  <div class="svf-cv-strip">
+    {%- for b in section.blocks -%}
+      <a class="svf-cv-item" href="{{ b.settings.link | default: '#' }}" data-i="{{ forloop.index0 }}" data-name="{{ b.settings.name | escape }}" data-pieces="{{ b.settings.pieces | escape }}" aria-label="{{ b.settings.name | escape }}" {{ b.shopify_attributes }}>
+        {%- if b.settings.image != blank -%}
+          {{ b.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 600, 900', sizes: '(min-width: 700px) 22vw, 60vw', alt: b.settings.name }}
+        {%- else -%}
+          <span class="svf-cv-fallback"><img src="{% render 'svf-frame-url', sig: b.settings.sig, frame: 1 %}" alt="" width="800" height="1200" loading="lazy"></span>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+  <p class="svf-cv-cap" aria-live="polite"></p>
+  <p class="svf-cv-hint svf-mono">{{ section.settings.hint }}</p>
+  <div class="svf-cv-index" hidden>
+    {%- for b in section.blocks -%}
+      <a href="{{ b.settings.link | default: '#' }}">
+        <span class="svf-cv-thumb">
+          {%- if b.settings.image != blank -%}{{ b.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<img src="{% render 'svf-frame-url', sig: b.settings.sig, frame: 1 %}" alt="" loading="lazy">{%- endif -%}
+        </span>
+        <span>({{ forloop.index | prepend: '0' | slice: -2, 2 }}) {{ b.settings.name }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+  <div class="svf-cv-bar svf-cv-bottom">
+    <span>{{ section.settings.brand }}</span>
+    <a class="svf-cv-mid" href="{{ routes.root_url }}">(Retour)</a>
+    <span class="svf-cv-right">{{ section.settings.title }}<br><span data-cv-count>01 / {{ section.blocks.size | prepend: '0' | slice: -2, 2 }}</span></span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Collection (looks)",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 24,
+  "settings": [
+    { "type": "text", "id": "brand", "label": "Marque", "default": "Sovintagefrip" },
+    { "type": "text", "id": "title", "label": "Collection", "default": "Crépuscule · FW26" },
+    { "type": "text", "id": "hint", "label": "Indication", "default": "Faites défiler · cliquez sur un look" }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (portrait 2:3)" },
+        { "type": "text", "id": "name", "label": "Nom", "default": "Look Eliot" },
+        { "type": "text", "id": "pieces", "label": "Pièces (légende)", "default": "Veste noire, pantalon, Signature Ombre" },
+        { "type": "text", "id": "link", "label": "Adresse de la page du look", "default": "/pages/look-eliot" },
+        { "type": "select", "id": "sig", "label": "Cravate (sans photo)", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SVF · Collection (looks)", "blocks": [ { "type": "look" } ] }]
+}
+{% endschema %}

@@ -1,0 +1,189 @@
+{%- comment -%}
+  Fiche produit d'une Cravate Signature (modèle product.signature).
+  Le coloris vient de l'adresse du produit : cravate-signature-<ombre|brume|sable|neige>.
+  Studio clair à gauche (360° glissable + photos), achat à droite, puis les autres Signatures.
+{%- endcomment -%}
+{%- liquid
+  assign sigs = 'ombre,brume,sable,neige' | split: ','
+  assign sig = product.handle | remove: 'cravate-signature-'
+  unless sigs contains sig
+    assign sig = section.settings.fallback_sig
+  endunless
+  case sig
+    when 'ombre'
+      assign sig_name = 'Ombre'
+      assign sig_fur = 'Noir profond'
+      assign sig_back = 'Velours noir'
+      assign sig_no = '01'
+    when 'brume'
+      assign sig_name = 'Brume'
+      assign sig_fur = 'Gris fumé, pointes argent'
+      assign sig_back = 'Jacquard cachemire anthracite'
+      assign sig_no = '02'
+    when 'sable'
+      assign sig_name = 'Sable'
+      assign sig_fur = 'Blond miel, mèches longues'
+      assign sig_back = 'Jacquard ivoire'
+      assign sig_no = '03'
+    else
+      assign sig_name = 'Neige'
+      assign sig_fur = 'Blanc neige'
+      assign sig_back = 'Jacquard cachemire argent'
+      assign sig_no = '04'
+  endcase
+  assign v = product.selected_or_first_available_variant
+  assign edition = section.settings.edition_size
+  assign left = edition
+  if v.inventory_management == 'shopify'
+    assign left = v.inventory_quantity | at_least: 0 | at_most: edition
+  endif
+  unless product.available
+    assign left = 0
+  endunless
+  assign home = routes.root_url
+-%}
+{%- capture base -%}{% render 'svf-frame-url', sig: sig, frame: 1 %}{%- endcapture -%}
+<script type="application/ld+json">{{ product | structured_data }}</script>
+<section class="svf svf-pd" data-svf="product" data-base="{{ base }}" data-sig="{{ sig }}" aria-labelledby="svf-pd-{{ section.id }}">
+  <nav class="svf-pd-crumb svf-mono" aria-label="Fil d’Ariane">
+    <a href="{{ home }}">Accueil</a><span aria-hidden="true">/</span><a href="{{ home }}#svf-drop">Le drop</a><span aria-hidden="true">/</span><span aria-current="page">Signature {{ sig_name }}</span>
+  </nav>
+
+  <div class="svf-pd-grid">
+    <div class="svf-pd-media">
+      <div class="svf-pd-stage">
+        <div class="svf-pd-view is-on" data-view="0">
+          <div class="svf-pd-ghost" aria-hidden="true"><span>{{ sig_name }}</span></div>
+          <div class="svf-pd-tie" role="slider" tabindex="0" aria-label="Faire tourner la cravate" aria-valuemin="0" aria-valuemax="359" aria-valuenow="0" aria-valuetext="0 degrés, endroit en fourrure">
+            <img class="svf-pd-poster" src="{{ base }}" alt="Cravate Signature {{ sig_name }}, vue de face" width="800" height="1200" fetchpriority="high">
+            <canvas aria-hidden="true"></canvas>
+          </div>
+          <div class="svf-pd-hud svf-mono">
+            <span class="svf-pd-dial"><b data-pd-deg>0°</b> <span data-pd-face>Endroit · fourrure</span></span>
+            <span class="svf-pd-hint" data-pd-hint>Glissez pour faire tourner</span>
+          </div>
+        </div>
+        {%- for m in product.media offset: 1 -%}
+          {%- if m.media_type == 'image' -%}
+            {%- assign malt = m.alt | default: product.title -%}
+            <figure class="svf-pd-view svf-pd-photo" data-view="{{ forloop.index }}">
+              {{ m | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 1000, 1400', sizes: '(min-width: 861px) 50vw, 100vw', alt: malt }}
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="svf-pd-thumbs" role="tablist" aria-label="Vues">
+        <button type="button" role="tab" aria-selected="true" data-to="0"><img src="{{ base }}" alt="" width="80" height="120"><span class="svf-mono">360°</span></button>
+        {%- for m in product.media offset: 1 -%}
+          {%- if m.media_type == 'image' -%}
+            <button type="button" role="tab" aria-selected="false" data-to="{{ forloop.index }}">{{ m | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}<span class="svf-sr">Photo {{ forloop.index }}</span></button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="svf-pd-info">
+      <p class="svf-mono svf-muted">{{ section.settings.kicker }} · Signature {{ sig_no }} / 04</p>
+      <h1 class="svf-pd-title" id="svf-pd-{{ section.id }}">Cravate Signature <em>{{ sig_name }}</em></h1>
+      <div class="svf-pd-price">
+        <span data-pd-price>{{ v.price | money }}</span>
+        {%- if section.settings.shipping_note != blank -%}<span class="svf-mono svf-muted">{{ section.settings.shipping_note }}</span>{%- endif -%}
+      </div>
+
+      <div class="svf-pd-edition" aria-label="{{ left }} pièce{% if left > 1 %}s{% endif %} disponible{% if left > 1 %}s{% endif %} sur {{ edition }}">
+        <div class="svf-pd-dots" aria-hidden="true">
+          {%- for i in (1..edition) -%}<i{% if i <= left %} class="is-on"{% endif %}></i>{%- endfor -%}
+        </div>
+        <p class="svf-mono">
+          {%- if left == 0 -%}Épuisée — les {{ edition }} pièces ont trouvé preneur
+          {%- elsif left == 1 -%}Dernière pièce sur {{ edition }}
+          {%- elsif left == edition -%}Édition limitée à {{ edition }} pièces
+          {%- else -%}Édition limitée · plus que {{ left }} sur {{ edition }}
+          {%- endif -%}
+        </p>
+      </div>
+
+      <div class="svf-pd-colors">
+        <p class="svf-label svf-muted">Coloris · <span>{{ sig_name }}</span></p>
+        <div class="svf-pd-sws">
+          {%- for s in sigs -%}
+            {%- assign okey = 'cravate-signature-' | append: s -%}{%- assign other = all_products[okey] -%}
+            {%- capture nm -%}{%- case s -%}{%- when 'ombre' -%}Ombre{%- when 'brume' -%}Brume{%- when 'sable' -%}Sable{%- else -%}Neige{%- endcase -%}{%- endcapture -%}
+            <a class="svf-pd-sw is-{{ s }}" href="{% if other.url != blank %}{{ other.url }}{% else %}#{% endif %}"{% if s == sig %} aria-current="true"{% endif %}{% if other.available == false and other.url != blank %} data-out{% endif %}>
+              <i aria-hidden="true"></i><span>{{ nm }}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- form 'product', product, class: 'svf-pd-form' -%}
+        <input type="hidden" name="id" value="{{ v.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button class="svf-pd-add" type="submit" name="add" data-pd-add{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available -%}Ajouter au panier <span aria-hidden="true">·</span> {{ v.price | money }}{%- else -%}Épuisée{%- endif -%}
+        </button>
+        <p class="svf-pd-msg svf-mono" data-pd-msg aria-live="polite"></p>
+      {%- endform -%}
+
+      {%- if product.description != blank -%}<div class="svf-copy svf-pd-desc">{{ product.description }}</div>{%- endif -%}
+
+      <div class="svf-pd-acc">
+        <details open>
+          <summary>Matières</summary>
+          <dl>
+            <div><dt>Endroit</dt><dd>Fausse fourrure · {{ sig_fur }}</dd></div>
+            <div><dt>Envers</dt><dd>{{ sig_back }}</dd></div>
+            <div><dt>Détail</dt><dd>Trois perles à l’encolure</dd></div>
+          </dl>
+        </details>
+        {%- if section.settings.size_text != blank -%}<details><summary>Dimensions</summary><div class="svf-copy">{{ section.settings.size_text }}</div></details>{%- endif -%}
+        {%- if section.settings.care_text != blank -%}<details><summary>Entretien</summary><div class="svf-copy">{{ section.settings.care_text }}</div></details>{%- endif -%}
+        {%- if section.settings.shipping_text != blank -%}<details><summary>Livraison &amp; retours</summary><div class="svf-copy">{{ section.settings.shipping_text }}</div></details>{%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.show_others -%}
+    <div class="svf-pd-others">
+      <h2 class="svf-h">Les autres <em>Signatures.</em></h2>
+      <div class="svf-rail svf-pd-rail" role="list">
+        {%- for s in sigs -%}
+          {%- if s == sig -%}{%- continue -%}{%- endif -%}
+          {%- assign okey = 'cravate-signature-' | append: s -%}{%- assign other = all_products[okey] -%}
+          {%- capture ob -%}{% render 'svf-frame-url', sig: s, frame: 1 %}{%- endcapture -%}
+          {%- capture nm -%}{%- case s -%}{%- when 'ombre' -%}Ombre{%- when 'brume' -%}Brume{%- when 'sable' -%}Sable{%- else -%}Neige{%- endcase -%}{%- endcapture -%}
+          <article class="svf-card" role="listitem">
+            <div class="svf-card-media" data-base="{{ ob }}">
+              <img src="{{ ob }}" alt="Cravate Signature {{ nm }}" width="800" height="1200" loading="lazy">
+              <span class="svf-card-turn svf-mono">360°</span>
+              {%- if other.url != blank -%}<a class="svf-card-cta" href="{{ other.url }}">Voir la pièce</a>{%- endif -%}
+            </div>
+            <div class="svf-card-info">
+              <h3 class="svf-card-name"><a href="{{ other.url | default: '#' }}">Cravate Signature <em>{{ nm }}</em></a></h3>
+              <p class="svf-card-price svf-mono">{%- if other.url == blank -%}—{%- elsif other.available -%}{{ other.price | money }}{%- else -%}Épuisée{%- endif -%}</p>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Fiche Signature",
+  "tag": "div",
+  "class": "svf-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Surtitre", "default": "Crépuscule FW26" },
+    { "type": "range", "id": "edition_size", "label": "Pièces par coloris", "min": 1, "max": 30, "step": 1, "default": 5 },
+    { "type": "text", "id": "shipping_note", "label": "Note sous le prix", "default": "Livraison 5 €" },
+    { "type": "select", "id": "fallback_sig", "label": "Coloris si l’adresse du produit ne l’indique pas", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+    { "type": "richtext", "id": "size_text", "label": "Dimensions", "info": "Laissez vide pour masquer." },
+    { "type": "richtext", "id": "care_text", "label": "Entretien", "info": "Laissez vide pour masquer." },
+    { "type": "richtext", "id": "shipping_text", "label": "Livraison & retours", "info": "Laissez vide pour masquer." },
+    { "type": "checkbox", "id": "show_others", "label": "Afficher les autres Signatures", "default": true }
+  ],
+  "presets": [{ "name": "SVF · Fiche Signature" }]
+}
+{% endschema %}

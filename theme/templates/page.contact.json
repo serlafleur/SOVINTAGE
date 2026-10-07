@@ -1,0 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_contact": {
+      "type": "svf-contact",
+      "settings": {
+        "image_pro": "shopify://shop_images/IMG_2421.jpg",
+        "image_perso": "shopify://shop_images/IMG_2406.jpg"
+      }
+    }
+  },
+  "order": [
+    "svf_contact"
+  ]
+}

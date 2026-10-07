@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_collection": {
+      "type": "svf-collection",
+      "blocks": {
+        "look_eliot": {
+          "type": "look",
+          "settings": {
+            "image": "",
+            "name": "Look Eliot",
+            "pieces": "Veste de costume noire, Pantalon à pinces noir, Cravate Signature Ombre",
+            "link": "/pages/look-eliot",
+            "sig": "ombre"
+          }
+        },
+        "look_oscar": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2428.jpg",
+            "name": "Look Oscar",
+            "pieces": "Manteau en fausse fourrure marron, Blazer gris, Pantalon gris anthracite, Cravate Signature Brume",
+            "link": "/pages/look-oscar",
+            "sig": "brume"
+          }
+        },
+        "look_florian": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2420.jpg",
+            "name": "Look Florian",
+            "pieces": "Blazer bordeaux, Pantalon bordeaux, Cravate Signature Ombre",
+            "link": "/pages/look-florian",
+            "sig": "ombre"
+          }
+        },
+        "look_jules": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2400.jpg",
+            "name": "Look Jules",
+            "pieces": "Blazer à revers en fourrure, Pantalon droit noir, Cravate Signature Ombre",
+            "link": "/pages/look-jules",
+            "sig": "ombre"
+          }
+        },
+        "look_aori": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2394.jpg",
+            "name": "Look Aori",
+            "pieces": "Veste en tweed, Jupe en tweed",
+            "link": "/pages/look-aori",
+            "sig": "sable"
+          }
+        },
+        "look_mayi": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2406.jpg",
+            "name": "Look Mayi",
+            "pieces": "Veste beige, Pantalon beige, Cravate Signature Sable",
+            "link": "/pages/look-mayi",
+            "sig": "sable"
+          }
+        },
+        "look_clementine": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2471.jpg",
+            "name": "Look Clémentine",
+            "pieces": "Veste blanche, Pantalon blanc cassé, Cravate Signature Neige",
+            "link": "/pages/look-clementine",
+            "sig": "neige"
+          }
+        },
+        "look_rose": {
+          "type": "look",
+          "settings": {
+            "image": "",
+            "name": "Look Rose",
+            "pieces": "Veste en tweed, Corset en fausse fourrure, Jupe en tweed",
+            "link": "/pages/look-rose",
+            "sig": "brume"
+          }
+        },
+        "look_zeina": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2454.jpg",
+            "name": "Look Zeina",
+            "pieces": "Veste d’hiver aspect cuir, Pantalon noir",
+            "link": "/pages/look-zeina",
+            "sig": "sable"
+          }
+        }
+      },
+      "block_order": [
+        "look_eliot",
+        "look_oscar",
+        "look_florian",
+        "look_jules",
+        "look_aori",
+        "look_mayi",
+        "look_clementine",
+        "look_rose",
+        "look_zeina"
+      ],
+      "settings": {
+        "brand": "Sovintagefrip",
+        "title": "Crépuscule · FW26",
+        "hint": "Faites défiler · cliquez sur un look"
+      }
+    }
+  },
+  "order": [
+    "svf_collection"
+  ]
+}

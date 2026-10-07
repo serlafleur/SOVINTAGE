@@ -1,0 +1,15 @@
+{
+  "name": "sovintage-preview",
+  "version": "1.0.0",
+  "description": "Aperçu local de l’accueil SOVINTAGEFRIP rendu depuis les sections Liquid du thème",
+  "scripts": {
+    "build": "node build.mjs",
+    "shoot": "node shoot.mjs mobile.html shots/mobile 390"
+  },
+  "dependencies": {
+    "liquidjs": "^10.30.0",
+    "playwright-core": "1.56"
+  },
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,14 @@
+{%- comment -%}
+  URL d'une vue 360° de la cravate, depuis Contenu > Fichiers.
+  Fichiers attendus : svf-<signature>-0001.webp … svf-<signature>-0072.webp
+  Paramètres : sig (ombre | brume | sable | neige), frame (1–72)
+{%- endcomment -%}
+{%- liquid
+  assign svf_n = frame | default: 1 | plus: 0
+  if svf_n < 1 or svf_n > 72
+    assign svf_n = 1
+  endif
+  assign svf_pad = svf_n | prepend: '000' | slice: -4, 4
+  assign svf_name = 'svf-' | append: sig | append: '-' | append: svf_pad | append: '.webp'
+  echo svf_name | file_url
+-%}

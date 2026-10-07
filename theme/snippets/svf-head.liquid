@@ -1,0 +1,11 @@
+{%- comment -%} Chargé sur l'accueil, la collection, les looks, le contact et la 404 (voir layout/theme.liquid). {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+{{ 'svf.css' | asset_url | stylesheet_tag }}
+{{ 'svf-2.css' | asset_url | stylesheet_tag }}
+{%- unless template.name == 'index' -%}{{ 'svf-3.css' | asset_url | stylesheet_tag }}{%- endunless -%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="{{ 'svf.js' | asset_url }}" defer></script>

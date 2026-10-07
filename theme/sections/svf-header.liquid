@@ -1,0 +1,173 @@
+{%- comment -%}
+  En-tête SOVINTAGEFRIP (repris de l'artefact) : navigation à gauche, logotype centré, panier à droite.
+  Fixe, se masque en descendant et réapparaît en remontant ; menu plein écran sur mobile.
+  Remplace l'en-tête Horizon (désactivé dans header-group.json, réactivable dans l'éditeur).
+{%- endcomment -%}
+{%- liquid
+  # Les ancres (#svf-…) pointent vers l'accueil depuis les autres pages
+  assign home = ''
+  unless template.name == 'index'
+    assign home = routes.root_url
+  endunless
+-%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  .svf-hd-root{--hd-bg:{{ section.settings.bg }};--hd-fg:{{ section.settings.fg }};--hd-line:{{ section.settings.line }};--hd-ease:cubic-bezier(.7,0,.16,1);--hd-gutter:clamp(16px,2.6vw,36px)}
+  /* Deux colonnes latérales strictement égales : le logotype reste au centre exact de l'écran */
+  .svf-hd{position:fixed;top:0;left:0;right:0;z-index:58;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;padding:calc(env(safe-area-inset-top,0px) + 18px) var(--hd-gutter) 16px;background:var(--hd-bg);color:var(--hd-fg);border-bottom:1px solid transparent;transition:transform .7s var(--hd-ease),border-color .4s;font-family:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .svf-hd.is-scrolled{border-bottom-color:var(--hd-line)}
+  .svf-hd.is-hidden{transform:translateY(-110%)}
+  .svf-hd ul{display:flex;align-items:center;gap:clamp(14px,2vw,28px);list-style:none;margin:0;padding:0}
+  .svf-hd li{flex:none;margin:0;padding:0;line-height:1.6}
+  .svf-hd a,.svf-hd button,.svf-hd-fx{white-space:nowrap;line-height:1.6}
+  .svf-hd a,.svf-hd button{color:inherit;text-decoration:none;font-family:inherit;font-stretch:125%;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;position:relative;background:none;border:0;padding:0;margin:0;cursor:pointer;min-height:0;box-shadow:none;border-radius:0}
+  .svf-hd nav a::after,.svf-hd .svf-hd-right a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--hd-ease)}
+  .svf-hd nav a:hover::after,.svf-hd nav a[aria-current="page"]::after,.svf-hd .svf-hd-right a:hover::after{transform:scaleX(1);transform-origin:left}
+  .svf-hd .svf-hd-logo{font-weight:600;font-size:13px;letter-spacing:.3em;padding-left:.3em;white-space:nowrap}
+  .svf-hd .svf-hd-logo::after{display:none}
+  .svf-hd-right{display:flex;justify-content:flex-end;gap:clamp(14px,2vw,28px);align-items:center}
+  .svf-hd .svf-hd-fx{font-stretch:125%;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;opacity:.7}
+  .svf-hd .svf-hd-count{font-variant-numeric:tabular-nums}
+  .svf-hd .svf-hd-menu-btn{display:none}
+  .svf-hd :focus-visible{outline:1px solid currentColor;outline-offset:4px}
+  .svf-hd-space{height:var(--svf-hd-h,52px)}
+  .svf-hd-menu{position:fixed;inset:0;z-index:57;background:var(--hd-bg);color:var(--hd-fg);display:grid;align-content:center;padding:0 var(--hd-gutter);clip-path:inset(0 0 100% 0);transition:clip-path .9s var(--hd-ease),visibility 0s .9s;visibility:hidden}
+  .svf-hd-menu.is-open{clip-path:inset(0);visibility:visible;transition:clip-path .9s var(--hd-ease)}
+  .svf-hd-menu ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .svf-hd-menu a{color:inherit;text-decoration:none;font-family:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;font-size:clamp(40px,11vw,64px);line-height:1.1}
+  .svf-hd-menu a em{font-style:italic}
+  .svf-hd-menu li{opacity:0;transform:translateY(24px);transition:opacity .5s,transform .8s cubic-bezier(.16,1,.3,1)}
+  .svf-hd-menu.is-open li{opacity:1;transform:none;transition-delay:calc(.25s + var(--i) * .06s)}
+  .svf-hd>div:first-child{min-width:0;display:flex;align-items:center}
+  .svf-hd .svf-hd-logo{justify-self:center}
+  .svf-hd-right{min-width:0}
+  /* Quand la navigation ne tient plus dans sa colonne (mesuré en JS), elle passe dans le menu */
+  .svf-hd-root.is-compact .svf-hd nav{display:none}
+  .svf-hd-root.is-compact .svf-hd .svf-hd-menu-btn{display:block}
+  .svf-hd-root.is-compact .svf-hd .svf-hd-fx{display:none}
+  @media (max-width:860px){
+    .svf-hd nav{display:none}
+    .svf-hd .svf-hd-menu-btn{display:block}
+    .svf-hd .svf-hd-fx,.svf-hd .svf-hd-notify{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.svf-hd,.svf-hd-menu,.svf-hd-menu li{transition:none}}
+</style>
+{%- comment -%} Couche mobile (≤ 860 px) : chargée ici pour s'appliquer à toutes les pages qui affichent cet en-tête {%- endcomment -%}
+{{ 'svf-mobile.css' | asset_url | stylesheet_tag }}
+
+<div class="svf-hd-root" data-svf-header>
+  <header class="svf-hd" data-hd>
+    <div>
+      <button class="svf-hd-menu-btn" type="button" data-hd-btn aria-expanded="false" aria-controls="svf-hd-menu-{{ section.id }}">Menu</button>
+      <nav aria-label="Navigation principale">
+        <ul>
+          {%- for b in section.blocks -%}
+            {%- unless b.settings.in_bar -%}{%- continue -%}{%- endunless -%}
+            {%- assign href = b.settings.link -%}
+            {%- assign c0 = href | slice: 0 -%}{%- if c0 == '#' -%}{%- assign href = home | append: href -%}{%- endif -%}
+            {%- assign cur = false -%}{%- if request.path == b.settings.link -%}{%- assign cur = true -%}{%- endif -%}
+            <li {{ b.shopify_attributes }}><a href="{{ href }}"{% if cur %} aria-current="page"{% endif %}>{{ b.settings.label | strip_html }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+    <a class="svf-hd-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}, accueil">{{ section.settings.wordmark }}</a>
+    <div class="svf-hd-right">
+      {%- if section.settings.show_fx -%}<span class="svf-hd-fx">{{ localization.language.iso_code | upcase }} · {{ cart.currency.symbol }}</span>{%- endif -%}
+      {%- if section.settings.notify_label != blank -%}<a class="svf-hd-notify" href="{{ home }}#svf-lettre">{{ section.settings.notify_label }}</a>{%- endif -%}
+      <a href="{{ routes.cart_url }}" data-hd-cart>Panier (<span class="svf-hd-count" data-hd-count>{{ cart.item_count }}</span>)</a>
+    </div>
+  </header>
+  <div class="svf-hd-space" aria-hidden="true"></div>
+  <div class="svf-hd-menu" id="svf-hd-menu-{{ section.id }}" data-hd-menu aria-hidden="true">
+    <ul>
+      {%- for b in section.blocks -%}
+        {%- assign href = b.settings.link -%}
+        {%- assign c0 = href | slice: 0 -%}{%- if c0 == '#' -%}{%- assign href = home | append: href -%}{%- endif -%}
+        <li style="--i:{{ forloop.index0 }}"><a href="{{ href }}">{{ b.settings.label_menu | default: b.settings.label }}</a></li>
+      {%- endfor -%}
+      <li style="--i:{{ section.blocks.size }}"><a href="{{ routes.cart_url }}">Panier</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.matches("[data-svf-header]")) root = document.querySelector("[data-svf-header]");
+    if (!root || root.dataset.ready) return; root.dataset.ready = "1";
+    var hd = root.querySelector("[data-hd]"), btn = root.querySelector("[data-hd-btn]"), menu = root.querySelector("[data-hd-menu]");
+    var navUl = root.querySelector(".svf-hd nav ul"), left = hd.firstElementChild, right = root.querySelector(".svf-hd-right");
+    function fit() {
+      if (!navUl) return;
+      root.classList.remove("is-compact");
+      var need = function (el) { var w = 0, k = el.children, gs = parseFloat(getComputedStyle(el).columnGap) || 0, n = 0; for (var i = 0; i < k.length; i++) if (k[i].offsetWidth) { w += k[i].offsetWidth; n++; } return w + gs * Math.max(0, n - 1); };
+      var full = need(navUl) + 24 > left.clientWidth || need(right) > right.clientWidth;
+      root.classList.toggle("is-compact", full);
+    }
+    function measure() {
+      fit();
+      var h = hd.offsetHeight;
+      root.style.setProperty("--svf-hd-h", h + "px");
+      document.body.style.setProperty("--header-height", h + "px");
+      document.body.style.setProperty("--header-group-height", h + "px");
+    }
+    measure(); window.addEventListener("resize", measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    /* Horizon fait défiler .page-wrapper sur grand écran, la fenêtre ailleurs */
+    function scroller() { var pw = document.querySelector(".page-wrapper"); if (!pw) return null; var oy = getComputedStyle(pw).overflowY; return (oy === "auto" || oy === "scroll") && pw.scrollHeight > pw.clientHeight ? pw : null; }
+    var last = 0, open = false;
+    function onScroll() {
+      var s = scroller(), y = s ? s.scrollTop : window.scrollY;
+      hd.classList.toggle("is-scrolled", y > 10);
+      hd.classList.toggle("is-hidden", !open && y > 160 && y > last + 2);
+      if (y < last - 2 || y <= 160) hd.classList.remove("is-hidden");
+      last = y;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    function setMenu(v) {
+      open = v; menu.classList.toggle("is-open", v); menu.setAttribute("aria-hidden", v ? "false" : "true");
+      btn.setAttribute("aria-expanded", v ? "true" : "false"); btn.textContent = v ? "Fermer" : "Menu";
+      hd.classList.remove("is-hidden");
+    }
+    btn.addEventListener("click", function () { setMenu(!open); });
+    menu.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) { setMenu(false); btn.focus(); } });
+    /* Compteur du panier : suit les ajouts faits sur les pages look */
+    document.addEventListener("svf:cart", function (e) { var c = root.querySelector("[data-hd-count]"); if (c && e.detail && e.detail.count != null) c.textContent = e.detail.count; });
+  })();
+</script>
+<script src="{{ 'svf-mobile.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "SVF · En-tête",
+  "tag": "div",
+  "class": "svf-header-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Logotype (texte)", "default": "Sovintagefrip" },
+    { "type": "text", "id": "notify_label", "label": "Lien vers la lettre (facultatif)", "info": "Vide : le lien n’apparaît pas." },
+    { "type": "checkbox", "id": "show_fx", "label": "Afficher langue · devise", "default": true },
+    { "type": "color", "id": "bg", "label": "Fond", "default": "#0B1A10" },
+    { "type": "color", "id": "fg", "label": "Texte", "default": "#DCE8DF" },
+    { "type": "color", "id": "line", "label": "Filet au défilement", "default": "#1E3527" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Lien",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Libellé (barre)", "default": "Le drop" },
+        { "type": "text", "id": "label_menu", "label": "Libellé du menu plein écran (facultatif)", "info": "Ex. : La <em>collection</em> — <em>…</em> passe en italique." },
+        { "type": "text", "id": "link", "label": "Adresse", "default": "#svf-drop", "info": "Une ancre de l'accueil (#svf-drop) ou une page (/pages/collection)." },
+        { "type": "checkbox", "id": "in_bar", "label": "Afficher dans la barre", "default": true, "info": "Décoché : le lien n'apparaît que dans le menu plein écran." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SVF · En-tête" }]
+}
+{% endschema %}

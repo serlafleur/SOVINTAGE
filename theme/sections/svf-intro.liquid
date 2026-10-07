@@ -1,0 +1,81 @@
+{%- assign first = section.blocks.first -%}
+<section class="svf svf-intro svf-pad" data-svf="intro" id="svf-univers" aria-labelledby="svf-intro-{{ section.id }}">
+  <div class="svf-intro-grid">
+    <div class="svf-intro-text">
+      {%- if section.settings.eyebrow != blank -%}<p class="svf-mono svf-muted svf-rv">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="svf-h svf-rv" id="svf-intro-{{ section.id }}">{{ section.settings.heading }}<br><em>{{ section.settings.heading_em }}</em></h2>
+      <div class="svf-copy svf-rv">{{ section.settings.text }}</div>
+      {%- if section.settings.link_label != blank -%}<a class="svf-link svf-rv" href="{{ section.settings.link_url | default: '#svf-drop' }}">{{ section.settings.link_label }}</a>{%- endif -%}
+    </div>
+    <figure>
+      <div class="svf-frame svf-wall-{{ section.settings.wall }}">
+        <div class="svf-stack svf-plx">
+          {%- for block in section.blocks -%}
+            <div class="svf-hang{% if forloop.first %} is-on{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.name }}
+              {%- else -%}
+                <img src="{% render 'svf-frame-url', sig: block.settings.sig, frame: 1 %}" alt="Cravate Signature {{ block.settings.name | escape }}" width="800" height="1200" loading="lazy">
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if first -%}
+          <figcaption class="svf-frame-cap"><span class="svf-label" data-svf-intro-name>Signature {{ first.settings.name }}</span><span class="svf-mono" data-svf-intro-desc>{{ first.settings.desc }}</span></figcaption>
+        {%- endif -%}
+        <div class="svf-look">
+          <p class="svf-label">{{ section.settings.picker_label }}</p>
+          <div class="svf-thumbs" role="group" aria-label="{{ section.settings.picker_label | escape }}">
+            {%- for block in section.blocks -%}
+              <button class="svf-thumb" type="button" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Signature {{ block.settings.name | escape }}" data-i="{{ forloop.index0 }}" data-name="Signature {{ block.settings.name | escape }}" data-desc="{{ block.settings.desc | escape }}">
+                <img src="{% render 'svf-frame-url', sig: block.settings.sig, frame: 1 %}" alt="" width="800" height="1200" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Une cravate",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "SOVINTAGEFRIP · Collection FW26" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Une cravate," },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "une présence." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>La fausse fourrure bouscule les codes et dessine une autre silhouette. Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>" },
+    { "type": "text", "id": "link_label", "label": "Lien", "default": "Explorer le drop" },
+    { "type": "text", "id": "link_url", "label": "Destination du lien", "default": "#svf-drop" },
+    { "type": "text", "id": "picker_label", "label": "Libellé du sélecteur", "default": "Choisir sa Signature" },
+    { "type": "select", "id": "wall", "label": "Mur", "default": "green", "options": [
+      { "value": "green", "label": "Vert" }, { "value": "char", "label": "Anthracite" }, { "value": "tobacco", "label": "Tabac" }, { "value": "oxblood", "label": "Bordeaux" }, { "value": "slate", "label": "Ardoise" }, { "value": "olive", "label": "Olive" }, { "value": "stone", "label": "Pierre" }, { "value": "sand", "label": "Sable" }, { "value": "mist", "label": "Brume claire" } ] }
+  ],
+  "blocks": [
+    {
+      "type": "signature",
+      "name": "Signature",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Ombre" },
+        { "type": "select", "id": "sig", "label": "Rendus 360°", "default": "ombre", "options": [
+          { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+        { "type": "text", "id": "desc", "label": "Description courte", "default": "Noir profond" },
+        { "type": "image_picker", "id": "image", "label": "Photo (remplace le rendu)" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "SVF · Une cravate",
+    "blocks": [
+      { "type": "signature", "settings": { "name": "Ombre", "sig": "ombre", "desc": "Noir profond" } },
+      { "type": "signature", "settings": { "name": "Brume", "sig": "brume", "desc": "Gris fumé, pointes argent" } },
+      { "type": "signature", "settings": { "name": "Sable", "sig": "sable", "desc": "Blond miel, mèches longues" } },
+      { "type": "signature", "settings": { "name": "Neige", "sig": "neige", "desc": "Blanc neige" } }
+    ]
+  }]
+}
+{% endschema %}

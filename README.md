@@ -1,0 +1,62 @@
+# SOVINTAGEFRIP — version mobile de l’accueil « Crépuscule »
+
+Couche mobile (≤ 860 px) pour le thème Shopify **SOVINTAGEFRIP — Crépuscule 360** (base Horizon, sections `svf-*`).
+Elle s’ajoute au thème sans modifier `svf.css`, `svf-2.css`, `svf.js` ni les réglages de l’éditeur. Au-dessus de 860 px, rien ne change.
+
+Aperçu interactif (avant / après) : https://claude.ai/artifact/2t2PbWJFuS9o6SqVmkW6ob
+
+## Intégration dans Shopify
+
+1. **Ajouter les deux fichiers** dans *Boutique en ligne › Thèmes › Crépuscule 360 › Modifier le code › assets* :
+   - `theme/assets/svf-mobile.css`
+   - `theme/assets/svf-mobile.js`
+2. **Les charger** dans `sections/svf-header.liquid` (déjà fait dans `theme/sections/svf-header.liquid`) :
+   - juste après la balise `</style>` :
+     ```liquid
+     {{ 'svf-mobile.css' | asset_url | stylesheet_tag }}
+     ```
+   - à la fin du fichier, avant `{% schema %}` :
+     ```liquid
+     <script src="{{ 'svf-mobile.js' | asset_url }}" defer></script>
+     ```
+   L’en-tête est présent sur toutes les pages, donc la couche s’applique partout où il s’affiche.
+3. **Vérifier** avec l’aperçu du thème depuis un téléphone avant de publier.
+
+Avec Shopify CLI, depuis le dossier `theme/` :
+
+```sh
+shopify theme push --theme 211137102214 \
+  --only assets/svf-mobile.css --only assets/svf-mobile.js --only sections/svf-header.liquid
+```
+
+## Ce que fait la couche mobile
+
+| Section | Thème actuel sur téléphone | Avec la couche mobile |
+| --- | --- | --- |
+| En-tête | logo et « Panier (0) » se chevauchent à 390 px, boutons hauts de 17 px | icône panier + compteur (nom accessible « Panier, n article »), cibles 44 px, menu en fenêtre modale : focus piégé, fond inerte, Échap, défilement bloqué |
+| Bannière | titre coupé, défilement automatique sans pause | titre ajusté à l’écran, lookbook à faire glisser (scroll-snap), légende et repères synchronisés, défilement automatique coupé |
+| Le drop | « Voir la pièce » visible au survol uniquement | bouton toujours visible, carte entière cliquable, bouton « 360° » vers la scène sur la bonne Signature |
+| Signature 360° | pastilles 26 px, texte secondaire à 3,5:1 | pastilles 68 px, indication « glissez pour faire tourner », contraste 4,8:1 |
+| Silhouettes | carrousel calculé au pointeur | bande à faire glisser, synchronisée avec la fiche du look |
+| Sur mesure | visuel après les services | visuel sous le titre, accordéon de 64 px |
+| Lettre | champ en 14 px (zoom iOS) | champ en 16 px, bouton 48 px |
+
+Le bureau a été vérifié : à 1 280 px, les 577 éléments mesurés de l’accueil ont les mêmes positions et tailles avec et sans la couche.
+
+## Aperçu local
+
+`preview/build.mjs` rend les vraies sections Liquid de `theme/` avec les réglages de `templates/index.json` et `sections/header-group.json`, en simulant les filtres Shopify utilisés (`image_url`, `file_url`, `money`…). Les quatre produits (Cravates Signatures, 40,00 €) reprennent les données de la boutique.
+
+```sh
+cd preview
+npm install
+npm run build        # dist/index.html (comparatif), dist/mobile.html, dist/avant.html
+npm run shoot        # captures + contrôle débordement / cibles tactiles (Chromium requis)
+```
+
+Limites de l’aperçu : seules huit photos de la boutique sont dans `preview/media/photos` ; les blocs qui utilisent d’autres photos affichent le visuel de cravate prévu par la section. Le pied de page Horizon, le panier et les fiches produit ne sont pas simulés.
+
+## Contenu du dépôt
+
+- `theme/` : copie des fichiers `svf-*` du thème (récupérés le 7 octobre 2026) + `assets/svf-mobile.css`, `assets/svf-mobile.js`, et `sections/svf-header.liquid` avec les deux lignes ajoutées.
+- `preview/` : générateur d’aperçu, médias (photos, 4 × 72 vues 360°) et page de comparaison.

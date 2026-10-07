@@ -1,0 +1,122 @@
+{%- liquid
+  assign sigs = section.blocks | where: 'type', 'signature'
+  assign callouts = section.blocks | where: 'type', 'callout'
+  assign start = sigs.first
+  for b in sigs
+    if b.settings.is_default
+      assign start = b
+      break
+    endif
+  endfor
+-%}
+<section class="svf svf-stage" data-svf="stage" id="svf-signature" aria-labelledby="svf-stage-{{ section.id }}">
+  <div class="svf-pin">
+    <div class="svf-top svf-mono"><span>{{ section.settings.top_left }}</span><span>{{ section.settings.top_right }}</span></div>
+    <div class="svf-center">
+      <h2 class="svf-ghost" id="svf-stage-{{ section.id }}" aria-live="polite"><span class="svf-sr">Cravate Signature </span><span class="svf-ghost-word">{{ start.settings.name }}</span></h2>
+      <div class="svf-tie" tabindex="0" role="slider" aria-label="Cravate à 360 degrés. Glisser ou utiliser les flèches pour la faire tourner." aria-valuemin="0" aria-valuemax="359" aria-valuenow="0">
+        <canvas></canvas>
+        <ul class="svf-callouts" aria-hidden="true">
+          {%- for c in callouts -%}
+            <li class="svf-co{% if c.settings.side == 'l' %} is-l{% endif %}" style="--x: {{ c.settings.x }}%; --y: {{ c.settings.y }}%;" {{ c.shopify_attributes }}>
+              <span class="svf-co-dot"></span><span class="svf-co-line"></span>
+              <span class="svf-co-txt"><strong>{{ c.settings.title }}</strong><span>{{ c.settings.text }}</span></span>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <p class="svf-loading svf-mono">Chargement des vues · 0 / 72</p>
+      </div>
+    </div>
+    <ul class="svf-callouts-m">
+      {%- for c in callouts -%}
+        <li class="svf-co"><span class="svf-co-txt"><strong>{{ c.settings.title }}</strong><span>{{ c.settings.text }}</span></span></li>
+      {%- endfor -%}
+    </ul>
+    <div class="svf-foot">
+      <div class="svf-sws" role="group" aria-label="Choisir la Signature">
+        {%- for b in sigs -%}
+          {%- liquid
+            assign url = section.settings.cta_link | default: '#svf-lettre'
+            if b.settings.product != blank
+              assign url = b.settings.product.url
+            endif
+          -%}
+          <button class="svf-sw" type="button" aria-pressed="false"
+            style="--r: {{ b.settings.color_r }}; --m: {{ b.settings.color_m }}; --t: {{ b.settings.color_t }};"
+            data-base="{% render 'svf-frame-url', sig: b.settings.sig, frame: 1 %}"
+            data-name="{{ b.settings.name | escape }}" data-fur="{{ b.settings.fur | escape }}" data-back="{{ b.settings.back | escape }}"
+            data-url="{{ url }}" data-default="{% if b.id == start.id %}true{% else %}false{% endif %}" {{ b.shopify_attributes }}>
+            <i></i><span>{{ b.settings.name }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+      <div class="svf-dial">
+        <svg viewBox="0 0 58 58" aria-hidden="true"><g class="svf-ticks"></g><circle class="ring" cx="29" cy="29" r="22"/><line class="needle" x1="29" y1="29" x2="29" y2="9"/></svg>
+        <div><b class="svf-deg">0°</b><small class="svf-mono svf-face">Endroit · fourrure</small></div>
+      </div>
+      <dl class="svf-specs">
+        <div><dt>Fourrure</dt><dd data-svf-fur>{{ start.settings.fur }}</dd></div>
+        <div><dt>Envers &amp; bande</dt><dd data-svf-back>{{ start.settings.back }}</dd></div>
+        {%- if section.settings.presentation != blank -%}<div><dt>Présentation</dt><dd>{{ section.settings.presentation }}</dd></div>{%- endif -%}
+      </dl>
+      <a class="svf-btn" href="{{ section.settings.cta_link | default: '#svf-lettre' }}" data-svf-cta>{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Signature 360°",
+  "tag": "div",
+  "class": "svf-section",
+  "settings": [
+    { "type": "text", "id": "top_left", "label": "Mention haut gauche", "default": "La Cravate Signature · vue à 360°" },
+    { "type": "text", "id": "top_right", "label": "Mention haut droite", "default": "Fausse fourrure · trois perles" },
+    { "type": "text", "id": "presentation", "label": "Présentation", "default": "Mallette en aluminium" },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "Voir cette Signature" },
+    { "type": "text", "id": "cta_link", "label": "Destination par défaut", "default": "#svf-drop", "info": "Remplacée par la fiche produit si la Signature a un produit lié." },
+    { "type": "paragraph", "content": "Les vues viennent de Contenu > Fichiers : svf-ombre-0001.webp … svf-neige-0072.webp (72 vues par coloris)." }
+  ],
+  "blocks": [
+    {
+      "type": "signature",
+      "name": "Signature",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Ombre" },
+        { "type": "select", "id": "sig", "label": "Rendus 360°", "default": "ombre", "options": [
+          { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+        { "type": "text", "id": "fur", "label": "Fourrure", "default": "Noir profond" },
+        { "type": "text", "id": "back", "label": "Envers & bande", "default": "Velours noir" },
+        { "type": "color", "id": "color_r", "label": "Pastille · ombre", "default": "#050404" },
+        { "type": "color", "id": "color_m", "label": "Pastille · teinte", "default": "#121010" },
+        { "type": "color", "id": "color_t", "label": "Pastille · reflet", "default": "#2a2525" },
+        { "type": "product", "id": "product", "label": "Produit lié" },
+        { "type": "checkbox", "id": "is_default", "label": "Affichée en premier", "default": false }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Légende",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Trois perles" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Posées à l’encolure" },
+        { "type": "range", "id": "x", "label": "Position horizontale", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 54 },
+        { "type": "range", "id": "y", "label": "Position verticale", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 12 },
+        { "type": "select", "id": "side", "label": "Côté du texte", "default": "r", "options": [ { "value": "r", "label": "Droite" }, { "value": "l", "label": "Gauche" } ] }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "SVF · Signature 360°",
+    "blocks": [
+      { "type": "signature", "settings": { "name": "Ombre", "sig": "ombre", "fur": "Noir profond", "back": "Velours noir", "color_r": "#050404", "color_m": "#121010", "color_t": "#2a2525", "is_default": true } },
+      { "type": "signature", "settings": { "name": "Brume", "sig": "brume", "fur": "Gris fumé, pointes argent", "back": "Jacquard cachemire anthracite", "color_r": "#141313", "color_m": "#3d3a3a", "color_t": "#8c8884" } },
+      { "type": "signature", "settings": { "name": "Sable", "sig": "sable", "fur": "Blond miel, mèches longues", "back": "Jacquard ivoire", "color_r": "#4a3018", "color_m": "#9c7a4a", "color_t": "#d6bc88" } },
+      { "type": "signature", "settings": { "name": "Neige", "sig": "neige", "fur": "Blanc neige", "back": "Jacquard cachemire argent", "color_r": "#b5b0a8", "color_m": "#ecebe7", "color_t": "#ffffff" } },
+      { "type": "callout", "settings": { "title": "Trois perles", "text": "Posées à l’encolure", "x": 54, "y": 12, "side": "r" } },
+      { "type": "callout", "settings": { "title": "Fourrure longue", "text": "Peignée vers la pointe", "x": 42, "y": 46, "side": "l" } },
+      { "type": "callout", "settings": { "title": "Envers jacquard", "text": "Motif cachemire, visible de dos", "x": 57, "y": 72, "side": "r" } }
+    ]
+  }]
+}
+{% endschema %}

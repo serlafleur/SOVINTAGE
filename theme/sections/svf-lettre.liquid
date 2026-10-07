@@ -1,0 +1,42 @@
+<section class="svf svf-news" data-svf="news" id="svf-lettre" aria-labelledby="svf-news-{{ section.id }}">
+  <div class="svf-news-grid">
+    <div>
+      <h2 class="svf-label svf-muted" id="svf-news-{{ section.id }}">{{ section.settings.heading }}</h2>
+      <p class="svf-h" style="font-size: clamp(28px, 3vw, 44px); margin-top: 14px;">{{ section.settings.tagline }}</p>
+    </div>
+    <div>
+      <div class="svf-copy" style="margin-bottom: 16px;">{{ section.settings.text }}</div>
+      {%- form 'customer', id: 'svf-news-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter, drop-crepuscule">
+        <div class="svf-news-form">
+          <label for="svf-news-email-{{ section.id }}" class="svf-sr">Adresse e-mail</label>
+          <input id="svf-news-email-{{ section.id }}" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="email" required>
+          <button type="submit" aria-label="S’inscrire">→</button>
+        </div>
+        <p class="svf-news-msg svf-mono" role="status">
+          {%- if form.posted_successfully? -%}{{ section.settings.success }}{%- elsif form.errors -%}Indiquez une adresse e-mail valide, par exemple nom@domaine.fr.{%- endif -%}
+        </p>
+      {%- endform -%}
+    </div>
+  </div>
+  {%- if section.settings.wordmark != blank -%}
+    <div class="svf-wm-wrap"><p class="svf-wm" aria-label="{{ section.settings.wordmark | escape }}">{{ section.settings.wordmark }}</p></div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Lettre & signature",
+  "tag": "div",
+  "class": "svf-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Surtitre", "default": "Rejoindre la liste" },
+    { "type": "text", "id": "tagline", "label": "Phrase", "default": "Le prochain drop, en avant-première." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Offres exclusives et accès en avant-première aux nouvelles pièces.</p>" },
+    { "type": "text", "id": "placeholder", "label": "Champ e-mail", "default": "Votre adresse e-mail" },
+    { "type": "text", "id": "success", "label": "Message de confirmation", "default": "C’est noté. Vous serez prévenu·e avant l’ouverture du drop." },
+    { "type": "text", "id": "wordmark", "label": "Grand logo", "default": "SOVINTAGEFRIP" }
+  ],
+  "presets": [{ "name": "SVF · Lettre & signature" }]
+}
+{% endschema %}

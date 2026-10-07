@@ -1,0 +1,738 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "svf_hero": {
+      "type": "svf-hero",
+      "blocks": {
+        "s_florian": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2421.jpg",
+            "look": "Look Florian",
+            "desc": "Blazer bordeaux, manteau en fausse fourrure, Signature Ombre"
+          }
+        },
+        "s_oscar": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2430.jpg",
+            "look": "Look Oscar",
+            "desc": "Fourrure marron, croisé gris, Signature Brume"
+          }
+        },
+        "s_neige": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2415.jpg",
+            "look": "Signature Neige",
+            "desc": "Veste brodée, manches en fausse fourrure blanche"
+          }
+        },
+        "s_aori": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2394.jpg",
+            "look": "Look Aori",
+            "desc": "Tweed, veste et jupe, collants rouges"
+          }
+        },
+        "s_zeina": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2467.jpg",
+            "look": "Look Zeina",
+            "desc": "Veste d’hiver aspect cuir, ourlet en fausse fourrure"
+          }
+        },
+        "s_jules": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2400.jpg",
+            "look": "Look Jules",
+            "desc": "Blazer à revers en fourrure, Signature Ombre"
+          }
+        }
+      },
+      "block_order": [
+        "s_florian",
+        "s_oscar",
+        "s_neige",
+        "s_aori",
+        "s_zeina",
+        "s_jules"
+      ],
+      "settings": {
+        "top_left": "N°01 — Collection FW26",
+        "top_center": "Premier drop · 20 Cravates Signatures",
+        "top_right": "Lookbook · Crépuscule",
+        "heading": "Crépuscule",
+        "heading_em": ".",
+        "lede_em": "Une cravate, une présence.",
+        "lede": "La fausse fourrure bouscule les codes et dessine une autre silhouette.",
+        "cta_label": "Explorer le drop",
+        "cta_link": "#svf-drop",
+        "cta2_label": "Voir les looks",
+        "cta2_link": "#svf-silhouettes",
+        "image_a": "shopify://shop_images/IMG_2401.jpg",
+        "caption_a_title": "(A) Signature Ombre",
+        "caption_a_text": "Fausse fourrure noir profond,\ntrois perles à l’encolure",
+        "image_b": "shopify://shop_images/IMG_2407.jpg",
+        "caption_b_title": "(B) Signature Sable",
+        "caption_b_text": "Blond miel, mèches longues,\nenvers jacquard ivoire",
+        "studio": "#D9D7DA",
+        "autoplay": 6
+      }
+    },
+    "svf_intro": {
+      "type": "svf-intro",
+      "blocks": {
+        "sig_ombre": {
+          "type": "signature",
+          "settings": {
+            "name": "Ombre",
+            "sig": "ombre",
+            "desc": "Noir profond"
+          }
+        },
+        "sig_brume": {
+          "type": "signature",
+          "settings": {
+            "name": "Brume",
+            "sig": "brume",
+            "desc": "Gris fumé, pointes argent"
+          }
+        },
+        "sig_sable": {
+          "type": "signature",
+          "settings": {
+            "name": "Sable",
+            "sig": "sable",
+            "desc": "Blond miel, mèches longues"
+          }
+        },
+        "sig_neige": {
+          "type": "signature",
+          "settings": {
+            "name": "Neige",
+            "sig": "neige",
+            "desc": "Blanc neige"
+          }
+        }
+      },
+      "block_order": [
+        "sig_ombre",
+        "sig_brume",
+        "sig_sable",
+        "sig_neige"
+      ],
+      "settings": {
+        "eyebrow": "SOVINTAGEFRIP · Collection FW26",
+        "heading": "Une cravate,",
+        "heading_em": "une présence.",
+        "text": "<p>La fausse fourrure bouscule les codes et dessine une autre silhouette. Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>",
+        "link_label": "Explorer le drop",
+        "link_url": "#svf-drop",
+        "picker_label": "Choisir sa Signature",
+        "wall": "green"
+      }
+    },
+    "svf_drop": {
+      "type": "svf-drop",
+      "blocks": {
+        "drop_ombre": {
+          "type": "signature",
+          "settings": {
+            "name": "Ombre",
+            "sig": "ombre",
+            "meta": "Noir profond · Velours noir",
+            "product": "cravate-signature-ombre"
+          }
+        },
+        "drop_brume": {
+          "type": "signature",
+          "settings": {
+            "name": "Brume",
+            "sig": "brume",
+            "meta": "Gris fumé, pointes argent · Jacquard cachemire anthracite",
+            "product": "cravate-signature-brume"
+          }
+        },
+        "drop_sable": {
+          "type": "signature",
+          "settings": {
+            "name": "Sable",
+            "sig": "sable",
+            "meta": "Blond miel, mèches longues · Jacquard ivoire",
+            "product": "cravate-signature-sable"
+          }
+        },
+        "drop_neige": {
+          "type": "signature",
+          "settings": {
+            "name": "Neige",
+            "sig": "neige",
+            "meta": "Blanc neige · Jacquard cachemire argent",
+            "product": "cravate-signature-neige"
+          }
+        }
+      },
+      "block_order": [
+        "drop_ombre",
+        "drop_brume",
+        "drop_sable",
+        "drop_neige"
+      ],
+      "settings": {
+        "eyebrow": "01 / Le premier drop",
+        "heading": "20 pièces.",
+        "heading_em": "Votre signature.",
+        "text": "<p>Un drop de 20 Cravates Signatures. Trouvez celle qui accompagnera votre allure.</p>",
+        "hint": "Survolez une cravate pour la faire tourner",
+        "price_placeholder": "Prix au drop",
+        "product_label": "Voir la pièce"
+      }
+    },
+    "svf_signature": {
+      "type": "svf-signature-360",
+      "blocks": {
+        "s_ombre": {
+          "type": "signature",
+          "settings": {
+            "name": "Ombre",
+            "sig": "ombre",
+            "fur": "Noir profond",
+            "back": "Velours noir",
+            "color_r": "#050404",
+            "color_m": "#121010",
+            "color_t": "#2a2525",
+            "is_default": true,
+            "product": "cravate-signature-ombre"
+          }
+        },
+        "s_brume": {
+          "type": "signature",
+          "settings": {
+            "name": "Brume",
+            "sig": "brume",
+            "fur": "Gris fumé, pointes argent",
+            "back": "Jacquard cachemire anthracite",
+            "color_r": "#141313",
+            "color_m": "#3d3a3a",
+            "color_t": "#8c8884",
+            "is_default": false,
+            "product": "cravate-signature-brume"
+          }
+        },
+        "s_sable": {
+          "type": "signature",
+          "settings": {
+            "name": "Sable",
+            "sig": "sable",
+            "fur": "Blond miel, mèches longues",
+            "back": "Jacquard ivoire",
+            "color_r": "#4a3018",
+            "color_m": "#9c7a4a",
+            "color_t": "#d6bc88",
+            "is_default": false,
+            "product": "cravate-signature-sable"
+          }
+        },
+        "s_neige": {
+          "type": "signature",
+          "settings": {
+            "name": "Neige",
+            "sig": "neige",
+            "fur": "Blanc neige",
+            "back": "Jacquard cachemire argent",
+            "color_r": "#b5b0a8",
+            "color_m": "#ecebe7",
+            "color_t": "#ffffff",
+            "is_default": false,
+            "product": "cravate-signature-neige"
+          }
+        },
+        "co_perles": {
+          "type": "callout",
+          "settings": {
+            "title": "Trois perles",
+            "text": "Posées à l’encolure",
+            "x": 54,
+            "y": 12,
+            "side": "r"
+          }
+        },
+        "co_fourrure": {
+          "type": "callout",
+          "settings": {
+            "title": "Fourrure longue",
+            "text": "Peignée vers la pointe",
+            "x": 42,
+            "y": 46,
+            "side": "l"
+          }
+        },
+        "co_envers": {
+          "type": "callout",
+          "settings": {
+            "title": "Envers jacquard",
+            "text": "Motif cachemire, visible de dos",
+            "x": 57,
+            "y": 72,
+            "side": "r"
+          }
+        }
+      },
+      "block_order": [
+        "s_ombre",
+        "s_brume",
+        "s_sable",
+        "s_neige",
+        "co_perles",
+        "co_fourrure",
+        "co_envers"
+      ],
+      "settings": {
+        "top_left": "La Cravate Signature · vue à 360°",
+        "top_right": "Fausse fourrure · trois perles",
+        "presentation": "Mallette en aluminium",
+        "cta_label": "Voir cette Signature",
+        "cta_link": "/products/cravate-signature-ombre"
+      }
+    },
+    "svf_silhouettes": {
+      "type": "svf-silhouettes",
+      "blocks": {
+        "look_eliot": {
+          "type": "look",
+          "settings": {
+            "name": "Eliot",
+            "sig": "ombre",
+            "sig_label": "Signature Ombre",
+            "frame": 1,
+            "wall": "char",
+            "garment": "tweed",
+            "description": "<p>Une veste noire et la Cravate Signature Ombre.</p>"
+          }
+        },
+        "look_oscar": {
+          "type": "look",
+          "settings": {
+            "name": "Oscar",
+            "sig": "brume",
+            "sig_label": "Signature Brume",
+            "frame": 66,
+            "wall": "tobacco",
+            "garment": "tweed",
+            "description": "<p>Fourrure marron, blazer gris et Signature Brume.</p>",
+            "image": "shopify://shop_images/IMG_2428.jpg"
+          }
+        },
+        "look_florian": {
+          "type": "look",
+          "settings": {
+            "name": "Florian",
+            "sig": "ombre",
+            "sig_label": "Signature Ombre",
+            "frame": 6,
+            "wall": "oxblood",
+            "garment": "tweed",
+            "description": "<p>Les nuances bordeaux rencontrent la Signature Ombre.</p>",
+            "image": "shopify://shop_images/IMG_2420.jpg"
+          }
+        },
+        "look_jules": {
+          "type": "look",
+          "settings": {
+            "name": "Jules",
+            "sig": "ombre",
+            "sig_label": "Signature Ombre",
+            "frame": 70,
+            "wall": "slate",
+            "garment": "tweed",
+            "description": "<p>Un blazer à revers en fourrure et la Signature Ombre.</p>",
+            "image": "shopify://shop_images/IMG_2400.jpg"
+          }
+        },
+        "look_aori": {
+          "type": "look",
+          "settings": {
+            "name": "Aori",
+            "sig": "none",
+            "sig_label": "—",
+            "frame": 1,
+            "wall": "stone",
+            "garment": "tweed",
+            "description": "<p>Une silhouette en tweed, veste et jupe.</p>",
+            "image": "shopify://shop_images/IMG_2394.jpg"
+          }
+        },
+        "look_mayi": {
+          "type": "look",
+          "settings": {
+            "name": "Mayi",
+            "sig": "sable",
+            "sig_label": "Signature Sable",
+            "frame": 4,
+            "wall": "sand",
+            "garment": "tweed",
+            "description": "<p>Un ensemble beige accompagné de la Signature Sable.</p>",
+            "image": "shopify://shop_images/IMG_2406.jpg"
+          }
+        },
+        "look_clementine": {
+          "type": "look",
+          "settings": {
+            "name": "Clémentine",
+            "sig": "neige",
+            "sig_label": "Signature Neige",
+            "frame": 69,
+            "wall": "mist",
+            "garment": "tweed",
+            "description": "<p>Une silhouette blanche et la Signature Neige.</p>",
+            "image": "shopify://shop_images/IMG_2471.jpg"
+          }
+        },
+        "look_rose": {
+          "type": "look",
+          "settings": {
+            "name": "Rose",
+            "sig": "none",
+            "sig_label": "—",
+            "frame": 1,
+            "wall": "oxblood",
+            "garment": "tweed-rose",
+            "description": "<p>Tweed et corset en fourrure : un jeu de textures.</p>"
+          }
+        },
+        "look_zeina": {
+          "type": "look",
+          "settings": {
+            "name": "Zeina",
+            "sig": "none",
+            "sig_label": "—",
+            "frame": 1,
+            "wall": "olive",
+            "garment": "leather",
+            "description": "<p>Une veste d’hiver brune, à l’aspect cuir.</p>",
+            "image": "shopify://shop_images/IMG_2454.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "look_eliot",
+        "look_oscar",
+        "look_florian",
+        "look_jules",
+        "look_aori",
+        "look_mayi",
+        "look_clementine",
+        "look_rose",
+        "look_zeina"
+      ],
+      "settings": {
+        "eyebrow": "Crépuscule · FW26",
+        "heading": "Une histoire à porter",
+        "heading_em": "autrement.",
+        "intro": "<p>Un vêtement retrouvé. Une création SoVintage. Explorez les silhouettes de la collection.</p>"
+      }
+    },
+    "svf_matieres": {
+      "type": "svf-matieres",
+      "blocks": {
+        "m_1": {
+          "type": "tile",
+          "settings": {
+            "kind": "tie",
+            "sig": "brume",
+            "frame": 8,
+            "wall": "stone",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "caption": "Signature Brume"
+          }
+        },
+        "m_2": {
+          "type": "tile",
+          "settings": {
+            "kind": "tie",
+            "sig": "ombre",
+            "frame": 1,
+            "wall": "green",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "caption": "Signature Ombre · endroit"
+          }
+        },
+        "m_3": {
+          "type": "tile",
+          "settings": {
+            "kind": "macro",
+            "sig": "ombre",
+            "frame": 1,
+            "wall": "green",
+            "x": 49,
+            "y": 12,
+            "zoom": 3.6,
+            "bg": "#1A1917",
+            "caption": "Trois perles"
+          }
+        },
+        "m_4": {
+          "type": "tile",
+          "settings": {
+            "kind": "macro",
+            "sig": "brume",
+            "frame": 37,
+            "wall": "green",
+            "x": 50,
+            "y": 48,
+            "zoom": 2.6,
+            "bg": "#24272A",
+            "caption": "Envers jacquard"
+          }
+        },
+        "m_5": {
+          "type": "tile",
+          "settings": {
+            "kind": "tie",
+            "sig": "sable",
+            "frame": 66,
+            "wall": "sand",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "caption": "Signature Sable"
+          }
+        }
+      },
+      "block_order": [
+        "m_1",
+        "m_2",
+        "m_3",
+        "m_4",
+        "m_5"
+      ],
+      "settings": {
+        "overlay": "Matières",
+        "eyebrow": "02 / Matières & détails",
+        "heading": "Le détail",
+        "heading_em": "change tout.",
+        "text": "<p>Des textures à regarder de près. Nos Cravates Signatures en fausse fourrure donnent une nouvelle place à cet accessoire.</p>",
+        "link_label": "Explorer les pièces",
+        "link_url": "#svf-drop"
+      }
+    },
+    "svf_mesure": {
+      "type": "svf-sur-mesure",
+      "blocks": {
+        "srv_stylisme": {
+          "type": "service",
+          "settings": {
+            "number": "01 / Stylisme",
+            "title": "Composer votre silhouette.",
+            "text": "<p>Un service de stylisme sur mesure pour donner forme à votre allure.</p>",
+            "kind": "tie",
+            "sig": "ombre",
+            "frame": 68,
+            "garment": "tweed",
+            "wall": "char",
+            "caption": "Stylisme · Signature Ombre"
+          }
+        },
+        "srv_creation": {
+          "type": "service",
+          "settings": {
+            "number": "02 / Création",
+            "title": "Imaginer votre pièce.",
+            "text": "<p>Un vêtement sur mesure, pensé autour de votre projet et de vos envies.</p>",
+            "kind": "garment",
+            "sig": "ombre",
+            "frame": 1,
+            "garment": "tweed",
+            "wall": "stone",
+            "caption": "Création · pièce sur mesure"
+          }
+        },
+        "srv_existant": {
+          "type": "service",
+          "settings": {
+            "number": "03 / L’existant",
+            "title": "L’existant rencontre la création.",
+            "text": "<p>Des pièces de seconde main sélectionnées, des créations originales et un regard singulier sur le vêtement.</p>",
+            "kind": "garment",
+            "sig": "ombre",
+            "frame": 1,
+            "garment": "leather",
+            "wall": "tobacco",
+            "caption": "Seconde main sélectionnée"
+          }
+        }
+      },
+      "block_order": [
+        "srv_stylisme",
+        "srv_creation",
+        "srv_existant"
+      ],
+      "settings": {
+        "eyebrow": "03 / À votre mesure",
+        "heading": "Votre envie,",
+        "heading_em": "notre point de départ.",
+        "text": "<p>Un accompagnement personnalisé ou un vêtement imaginé pour vous.</p>",
+        "link_label": "Découvrir les pièces",
+        "link_url": "#svf-drop"
+      }
+    },
+    "svf_instagram": {
+      "type": "svf-instagram",
+      "blocks": {
+        "ig_1": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "neige",
+            "frame": 1,
+            "wall": "green",
+            "x": 49,
+            "y": 12,
+            "zoom": 3.2,
+            "bg": "#2A3A2F",
+            "image": "shopify://shop_images/IMG_2456.jpg"
+          }
+        },
+        "ig_2": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "neige",
+            "frame": 68,
+            "wall": "mist",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "image": "shopify://shop_images/IMG_2453.jpg"
+          }
+        },
+        "ig_3": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "brume",
+            "frame": 1,
+            "wall": "char",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "image": "shopify://shop_images/IMG_2438.jpg"
+          }
+        },
+        "ig_4": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "sable",
+            "frame": 37,
+            "wall": "green",
+            "x": 50,
+            "y": 50,
+            "zoom": 2.4,
+            "bg": "#3A2E22",
+            "image": "shopify://shop_images/IMG_2444.jpg"
+          }
+        },
+        "ig_5": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "sable",
+            "frame": 4,
+            "wall": "sand",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "image": "shopify://shop_images/IMG_2463.jpg"
+          }
+        },
+        "ig_6": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "ombre",
+            "frame": 6,
+            "wall": "oxblood",
+            "x": 50,
+            "y": 50,
+            "zoom": 3,
+            "bg": "#1A1917",
+            "image": "shopify://shop_images/IMG_2436.jpg"
+          }
+        },
+        "ig_7": {
+          "type": "tile",
+          "settings": {
+            "kind": "image",
+            "sig": "ombre",
+            "frame": 1,
+            "wall": "green",
+            "x": 50,
+            "y": 55,
+            "zoom": 2.2,
+            "bg": "#161514",
+            "image": "shopify://shop_images/IMG_2430.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ig_1",
+        "ig_2",
+        "ig_3",
+        "ig_4",
+        "ig_5",
+        "ig_6",
+        "ig_7"
+      ],
+      "settings": {
+        "heading": "Suivez-nous sur Instagram",
+        "handle": "@sovintagefrip",
+        "url": "https://www.instagram.com/sovintagefrip/"
+      }
+    },
+    "svf_lettre": {
+      "type": "svf-lettre",
+      "settings": {
+        "heading": "Rejoindre la liste",
+        "tagline": "Les prochaines pièces, en avant-première.",
+        "text": "<p>Offres exclusives et accès en avant-première aux nouvelles pièces.</p>",
+        "placeholder": "Votre adresse e-mail",
+        "success": "C’est noté. Vous serez prévenu·e des prochaines pièces en avant-première.",
+        "wordmark": "SOVINTAGEFRIP"
+      }
+    }
+  },
+  "order": [
+    "svf_hero",
+    "svf_intro",
+    "svf_drop",
+    "svf_signature",
+    "svf_silhouettes",
+    "svf_matieres",
+    "svf_mesure",
+    "svf_instagram",
+    "svf_lettre"
+  ]
+}

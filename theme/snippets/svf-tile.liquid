@@ -1,0 +1,36 @@
+{%- comment -%}
+  Visuel réutilisable : photo, cravate suspendue sur un mur, gros plan ou illustration.
+  Paramètres : kind (tie | macro | image | garment), sig, frame, wall, x, y, z, bg, image, garment, caption, alt
+{%- endcomment -%}
+{%- liquid
+  assign svf_kind = kind | default: 'tie'
+  if svf_kind == 'image' and image == blank
+    assign svf_kind = 'tie'
+  endif
+  assign svf_wall = wall | default: 'green'
+  assign svf_sig = sig | default: 'ombre'
+-%}
+{%- case svf_kind -%}
+  {%- when 'image' -%}
+    {{ image | image_url: width: 1600 | image_tag: class: 'svf-photo', loading: 'lazy', sizes: '(min-width: 860px) 45vw, 92vw', alt: image.alt }}
+  {%- when 'macro' -%}
+    <div
+      class="svf-macro"
+      data-svf-macro
+      data-x="{{ x | default: 50 | divided_by: 100.0 }}"
+      data-y="{{ y | default: 50 | divided_by: 100.0 }}"
+      data-z="{{ z | default: 3 }}"
+      style="background-color: {{ bg | default: '#1A1917' }}; background-image: url('{% render 'svf-frame-url', sig: svf_sig, frame: frame %}');"
+    ></div>
+  {%- when 'garment' -%}
+    <div class="svf-still svf-wall-{{ svf_wall }}"><div class="svf-garment" data-svf-svg="{{ garment | default: 'tweed' }}"></div></div>
+  {%- else -%}
+    <div class="svf-still svf-wall-{{ svf_wall }}">
+      <div class="svf-hang">
+        <img src="{% render 'svf-frame-url', sig: svf_sig, frame: frame %}" alt="{{ alt | escape }}" width="800" height="1200" loading="lazy" decoding="async">
+      </div>
+    </div>
+{%- endcase -%}
+{%- if caption != blank -%}
+  <figcaption class="svf-tile-cap svf-mono">{{ caption }}</figcaption>
+{%- endif -%}

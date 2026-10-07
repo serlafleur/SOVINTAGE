@@ -1,0 +1,172 @@
+/* SOVINTAGEFRIP — couche mobile des sections svf-* (≤ 860 px).
+   Se charge après svf.css, svf-2.css et le <style> de svf-header : ne modifie aucun fichier existant.
+   Principes : défilement natif (scroll-snap) plutôt qu'animations au pointeur, cibles tactiles ≥ 44 px,
+   textes ≥ 11,5 px, champ e-mail en 16 px (pas de zoom iOS), aucun contenu caché au survol.
+   Le comportement associé est dans svf-mobile.js ; sans JavaScript, la page reste lisible et navigable. */
+
+/* Éléments ajoutés par svf-mobile.js : invisibles sur grand écran */
+.svfm-only,.svfm-dots,.svfm-turn,.svfm-drag-hint,.svfm-bag{display:none}
+
+@media (max-width:860px){
+  /* ---------- Socle ---------- */
+  .svf{--svf-gutter:var(--page-margin,20px);-webkit-tap-highlight-color:transparent}
+  .svf.svf-pad{padding-block:64px}
+  .svf .svf-mono{font-size:11.5px;line-height:1.45}
+  .svf .svf-label{font-size:11px}
+  .svf .svf-h{font-size:clamp(34px,9.6vw,44px);line-height:1.02}
+  .svf .svf-copy{font-size:15.5px;line-height:1.6}
+  .svf :focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  /* Liens soulignés : zone de toucher de 44 px, trait conservé sous le texte */
+  .svf .svf-link{min-height:44px;padding-block:12px;background-position:0 calc(100% - 9px)}
+  .svf .svf-link:hover{background-size:100% 1px;background-position:0 calc(100% - 9px)}
+  .svf .svf-btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:14px 26px;font-size:11px}
+  .svf .svf-btn:active,.svf .svf-link:active{opacity:.7}
+  #svf-drop,#svf-signature,#svf-silhouettes,#svf-matieres,#svf-mesure,#svf-lettre,#svf-univers{scroll-margin-top:64px}
+  .svfm-only{display:revert}
+
+  /* ---------- En-tête ---------- */
+  .svf-hd-root .svf-hd{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;padding:calc(env(safe-area-inset-top,0px) + 6px) max(8px,calc(var(--hd-gutter) - 12px)) 6px}
+  .svf-hd-root .svf-hd .svf-hd-menu-btn{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:0 12px;margin:0;font-size:11px}
+  .svf-hd-root .svf-hd .svf-hd-logo{font-size:12px;letter-spacing:.24em;padding:12px 0 12px .24em;line-height:20px}
+  .svf-hd-root .svf-hd [data-hd-cart]{display:inline-flex;align-items:center;justify-content:center;gap:2px;min-height:44px;min-width:44px;padding:0 10px;position:relative}
+  .svf-hd-root .svf-hd [data-hd-cart]::after{display:none}
+  .svf-hd-root .svfm-cart-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .svf-hd-root .svfm-bag{display:block;width:20px;height:20px}
+  .svf-hd-root .svf-hd-count{font-size:11px;letter-spacing:0;min-width:1ch}
+  .svf-hd-root .svf-hd-space{height:var(--svf-hd-h,56px)}
+  /* Menu plein écran : liens hauts de 52 px, bas du menu pour Instagram et la devise */
+  .svf-hd-root .svf-hd-menu{align-content:start;padding:calc(var(--svf-hd-h,56px) + 24px) var(--hd-gutter) calc(env(safe-area-inset-bottom,0px) + 24px);overflow-y:auto;overscroll-behavior:contain;grid-template-rows:auto 1fr auto}
+  .svf-hd-root .svf-hd-menu a{display:block;padding:5px 0;font-size:clamp(34px,10vw,48px)}
+  .svf-hd-root .svfm-menu-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;align-self:end;padding-top:28px;border-top:1px solid var(--hd-line);font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.02em;opacity:.8}
+  .svf-hd-root .svfm-menu-foot a{display:inline-flex;align-items:center;font:inherit;min-height:44px;padding:0}
+  html.svfm-lock,html.svfm-lock body{overflow:hidden}
+
+  /* ---------- Bannière éditoriale : titre, lookbook à faire glisser, accroche, puis gros plans ---------- */
+  .svf-hero .svf-ed{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:none;column-gap:10px;row-gap:0;height:auto;padding:10px var(--svf-gutter) 28px}
+  .svf-hero .svf-ed-grid{display:contents}
+  .svf-hero .svf-ed-top{grid-column:1/-1;grid-row:auto;order:0;padding-bottom:6px}
+  .svf-hero .svf-ed-title{grid-column:1/-1;grid-row:auto;order:1;position:relative;top:auto;transform:none;margin:4px 0 14px;text-align:left;font-size:18.5vw;line-height:.84;white-space:nowrap}
+  .svf-hero .svf-ed-main{grid-column:1/-1;grid-row:auto;order:2;height:auto;align-items:stretch}
+  .svf-hero .svf-ed-foot{grid-column:1/-1;grid-row:auto;order:3;display:grid;gap:18px;padding:22px 0 28px}
+  .svf-hero .svf-ed-l{order:4}
+  .svf-hero .svf-ed-r{order:5}
+  .svf-hero .svf-ed-l,.svf-hero .svf-ed-r{grid-row:auto;grid-column:auto;margin:0;align-self:start;transform:none}
+  .svf-hero .svf-ed-img{width:100%;aspect-ratio:4/5}
+  .svf-hero .svf-ed-r figcaption{text-align:left}
+  /* Lookbook : bande native à faire glisser, une photo à la fois, la suivante dépasse pour inviter au geste */
+  .svf-hero .svf-ed-slides{display:flex;gap:8px;flex:none;width:auto;max-width:none;height:auto;aspect-ratio:auto;margin-inline:calc(var(--svf-gutter) * -1);padding-inline:var(--svf-gutter);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--svf-gutter);scrollbar-width:none;mix-blend-mode:normal;cursor:auto;touch-action:pan-x pan-y}
+  .svf-hero .svf-ed-slides::-webkit-scrollbar{display:none}
+  .svf-hero .svf-ed-slide,.svf-hero .svf-ed-slide.is-on,.svf-hero .svf-ed-slide.is-prev{position:relative;inset:auto;flex:0 0 86%;aspect-ratio:4/5;overflow:hidden;clip-path:none;transform:none;transition:none;scroll-snap-align:start;scroll-snap-stop:always;background:#cfcdd0;z-index:auto}
+  .svf-hero .svf-ed-slide img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+  .svf-hero .svf-ed-cap{max-width:none;grid-template-columns:auto 1fr auto;gap:4px 12px;padding-top:12px}
+  .svf-hero .svf-ed-look{font-size:22px}
+  .svf-hero .svf-ed-nav{gap:2px;margin-right:-10px}
+  .svf-hero .svf-ed-nav button{width:44px;height:44px;font-size:15px}
+  .svf-hero .svf-ed-nav button:disabled{opacity:.3;cursor:default}
+  .svf-hero .svf-ed-prog{display:none}
+  .svf-hero .svfm-dots{grid-column:1/-1;display:flex;gap:4px;padding-top:6px}
+  .svf-hero .svfm-dots span{flex:1;height:2px;background:rgba(27,92,45,.18);transition:background .4s}
+  .svf-hero .svfm-dots span.is-on{background:#1B5C2D}
+  .svf-hero .svf-ed-desc{color:#3F5C47}
+  .svf-hero .svf-ed-side figcaption{color:#3F5C47}
+  .svf-hero .svf-ed-lede{max-width:none;font-size:16px}
+  .svf-hero .svf-ed-lede em{font-size:21px}
+  .svf-hero .svf-ed-ctas{gap:8px 22px;flex-wrap:wrap}
+  .svf-hero .svf-ed-ctas .svf-btn{flex:1 1 100%;background:#1B5C2D;color:#F1F5F2}
+  .svf-hero .svf-ed-top .svf-mono:last-child{text-align:right}
+
+  /* ---------- Une cravate, une présence ---------- */
+  .svf-intro .svf-intro-grid{gap:36px}
+  .svf-intro .svf-intro-text{gap:18px}
+  .svf-intro .svf-frame-cap{top:14px;left:14px;right:14px}
+  .svf-intro .svf-look{bottom:14px;gap:8px}
+  .svf-intro .svf-thumbs{gap:10px}
+  .svf-intro .svf-thumb{width:58px}
+  .svf-intro .svf-thumb[aria-pressed="true"]{outline-width:2px}
+
+  /* ---------- Le drop : bande pleine largeur, bouton toujours visible, toute la carte cliquable ---------- */
+  .svf-drop .svf-head{margin-bottom:20px}
+  :is(.svf-drop,.svf-pd) .svf-rail{gap:10px;margin-inline:calc(var(--svf-gutter) * -1);padding-inline:var(--svf-gutter);scroll-padding-inline:var(--svf-gutter);scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+  :is(.svf-drop,.svf-pd) .svf-card{flex:0 0 78%;position:relative;gap:6px}
+  :is(.svf-drop,.svf-pd) .svf-card-media{cursor:auto;margin-bottom:8px}
+  :is(.svf-drop,.svf-pd) .svf-card-media img{top:3%;height:80%}
+  :is(.svf-drop,.svf-pd) .svf-card-cta{transform:none;left:10px;right:10px;bottom:10px;min-height:44px;display:flex;align-items:center;justify-content:center;padding:0 12px;font-size:11px;z-index:2}
+  :is(.svf-drop,.svf-pd) .svf-card-tag{top:10px;left:12px}
+  :is(.svf-drop,.svf-pd) .svf-card-turn{display:none}
+  :is(.svf-drop,.svf-pd) .svfm-turn{display:inline-flex;align-items:center;gap:6px;position:absolute;top:2px;right:2px;min-height:44px;padding:0 10px;color:#2F4A37;font-family:var(--svf-mono);font-size:11.5px;z-index:2}
+  :is(.svf-drop,.svf-pd) .svfm-turn::before{content:"";width:14px;height:14px;border:1px solid currentColor;border-radius:50%;border-left-color:transparent}
+  :is(.svf-drop,.svf-pd) .svf-card-name{font-size:14px}
+  :is(.svf-drop,.svf-pd) .svf-card-name em{font-size:19px}
+  :is(.svf-drop,.svf-pd) .svf-card-name a::after{content:"";position:absolute;inset:0;z-index:1}
+  :is(.svf-drop,.svf-pd) .svf-card-price{font-size:13px;color:var(--svf-fg)}
+
+  /* ---------- Signature 360° ---------- */
+  /* Gris-vert assombri : 4,8:1 jusque sur le bord le plus foncé du dégradé (3,5:1 auparavant) */
+  .svf-stage{--svf-muted:#425E4A}
+  .svf-stage .svf-pin{height:auto;min-height:0;padding:40px var(--svf-gutter) 32px;gap:8px}
+  .svf-stage .svf-top{flex-direction:column;gap:2px}
+  .svf-stage .svf-ghost-word{font-size:31vw}
+  .svf-stage .svf-tie{height:min(54svh,430px);min-height:300px}
+  .svf-stage .svf-loading{bottom:-4px}
+  .svf-stage .svfm-drag-hint{display:block;margin-top:6px;text-align:center;color:var(--svf-muted);font-family:var(--svf-mono);font-size:11.5px;transition:opacity .5s}
+  .svf-stage .svfm-drag-hint.is-off{opacity:0}
+  .svf-stage .svf-callouts-m{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+  .svf-stage .svf-callouts-m .svf-co{display:block}
+  .svf-stage .svf-callouts-m .svf-co-txt strong{font-size:16px;line-height:1.15;margin-bottom:4px}
+  .svf-stage .svf-callouts-m .svf-co-txt span{display:block;font-size:12px;line-height:1.35}
+  .svf-stage .svf-foot{grid-template-columns:1fr;gap:18px;margin-top:16px;padding-top:16px}
+  .svf-stage .svf-sws{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;flex-wrap:nowrap}
+  .svf-stage .svf-sw{min-height:68px;padding:8px 0 6px;gap:8px;border-radius:12px;align-content:center}
+  .svf-stage .svf-sw i{width:30px;height:30px}
+  .svf-stage .svf-sw span{font-size:17px}
+  .svf-stage .svf-sw[aria-pressed="true"]{background:rgba(27,92,45,.07)}
+  .svf-stage .svf-specs{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;justify-self:stretch}
+  .svf-stage .svf-specs>div:nth-child(3){grid-column:1/-1}
+  .svf-stage .svf-specs dd{font-size:15px}
+  .svf-stage .svf-foot .svf-btn{justify-self:stretch;width:100%}
+
+  /* ---------- Silhouettes : bande à faire glisser, le look centré passe en couleur ---------- */
+  .svf-looks .svf-v-stage{--vw:72vw;display:flex;gap:10px;height:auto;margin-top:32px;margin-inline:calc(var(--svf-gutter) * -1);padding-inline:14vw;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x pan-y}
+  .svf-looks .svf-v-stage::-webkit-scrollbar{display:none}
+  .svf-looks .svf-v-item{position:relative;left:auto;bottom:auto;flex:0 0 var(--vw);width:auto;transform:none!important;opacity:1!important;scroll-snap-align:center;transition:filter .6s var(--svf-ease)}
+  .svf-looks .svf-v-item:not(.is-active){filter:grayscale(1) brightness(.75)}
+  .svf-looks .svf-v-meta{margin-top:24px;gap:14px 20px}
+  .svf-looks .svf-v-nav{margin-top:14px;gap:12px}
+  .svf-looks .svf-v-nav button{width:44px;height:44px}
+
+  /* ---------- Matières ---------- */
+  .svf-mat .svf-j-grid{gap:8px}
+  .svf-mat .svf-j-text{margin-top:24px;gap:14px}
+
+  /* ---------- Sur mesure : le visuel remonte sous le titre, avant les services ---------- */
+  .svf-mesure .svf-m-grid{gap:0}
+  .svf-mesure .svf-m-grid>div:first-child{display:contents}
+  .svf-mesure .svf-m-grid>div:first-child>.svf-mono{order:0}
+  .svf-mesure .svf-m-intro{order:1}
+  .svf-mesure .svf-m-fig{order:2;margin-top:28px;aspect-ratio:5/4}
+  .svf-mesure .svf-acc{order:3;margin-top:8px}
+  .svf-mesure .svf-m-grid>div:first-child>.svf-link{order:4;justify-self:start;margin-top:18px}
+  .svf-mesure .svf-acc-btn{min-height:64px;padding:14px 0}
+  .svf-mesure .svf-acc-btn .t{font-size:21px}
+
+  /* ---------- Instagram ---------- */
+  .svf-ig .svf-ig-center{width:max-content;max-width:70%}
+  .svf-ig .svf-ig-center a.svf-mono{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:12.5px;color:var(--svf-fg)}
+
+  /* ---------- Lettre ---------- */
+  .svf-news .svf-news-grid{gap:20px}
+  .svf-news input[type="email"]{font-size:16px;padding:12px 0;min-height:48px}
+  .svf-news .svf-news-form button{min-width:48px;min-height:48px;padding:0;display:grid;place-items:center}
+}
+
+/* Petits écrans (iPhone SE, Android compacts) */
+@media (max-width:380px){
+  .svf-hd-root .svf-hd .svf-hd-logo{font-size:11px;letter-spacing:.2em}
+  .svf-stage .svf-callouts-m{grid-template-columns:1fr;gap:10px}
+  .svf-stage .svf-callouts-m .svf-co-txt{display:flex;gap:10px;align-items:baseline}
+  .svf-stage .svf-callouts-m .svf-co-txt strong{margin:0;flex:none}
+}
+
+@media (max-width:860px) and (prefers-reduced-motion:reduce){
+  .svf-hero .svf-ed-slides,.svf-looks .svf-v-stage,:is(.svf-drop,.svf-pd) .svf-rail{scroll-behavior:auto}
+}

@@ -1,0 +1,145 @@
+{%- comment -%}
+  Page Contact : deux services → questions adaptées → brief en direct.
+  L'envoi passe par le formulaire de contact natif de Shopify (le brief complet part dans le message).
+{%- endcomment -%}
+<section class="svf svf-ct svf-pad" data-svf="contact" aria-labelledby="svf-ct-{{ section.id }}">
+  <header class="svf-ct-head">
+    <div>
+      <p class="svf-mono svf-muted" style="margin-bottom:18px">{{ section.settings.kicker }}</p>
+      <h1 class="svf-ct-h1" id="svf-ct-{{ section.id }}">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h1>
+    </div>
+    <div class="svf-copy">{{ section.settings.intro }}</div>
+  </header>
+
+  {%- form 'contact', id: 'svf-contact-form', class: 'svf-ct-form' -%}
+    {%- if form.posted_successfully? -%}
+      <div class="svf-ct-done" role="status">
+        <p class="svf-mono svf-muted">Demande envoyée</p>
+        <h2>{{ section.settings.done_title }} <em>{{ section.settings.done_em }}</em></h2>
+        <div class="svf-copy">{{ section.settings.done_text }}</div>
+      </div>
+    {%- else -%}
+      <section aria-labelledby="svf-ct-s1">
+        <div class="svf-ct-step"><span class="n">01</span><h2 id="svf-ct-s1">Votre besoin</h2></div>
+        <div class="svf-ct-services" role="group" aria-label="Choisir un service">
+          <button class="svf-ct-svc" type="button" aria-pressed="false" data-svc="pro" data-label="Recherche &amp; Styling" data-title="Recherche <em>&amp; Styling</em>">
+            <span class="svf-ct-vis">
+              {%- if section.settings.image_pro != blank -%}{{ section.settings.image_pro | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<span class="svf-still svf-wall-char"><span class="svf-hang"><img src="{% render 'svf-frame-url', sig: 'ombre', frame: 70 %}" alt=""></span></span>{%- endif -%}
+              <span class="svf-ct-tag svf-mono">Professionnels</span>
+            </span>
+            <span class="svf-ct-body">
+              <span class="svf-ct-h3">Recherche <em>&amp; Styling</em></span>
+              <span class="svf-ct-p">{{ section.settings.pro_text }}</span>
+              <span class="svf-ct-tags">{%- assign tags = section.settings.pro_tags | split: ',' -%}{%- for t in tags -%}<span>{{ t | strip }}</span>{%- endfor -%}</span>
+              <span class="svf-ct-choose"><i>✓</i>Choisir ce service</span>
+            </span>
+          </button>
+          <button class="svf-ct-svc" type="button" aria-pressed="false" data-svc="perso" data-label="Accompagnement sur mesure" data-title="Accompagnement <em>sur mesure</em>">
+            <span class="svf-ct-vis">
+              {%- if section.settings.image_perso != blank -%}{{ section.settings.image_perso | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<span class="svf-still svf-wall-green"><span class="svf-hang"><img src="{% render 'svf-frame-url', sig: 'sable', frame: 4 %}" alt=""></span></span>{%- endif -%}
+              <span class="svf-ct-tag svf-mono">Particuliers</span>
+            </span>
+            <span class="svf-ct-body">
+              <span class="svf-ct-h3">Accompagnement <em>sur mesure</em></span>
+              <span class="svf-ct-p">{{ section.settings.perso_text }}</span>
+              <span class="svf-ct-tags">{%- assign tags = section.settings.perso_tags | split: ',' -%}{%- for t in tags -%}<span>{{ t | strip }}</span>{%- endfor -%}</span>
+              <span class="svf-ct-choose"><i>✓</i>Choisir ce service</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <input type="hidden" name="contact[Service]" value="">
+      <textarea name="contact[body]" hidden></textarea>
+
+      <div class="svf-ct-formgrid" hidden>
+        <div class="svf-ct-fields">
+          <fieldset class="svf-ct-fs">
+            <div class="svf-ct-step"><span class="n">02</span><h2>Votre projet</h2></div>
+
+            <div data-svc-fields="pro" hidden>
+              <div class="svf-ct-q"><span class="ql">Vous êtes</span><div class="svf-chips" data-key="profil" data-label="Profil" data-single data-req data-err="Choisissez une réponse pour continuer."><button type="button" aria-pressed="false">Artiste</button><button type="button" aria-pressed="false">Directeur·rice artistique</button><button type="button" aria-pressed="false">Influenceur·se</button><button type="button" aria-pressed="false">Agence / production</button></div><span class="svf-ct-err"></span></div>
+              <div class="svf-ct-q"><span class="ql">Pour quel projet ? <span class="hint">Plusieurs choix possibles</span></span><div class="svf-chips" data-key="projet" data-label="Projet"><button type="button" aria-pressed="false">Shooting éditorial</button><button type="button" aria-pressed="false">Clip</button><button type="button" aria-pressed="false">Tapis rouge</button><button type="button" aria-pressed="false">Festival de Cannes</button><button type="button" aria-pressed="false">Campagne</button><button type="button" aria-pressed="false">Scène / tournée</button></div></div>
+              <div class="svf-ct-row">
+                <div class="svf-ct-q"><label for="ct-date">Date</label><input id="ct-date" type="date" data-key="date" data-label="Date"></div>
+                <div class="svf-ct-q"><label for="ct-lieu">Lieu</label><input id="ct-lieu" type="text" data-key="lieu" data-label="Lieu" placeholder="Cannes, Paris, Milan…"></div>
+              </div>
+              <div class="svf-ct-q"><label for="ct-looks">Nombre de looks</label><div class="svf-ct-range"><input id="ct-looks" type="range" min="1" max="20" value="3" data-key="looks" data-label="Nombre de looks"><output>3</output></div></div>
+              <div class="svf-ct-q"><span class="ql">Budget pièces et stylisme</span><div class="svf-chips" data-key="budget-pro" data-label="Budget" data-single><button type="button" aria-pressed="false">Moins de 1 000 €</button><button type="button" aria-pressed="false">1 000 – 3 000 €</button><button type="button" aria-pressed="false">3 000 – 8 000 €</button><button type="button" aria-pressed="false">Plus de 8 000 €</button></div></div>
+              <div class="svf-ct-q"><label for="ct-refs">Références ou moodboard <span class="hint">Lien Pinterest, Drive ou Instagram</span></label><input id="ct-refs" type="url" data-key="refs" data-label="Références" placeholder="https://…"></div>
+              <div class="svf-ct-q"><label for="ct-msg-pro">Votre projet en quelques mots</label><textarea id="ct-msg-pro" data-key="msg-pro" data-label="Message" placeholder="Le contexte, l’univers, les contraintes…"></textarea></div>
+            </div>
+
+            <div data-svc-fields="perso" hidden>
+              <div class="svf-ct-q"><span class="ql">Votre objectif</span><div class="svf-chips" data-key="objectif" data-label="Objectif" data-single data-req data-err="Choisissez une réponse pour continuer."><button type="button" aria-pressed="false">Refaire toute ma garde-robe</button><button type="button" aria-pressed="false">Trouver mon style</button><button type="button" aria-pressed="false">Préparer un événement</button><button type="button" aria-pressed="false">Un look pour une occasion</button></div><span class="svf-ct-err"></span></div>
+              <div class="svf-ct-q"><span class="ql">Les allures qui vous attirent <span class="hint">Plusieurs choix possibles</span></span><div class="svf-chips" data-key="styles" data-label="Allures"><button type="button" aria-pressed="false">Minimal</button><button type="button" aria-pressed="false">Tailoring</button><button type="button" aria-pressed="false">Vintage 70s</button><button type="button" aria-pressed="false">Romantique</button><button type="button" aria-pressed="false">Rock</button><button type="button" aria-pressed="false">Streetwear</button><button type="button" aria-pressed="false">Je ne sais pas encore</button></div></div>
+              <div class="svf-ct-q"><span class="ql">Où se voir ?</span><div class="svf-chips" data-key="format" data-label="Rendez-vous" data-single><button type="button" aria-pressed="false">En atelier</button><button type="button" aria-pressed="false">À domicile</button><button type="button" aria-pressed="false">En visio</button></div></div>
+              <div class="svf-ct-row">
+                <div class="svf-ct-q"><label for="ct-tailles">Vos tailles</label><input id="ct-tailles" type="text" data-key="tailles" data-label="Tailles" placeholder="Haut M · Bas 40 · Pointure 39"></div>
+                <div class="svf-ct-q"><label for="ct-quand">Pour quand ?</label><input id="ct-quand" type="text" data-key="quand" data-label="Échéance" placeholder="Dès que possible, avant juin…"></div>
+              </div>
+              <div class="svf-ct-q"><span class="ql">Budget global</span><div class="svf-chips" data-key="budget-perso" data-label="Budget" data-single><button type="button" aria-pressed="false">Moins de 300 €</button><button type="button" aria-pressed="false">300 – 800 €</button><button type="button" aria-pressed="false">800 – 2 000 €</button><button type="button" aria-pressed="false">Plus de 2 000 €</button></div></div>
+              <div class="svf-ct-q"><label for="ct-msg-perso">Parlez-nous de vous</label><textarea id="ct-msg-perso" data-key="msg-perso" data-label="Message" placeholder="Votre quotidien, ce que vous aimez porter, ce qui ne vous ressemble plus…"></textarea></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="svf-ct-fs">
+            <div class="svf-ct-step"><span class="n">03</span><h2>Vous</h2></div>
+            <div class="svf-ct-row">
+              <div class="svf-ct-q"><label for="ct-name">Prénom et nom</label><input id="ct-name" type="text" name="contact[name]" autocomplete="name" data-key="name" data-label="Nom" data-req data-err="Indiquez votre prénom et votre nom." placeholder="Camille Durand"><span class="svf-ct-err"></span></div>
+              <div class="svf-ct-q"><label for="ct-email">E-mail</label><input id="ct-email" type="email" name="contact[email]" autocomplete="email" data-key="email" data-label="E-mail" data-req data-err="Indiquez une adresse e-mail valide, par exemple nom@domaine.fr." placeholder="nom@domaine.fr"><span class="svf-ct-err"></span></div>
+            </div>
+            <div class="svf-ct-row">
+              <div class="svf-ct-q"><label for="ct-tel">Téléphone <span class="hint">facultatif</span></label><input id="ct-tel" type="tel" name="contact[phone]" autocomplete="tel" data-key="tel" data-label="Téléphone" placeholder="06 12 34 56 78"></div>
+              <div class="svf-ct-q"><label for="ct-ig">Instagram <span class="hint">facultatif</span></label><input id="ct-ig" type="text" data-key="ig" data-label="Instagram" placeholder="@votrecompte"></div>
+            </div>
+            <div class="svf-ct-q"><span class="ql">On vous recontacte par</span><div class="svf-chips" data-key="pref" data-label="Contact préféré" data-single><button type="button" aria-pressed="false">E-mail</button><button type="button" aria-pressed="false">Téléphone</button><button type="button" aria-pressed="false">Instagram</button></div></div>
+          </fieldset>
+          {%- if form.errors -%}<p class="svf-ct-err" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+          <button class="svf-ct-submit" type="submit">Envoyer ma demande</button>
+        </div>
+        <aside class="svf-ct-brief" aria-live="polite">
+          <p class="svf-mono svf-muted">Votre brief</p>
+          <h3>—</h3>
+          <div class="svf-ct-prog" aria-hidden="true"><span></span></div>
+          <dl></dl>
+          <div class="svf-ct-direct">
+            <span class="svf-mono svf-muted">Ou directement</span>
+            {%- if section.settings.instagram_url != blank -%}<a class="svf-mono" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Instagram · {{ section.settings.instagram_handle }}</a>{%- endif -%}
+            {%- if section.settings.email != blank -%}<span class="svf-mono">{{ section.settings.email }}</span>{%- endif -%}
+          </div>
+        </aside>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Contact",
+  "tag": "div",
+  "class": "svf-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Surtitre", "default": "(Contact) · Sur rendez-vous" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Parlons de votre" },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "allure." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Deux façons de travailler avec SoVintage : la recherche et le stylisme pour vos projets, ou un accompagnement complet pour repenser votre style. Choisissez, répondez à quelques questions, votre brief se compose à droite.</p>" },
+    { "type": "header", "content": "Recherche & Styling" },
+    { "type": "image_picker", "id": "image_pro", "label": "Image" },
+    { "type": "textarea", "id": "pro_text", "label": "Texte", "default": "Pour les artistes, directeurs et directrices artistiques, influenceurs. Nous cherchons, sélectionnons et stylisons les pièces de vos shootings, clips et événements, du tapis rouge cannois aux scènes de festival." },
+    { "type": "text", "id": "pro_tags", "label": "Étiquettes (séparées par des virgules)", "default": "Shooting, Clip, Tapis rouge, Festival de Cannes, Campagne" },
+    { "type": "header", "content": "Accompagnement sur mesure" },
+    { "type": "image_picker", "id": "image_perso", "label": "Image" },
+    { "type": "textarea", "id": "perso_text", "label": "Texte", "default": "Pour celles et ceux qui veulent refaire leur style de A à Z : analyse de votre garde-robe, recherche de pièces de seconde main et créations SoVintage, jusqu’à une allure qui vous ressemble." },
+    { "type": "text", "id": "perso_tags", "label": "Étiquettes (séparées par des virgules)", "default": "Garde-robe complète, Style personnel, Événement, Pièces uniques" },
+    { "type": "header", "content": "Contact direct et confirmation" },
+    { "type": "text", "id": "instagram_handle", "label": "Compte Instagram", "default": "@sovintagefrip" },
+    { "type": "text", "id": "instagram_url", "label": "Lien Instagram", "default": "https://www.instagram.com/sovintagefrip/" },
+    { "type": "text", "id": "email", "label": "E-mail affiché" },
+    { "type": "text", "id": "done_title", "label": "Confirmation · titre", "default": "Merci." },
+    { "type": "text", "id": "done_em", "label": "Confirmation · titre (italique)", "default": "Votre brief est bien arrivé." },
+    { "type": "richtext", "id": "done_text", "label": "Confirmation · texte", "default": "<p>Nous revenons vers vous rapidement pour en parler.</p>" }
+  ],
+  "presets": [{ "name": "SVF · Contact" }]
+}
+{% endschema %}

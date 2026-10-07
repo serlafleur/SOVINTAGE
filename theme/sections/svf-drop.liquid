@@ -1,0 +1,79 @@
+<section class="svf svf-drop" data-svf="drop" id="svf-drop" aria-labelledby="svf-drop-{{ section.id }}" style="padding-top: clamp(40px, 6vw, 90px);">
+  <header class="svf-head">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<p class="svf-mono svf-muted">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="svf-h svf-rv" id="svf-drop-{{ section.id }}">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h2>
+      <div class="svf-copy">{{ section.settings.text }}</div>
+    </div>
+    {%- if section.settings.hint != blank -%}<p class="svf-mono svf-muted">{{ section.settings.hint }}</p>{%- endif -%}
+  </header>
+  <div class="svf-rail" role="list">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign p = block.settings.product
+        assign cta_url = ''
+        assign cta_label = ''
+        if p != blank
+          assign cta_url = p.url
+          assign cta_label = section.settings.product_label
+        endif
+      -%}
+      <article class="svf-card" role="listitem" {{ block.shopify_attributes }}>
+        <div class="svf-card-media" data-base="{% render 'svf-frame-url', sig: block.settings.sig, frame: 1 %}">
+          <img src="{% render 'svf-frame-url', sig: block.settings.sig, frame: 1 %}" alt="Cravate Signature {{ block.settings.name | escape }}" width="800" height="1200" loading="lazy">
+          <span class="svf-card-tag svf-mono">Signature {{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="svf-card-turn svf-mono">360°</span>
+          {%- if cta_url != blank -%}<a class="svf-card-cta" href="{{ cta_url }}">{{ cta_label }}</a>{%- endif -%}
+        </div>
+        <div class="svf-card-info">
+          <h3 class="svf-card-name">{%- if p != blank -%}<a href="{{ p.url }}">Cravate Signature <em>{{ block.settings.name }}</em></a>{%- else -%}Cravate Signature <em>{{ block.settings.name }}</em>{%- endif -%}</h3>
+          <p class="svf-card-price svf-mono">
+            {%- if p != blank and p.available -%}{{ p.price | money }}{%- elsif p != blank -%}Épuisée{%- else -%}{{ section.settings.price_placeholder }}{%- endif -%}
+          </p>
+        </div>
+        <p class="svf-card-meta svf-mono">{{ block.settings.meta }}</p>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Le drop",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "01 / Le premier drop" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "20 pièces." },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "Votre signature." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un drop de 20 Cravates Signatures. Trouvez celle qui accompagnera votre allure.</p>" },
+    { "type": "text", "id": "hint", "label": "Indication", "default": "Survolez une cravate pour la faire tourner" },
+    { "type": "text", "id": "price_placeholder", "label": "Texte à la place du prix (sans produit lié)", "default": "Prix au drop" },
+    { "type": "text", "id": "notify_label", "label": "(Inutilisé depuis la sortie du drop)" },
+    { "type": "text", "id": "product_label", "label": "Bouton avec produit lié", "default": "Voir la pièce" }
+  ],
+  "blocks": [
+    {
+      "type": "signature",
+      "name": "Cravate",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom de la Signature", "default": "Ombre" },
+        { "type": "select", "id": "sig", "label": "Rendus 360°", "default": "ombre", "options": [
+          { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+        { "type": "text", "id": "meta", "label": "Détails", "default": "Noir profond · Velours noir" },
+        { "type": "product", "id": "product", "label": "Produit lié", "info": "Affiche le prix et renvoie vers la fiche produit." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "SVF · Le drop",
+    "blocks": [
+      { "type": "signature", "settings": { "name": "Ombre", "sig": "ombre", "meta": "Noir profond · Velours noir" } },
+      { "type": "signature", "settings": { "name": "Brume", "sig": "brume", "meta": "Gris fumé, pointes argent · Jacquard cachemire anthracite" } },
+      { "type": "signature", "settings": { "name": "Sable", "sig": "sable", "meta": "Blond miel, mèches longues · Jacquard ivoire" } },
+      { "type": "signature", "settings": { "name": "Neige", "sig": "neige", "meta": "Blanc neige · Jacquard cachemire argent" } }
+    ]
+  }]
+}
+{% endschema %}

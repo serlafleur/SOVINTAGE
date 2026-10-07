@@ -1,0 +1,226 @@
+<title>SOVINTAGEFRIP mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : banc d'essai — deux téléphones côte à côte sur le vert nuit de la marque (avant / après), puis le détail des changements et l'intégration Shopify */
+:root{
+  --bg:#0B1A10; --surface:#11241A; --fg:#DCE8DF; --muted:#8AA593; --line:#1E3527; --accent:#C9A46A; --ok:#7FC79A; --frame:#050B07;
+  --serif:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F1F5F2;--surface:#FFFFFF;--fg:#14402A;--muted:#4C6B55;--line:#C9D8CD;--accent:#8A6A35;--ok:#1B7A3E;--frame:#0B1A10;color-scheme:light}}
+:root[data-theme="light"]{--bg:#F1F5F2;--surface:#FFFFFF;--fg:#14402A;--muted:#4C6B55;--line:#C9D8CD;--accent:#8A6A35;--ok:#1B7A3E;--frame:#0B1A10;color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);padding-block:clamp(28px,5vw,64px) 72px;display:grid;gap:clamp(48px,7vw,88px)}
+h1,h2,h3,p,ol,ul{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.eyebrow{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
+.label{font-family:var(--sans);font-stretch:125%;font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+
+/* En-tête */
+.intro{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px 56px;align-items:end}
+.intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,7vw,92px);line-height:.92;letter-spacing:-.02em;text-wrap:balance;margin-top:14px}
+.intro h1 em{font-style:italic}
+.intro p{color:var(--muted);max-width:46ch}
+.intro .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-family:var(--mono);font-size:12px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;color:var(--fg)}
+
+/* Banc d'essai */
+.bench{display:grid;gap:22px}
+.bench-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 20px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.seg button{font:500 12px/1 var(--mono);color:var(--muted);background:none;border:0;border-radius:999px;padding:0 14px;min-height:38px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.phones{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,56px);justify-items:center;align-items:start}
+.phone{display:grid;gap:14px;justify-items:center;width:100%}
+.phone figcaption{display:grid;justify-items:center;gap:4px;text-align:center}
+.phone figcaption b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.1}
+.phone figcaption b em{font-style:italic}
+.phone figcaption span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.device{--w:390;--h:844;--s:.8;position:relative;width:calc(var(--w) * var(--s) * 1px + 24px);max-width:100%;padding:12px;border-radius:44px;background:var(--frame);box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.6)}
+.screen{position:relative;width:calc(var(--w) * var(--s) * 1px);height:calc(var(--h) * var(--s) * 1px);border-radius:32px;overflow:hidden;background:#0B1A10}
+.screen iframe{position:absolute;left:0;top:0;width:calc(var(--w) * 1px);height:calc(var(--h) * 1px);border:0;transform:scale(var(--s));transform-origin:0 0;background:#0B1A10}
+.open{font-family:var(--mono);font-size:12px;color:var(--muted);display:inline-flex;align-items:center;min-height:44px}
+.open:hover{color:var(--fg)}
+.tabs{display:none}
+
+/* Changements */
+.sec-h{display:grid;gap:10px;max-width:60ch;margin-bottom:26px}
+.sec-h h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.4vw,52px);line-height:1;letter-spacing:-.015em;text-wrap:balance}
+.sec-h h2 em{font-style:italic}
+.sec-h p{color:var(--muted)}
+.changes{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.changes li{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:14px;padding:18px 0;border-bottom:1px solid var(--line);min-width:0}
+.changes li:nth-child(odd){padding-right:28px}
+.changes li:nth-child(even){padding-left:28px;border-left:1px solid var(--line)}
+.changes h3{font-family:var(--sans);font-stretch:125%;font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding-top:3px}
+.changes p{min-width:0}
+.changes .was{display:block;color:var(--muted);font-size:13.5px;margin-bottom:4px}
+.changes .was::before{content:"Avant · ";font-family:var(--mono);font-size:11.5px}
+
+/* Intégration */
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:s}
+.steps li{display:grid;align-content:start;gap:10px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:4px;min-width:0;counter-increment:s}
+.steps li::before{content:"Étape " counter(s);font-family:var(--mono);font-size:12px;color:var(--accent)}
+.steps h3{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.15}
+.steps p{color:var(--muted);font-size:14px}
+.code{position:relative;margin:4px 0 0;padding:12px 12px 12px 12px;background:var(--bg);border:1px solid var(--line);border-radius:3px;font:12px/1.6 var(--mono);overflow-x:auto;white-space:pre;color:var(--fg)}
+.copy{justify-self:start;font:500 12px/1 var(--mono);color:var(--fg);background:none;border:1px solid var(--line);border-radius:999px;padding:0 14px;min-height:38px;cursor:pointer}
+.copy:hover{border-color:var(--fg)}
+.files{font-family:var(--mono);font-size:12.5px;color:var(--fg)}
+.files span{color:var(--muted)}
+.notes{display:grid;gap:8px;color:var(--muted);font-size:14px;max-width:80ch;padding-left:18px}
+.notes b{color:var(--fg);font-weight:500}
+
+@media (max-width:900px){
+  .intro{grid-template-columns:1fr}
+  .phones{grid-template-columns:1fr}
+  .tabs{display:inline-flex}
+  .phones[data-show="avant"] .phone[data-k="apres"],.phones[data-show="apres"] .phone[data-k="avant"]{display:none}
+  .changes{grid-template-columns:1fr}
+  .changes li:nth-child(n){padding-left:0;padding-right:0;border-left:0}
+  .steps{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .changes li{grid-template-columns:1fr;gap:6px}
+  .device{padding:8px;border-radius:36px}
+  .screen{border-radius:28px}
+}
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <div>
+      <p class="eyebrow">SOVINTAGEFRIP · thème « Crépuscule 360 » · accueil</p>
+      <h1>La version <em>mobile.</em></h1>
+    </div>
+    <div>
+      <p>À gauche, l’accueil tel que le thème Shopify l’affiche aujourd’hui sur téléphone. À droite, le même accueil avec la couche mobile : mêmes sections, mêmes réglages, mêmes produits. Les deux écrans sont interactifs : faites défiler, glissez le lookbook, ouvrez le menu.</p>
+      <div class="facts"><span class="chip">2 fichiers ajoutés</span><span class="chip">2 lignes dans svf-header</span><span class="chip">bureau inchangé</span></div>
+    </div>
+  </header>
+
+  <section class="bench" aria-labelledby="bench-h">
+    <h2 id="bench-h" class="label" style="color:var(--muted)">Comparer sur téléphone</h2>
+    <div class="bench-bar">
+      <div class="seg" role="group" aria-label="Largeur d’écran">
+        <button type="button" data-w="360" aria-pressed="false">360 px</button>
+        <button type="button" data-w="390" aria-pressed="true">390 px</button>
+        <button type="button" data-w="430" aria-pressed="false">430 px</button>
+      </div>
+      <div class="seg tabs" role="group" aria-label="Version affichée">
+        <button type="button" data-show="apres" aria-pressed="true">Après</button>
+        <button type="button" data-show="avant" aria-pressed="false">Avant</button>
+      </div>
+    </div>
+    <div class="phones" id="phones" data-show="apres">
+      <figure class="phone" data-k="avant" style="margin:0">
+        <div class="device"><div class="screen"><iframe src="avant.html" title="Accueil SOVINTAGEFRIP, thème actuel sur téléphone" loading="lazy"></iframe></div></div>
+        <figcaption><b>Thème <em>actuel</em></b><span>svf.css + svf.js, sans couche mobile</span><a class="open" href="avant.html" target="_blank" rel="noopener">Ouvrir en plein écran →</a></figcaption>
+      </figure>
+      <figure class="phone" data-k="apres" style="margin:0">
+        <div class="device"><div class="screen"><iframe src="mobile.html" title="Accueil SOVINTAGEFRIP avec la couche mobile" loading="lazy"></iframe></div></div>
+        <figcaption><b>Avec la couche <em>mobile</em></b><span>+ svf-mobile.css + svf-mobile.js</span><a class="open" href="mobile.html" target="_blank" rel="noopener">Ouvrir en plein écran →</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="ch-h">
+    <div class="sec-h">
+      <p class="eyebrow">Ce qui change sous 860 px</p>
+      <h2 id="ch-h">Neuf sections, <em>section par section.</em></h2>
+      <p>Les gestes passent par le défilement natif du téléphone (fluide, même sur un appareil modeste), et rien ne dépend plus du survol.</p>
+    </div>
+    <ul class="changes">
+      <li><h3>En-tête</h3><p><span class="was">le logo et « Panier (0) » se chevauchent à 390 px ; boutons hauts de 17 px.</span>Icône panier avec compteur, cibles de 44 px. Le menu devient une vraie fenêtre : focus déplacé et piégé, page derrière inactive, Échap pour fermer, défilement bloqué.</p></li>
+      <li><h3>Bannière</h3><p><span class="was">titre « Crépuscule » coupé ; défilement automatique sans pause ; deux écrans avant le bouton.</span>Titre ajusté à l’écran, lookbook à faire glisser avec la photo suivante en aperçu, légende et repères synchronisés, bouton visible dès le premier écran.</p></li>
+      <li><h3>Le drop</h3><p><span class="was">« Voir la pièce » n’apparaît qu’au survol, donc jamais au doigt.</span>Bouton toujours visible, toute la carte cliquable, prix lisible, bouton « 360° » qui ouvre la scène sur la bonne Signature.</p></li>
+      <li><h3>Signature 360°</h3><p><span class="was">pastilles de 26 px ; texte secondaire à 3,5:1 sur le bord du dégradé.</span>Pastilles de 68 px de haut, indication « glissez pour faire tourner », caractéristiques en deux colonnes, contraste porté à 4,8:1.</p></li>
+      <li><h3>Silhouettes</h3><p><span class="was">carrousel calculé au pointeur, regards latéraux minuscules.</span>Bande à faire glisser, le look centré passe en couleur et met à jour la fiche (look, Signature, silhouette).</p></li>
+      <li><h3>Sur mesure</h3><p><span class="was">le visuel arrive après les trois services.</span>Le visuel remonte sous le titre, puis les services en accordéon, hauts de 64 px.</p></li>
+      <li><h3>Lettre</h3><p><span class="was">champ e-mail en 14 px : l’iPhone zoome à la saisie.</span>Champ en 16 px, bouton d’envoi de 48 px.</p></li>
+      <li><h3>Partout</h3><p><span class="was">textes à 10,5 px, liens hauts de 20 px, légendes à 4,2:1 dans la bannière.</span>Textes à 11,5 px minimum, liens de 44 px, légendes à 5,2:1, contour de focus de 2 px.</p></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="in-h">
+    <div class="sec-h">
+      <p class="eyebrow">Intégration Shopify</p>
+      <h2 id="in-h">Trois étapes, <em>sans toucher au reste.</em></h2>
+      <p>La couche lit le balisage des sections svf-* existantes. svf.js, svf.css et les réglages de l’éditeur de thème restent tels quels.</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>Ajouter les deux fichiers</h3>
+        <p>Dans le thème « SOVINTAGEFRIP — Crépuscule 360 » : Modifier le code › assets › Ajouter un fichier.</p>
+        <p class="files">assets/svf-mobile.css<br>assets/svf-mobile.js <span>· dépôt GitHub, dossier theme/</span></p>
+      </li>
+      <li>
+        <h3>Charger la couche</h3>
+        <p>Dans sections/svf-header.liquid : la première ligne juste après la balise &lt;/style&gt;, la seconde à la toute fin, avant {% schema %}.</p>
+        <pre class="code" id="snippet">{{ 'svf-mobile.css' | asset_url | stylesheet_tag }}
+&lt;script src="{{ 'svf-mobile.js' | asset_url }}" defer&gt;&lt;/script&gt;</pre>
+        <button class="copy" type="button" id="copyBtn">Copier les deux lignes</button>
+      </li>
+      <li>
+        <h3>Vérifier sur téléphone</h3>
+        <p>Aperçu du thème depuis un téléphone : bannière, menu, drop, scène 360°. Le bureau ne change pas : la couche ne s’applique qu’en dessous de 860 px.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="nt-h">
+    <h2 id="nt-h" class="label" style="color:var(--muted);margin-bottom:14px">À savoir sur cet aperçu</h2>
+    <ul class="notes">
+      <li><b>Rendu fidèle :</b> les écrans sont générés à partir des fichiers Liquid du thème et des réglages de l’accueil, avec les quatre Cravates Signatures de la boutique (40,00 €).</li>
+      <li><b>Photos :</b> huit photos sont disponibles ici. Les looks et visuels Instagram qui utilisent d’autres photos de la boutique affichent le visuel de cravate prévu par la section en remplacement.</li>
+      <li><b>Hors aperçu :</b> le pied de page Horizon, le panier et les fiches produit ne sont pas simulés ; les boutons y mènent à des ancres.</li>
+      <li><b>Autres pages :</b> l’en-tête mobile s’applique partout ; les pages Collection, Look, Contact et Signature gardent leurs styles mobiles actuels, à revoir dans un second temps.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(function () {
+  var phones = document.getElementById("phones");
+  var devices = Array.prototype.slice.call(document.querySelectorAll(".device"));
+  var W = 390;
+  function scale() {
+    devices.forEach(function (d) {
+      var avail = d.parentElement.clientWidth - 24;
+      var byW = avail / W, byH = (window.innerHeight * 0.82) / 844;
+      var s = Math.max(0.42, Math.min(0.92, byW, Math.max(byH, 0.62)));
+      d.style.setProperty("--w", W); d.style.setProperty("--s", s.toFixed(3));
+    });
+  }
+  document.querySelectorAll("[data-w]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      W = +b.dataset.w;
+      document.querySelectorAll("[data-w]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      scale();
+    });
+  });
+  document.querySelectorAll("[data-show]").forEach(function (b) {
+    if (b.tagName !== "BUTTON") return;
+    b.addEventListener("click", function () {
+      phones.dataset.show = b.dataset.show;
+      document.querySelectorAll("button[data-show]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      scale();
+    });
+  });
+  window.addEventListener("resize", scale);
+  scale();
+  var btn = document.getElementById("copyBtn"), code = document.getElementById("snippet");
+  btn.addEventListener("click", function () {
+    var txt = code.textContent;
+    var done = function () { btn.textContent = "Copié"; setTimeout(function () { btn.textContent = "Copier les deux lignes"; }, 2000); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(code); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Sélectionné : Ctrl+C pour copier"; };
+    try { navigator.clipboard.writeText(txt).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>

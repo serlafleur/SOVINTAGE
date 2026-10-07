@@ -1,0 +1,33 @@
+{%- comment -%} Page 404 : « 4 [cravate] 4 », la Signature tourne avec le pointeur. {%- endcomment -%}
+{%- capture b1 -%}{% render 'svf-frame-url', sig: 'ombre', frame: 1 %}{%- endcapture -%}
+{%- capture b2 -%}{% render 'svf-frame-url', sig: 'brume', frame: 1 %}{%- endcapture -%}
+{%- capture b3 -%}{% render 'svf-frame-url', sig: 'sable', frame: 1 %}{%- endcapture -%}
+{%- capture b4 -%}{% render 'svf-frame-url', sig: 'neige', frame: 1 %}{%- endcapture -%}
+<section class="svf svf-nf" data-svf="nf" aria-labelledby="svf-nf-{{ section.id }}">
+  <div class="svf-nf-code" aria-label="Erreur 404"><span aria-hidden="true">4</span><span class="svf-nf-tie" aria-hidden="true"><img data-nf-img data-bases="{{ b1 }}|{{ b2 }}|{{ b3 }}|{{ b4 }}" data-names="Ombre|Brume|Sable|Neige" src="{{ b1 }}" alt="" width="800" height="1200"></span><em aria-hidden="true">4</em></div>
+  <p class="svf-mono svf-muted" data-nf-cap>Signature Ombre · faites-la tourner</p>
+  <h1 class="svf-nf-h" id="svf-nf-{{ section.id }}">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h1>
+  <div class="svf-copy">{{ section.settings.text }}</div>
+  <div class="svf-nf-links">
+    <a class="is-main" href="{{ routes.root_url }}">Retour à l’accueil</a>
+    <a href="{{ routes.root_url }}#svf-drop">Le premier drop</a>
+    <a href="{{ section.settings.collection_link | default: '/pages/collection' }}">La collection</a>
+    <a href="{{ section.settings.contact_link | default: '/pages/contact' }}">Nous écrire</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Page 404",
+  "tag": "div",
+  "class": "svf-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Cette pièce a déjà" },
+    { "type": "text", "id": "heading_em", "label": "Titre (italique)", "default": "trouvé preneur." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>La page que vous cherchez n’existe pas, ou plus. Comme nos pièces uniques, elle est peut-être partie avec quelqu’un d’autre.</p>" },
+    { "type": "text", "id": "collection_link", "label": "Adresse de la collection", "default": "/pages/collection" },
+    { "type": "text", "id": "contact_link", "label": "Adresse du contact", "default": "/pages/contact" }
+  ],
+  "presets": [{ "name": "SVF · Page 404" }]
+}
+{% endschema %}

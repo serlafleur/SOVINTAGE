@@ -1,0 +1,145 @@
+{%- comment -%}
+  Page d'un look : la tenue complète (photo) se décompose en pièces. Chaque pièce est un bloc ;
+  liée à un produit, elle affiche son prix, ses tailles (variantes) et part dans le panier Shopify.
+{%- endcomment -%}
+<section class="svf svf-lk" data-svf="look" aria-labelledby="svf-lk-{{ section.id }}">
+  <div class="svf-lk-bar">
+    <a class="svf-mono" href="{{ section.settings.collection_link | default: '/pages/collection' }}">← (Retour à la collection)</a>
+    <span class="svf-mono svf-muted">{{ section.settings.kicker }}</span>
+  </div>
+  <div class="svf-lk-grid">
+    <div class="svf-lk-left">
+      <div class="svf-lk-stage">
+        <div class="svf-lk-photo">
+          {%- if section.settings.photo != blank -%}
+            {{ section.settings.photo | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 1000, 1400', sizes: '(min-width: 861px) 45vw, 100vw', alt: section.settings.photo.alt }}
+          {%- else -%}
+            <span class="svf-lk-fallback"><img src="{% render 'svf-frame-url', sig: section.settings.fallback_sig, frame: 1 %}" alt="" width="800" height="1200"></span>
+          {%- endif -%}
+        </div>
+        <div class="svf-lk-pieces">
+          {%- for b in section.blocks -%}
+            <button type="button" class="svf-lk-card" style="--i:{{ forloop.index0 }}" aria-label="{{ b.settings.name | escape }}">
+              <span class="svf-lk-vis">
+                {%- if b.settings.image != blank -%}
+                  {{ b.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}
+                {%- elsif b.settings.visual contains 'tie-' -%}
+                  {%- assign tsig = b.settings.visual | remove: 'tie-' -%}
+                  <img src="{% render 'svf-frame-url', sig: tsig, frame: 1 %}" alt="" width="800" height="1200" loading="lazy">
+                {%- else -%}
+                  <span class="svf-lk-svg" data-svf-garment="{{ b.settings.visual }}" data-color="{{ b.settings.color }}"{% if b.settings.tweed %} data-tweed{% endif %}{% if b.settings.fur != blank %} data-fur="{{ b.settings.fur }}"{% endif %}></span>
+                {%- endif -%}
+              </span>
+              <span class="svf-lk-lab svf-mono">{{ b.settings.name }}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="svf-lk-modes" role="group" aria-label="Affichage de la tenue">
+        <button type="button" data-lk-full aria-pressed="true">Tenue complète</button>
+        <button type="button" data-lk-dec aria-pressed="false">Pièce par pièce</button>
+      </div>
+    </div>
+
+    <div class="svf-lk-info">
+      <h1 class="svf-lk-name" id="svf-lk-{{ section.id }}">{{ section.settings.name }}<em>.</em></h1>
+      <div class="svf-copy">{{ section.settings.description }}</div>
+      <div>
+        <p class="svf-label svf-muted" style="margin-bottom:10px">Composer sa tenue</p>
+        <ul class="svf-lk-list">
+          {%- for b in section.blocks -%}
+            {%- liquid
+              assign p = b.settings.product
+              assign cents = 0
+              assign variants = ''
+              assign sizes = ''
+              if p != blank
+                assign cents = p.price
+                if p.has_only_default_variant
+                  assign variants = p.selected_or_first_available_variant.id
+                else
+                  for v in p.variants
+                    assign variants = variants | append: v.id
+                    assign sizes = sizes | append: v.title
+                    unless forloop.last
+                      assign variants = variants | append: '|'
+                      assign sizes = sizes | append: '|'
+                    endunless
+                  endfor
+                endif
+              else
+                assign cents = b.settings.price | plus: 0 | times: 100
+              endif
+              if sizes == ''
+                assign parts = b.settings.sizes | split: ','
+                for s in parts
+                  assign s2 = s | strip
+                  assign sizes = sizes | append: s2
+                  unless forloop.last
+                    assign sizes = sizes | append: '|'
+                  endunless
+                endfor
+              endif
+            -%}
+            <li class="svf-lk-row" data-name="{{ b.settings.name | escape }}" data-og="{{ b.settings.origin | escape }}" data-mat="{{ b.settings.material | escape }}" data-sizes="{{ sizes | escape }}" data-price="{{ cents }}"{% if variants != '' %} data-variants="{{ variants }}"{% endif %} {{ b.shopify_attributes }}>
+              <input type="checkbox" checked aria-label="Inclure {{ b.settings.name | escape }}">
+              <div><span class="svf-lk-nm">{{ b.settings.name }}</span><br><span class="svf-lk-og">{{ b.settings.origin }}</span></div>
+              <span class="svf-lk-pr">{% if cents > 0 %}{{ cents | money }}{% else %}—{% endif %}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="svf-lk-detail" aria-live="polite" data-empty="Sélectionnez une pièce, dans la liste ou sur la tenue, pour voir sa matière et choisir sa taille."></div>
+      <div class="svf-lk-total"><span class="svf-label" data-lk-count></span><b data-lk-total></b></div>
+      <button class="svf-lk-add" type="button" data-lk-add>Ajouter la sélection au panier</button>
+      <p class="svf-mono svf-muted" data-lk-msg aria-live="polite"></p>
+      <nav class="svf-lk-nav" aria-label="Looks">
+        {%- if section.settings.prev_link != blank -%}<a class="svf-mono" href="{{ section.settings.prev_link }}">← {{ section.settings.prev_label }}</a>{%- else -%}<span></span>{%- endif -%}
+        {%- if section.settings.next_link != blank -%}<a class="svf-mono" href="{{ section.settings.next_link }}">{{ section.settings.next_label }} →</a>{%- endif -%}
+      </nav>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SVF · Look",
+  "tag": "div",
+  "class": "svf-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Surtitre", "default": "(Look 01 / 09) · Crépuscule FW26" },
+    { "type": "text", "id": "name", "label": "Nom du look", "default": "Eliot" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Une veste noire et la Cravate Signature Ombre.</p>" },
+    { "type": "image_picker", "id": "photo", "label": "Photo de la tenue complète (portrait 2:3)" },
+    { "type": "select", "id": "fallback_sig", "label": "Cravate affichée sans photo", "default": "ombre", "options": [ { "value": "ombre", "label": "Ombre" }, { "value": "brume", "label": "Brume" }, { "value": "sable", "label": "Sable" }, { "value": "neige", "label": "Neige" } ] },
+    { "type": "text", "id": "collection_link", "label": "Adresse de la collection", "default": "/pages/collection" },
+    { "type": "text", "id": "prev_label", "label": "Look précédent · nom" },
+    { "type": "text", "id": "prev_link", "label": "Look précédent · adresse" },
+    { "type": "text", "id": "next_label", "label": "Look suivant · nom" },
+    { "type": "text", "id": "next_link", "label": "Look suivant · adresse" }
+  ],
+  "blocks": [
+    {
+      "type": "piece",
+      "name": "Pièce",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Veste de costume noire" },
+        { "type": "select", "id": "origin", "label": "Origine", "default": "Seconde main", "options": [ { "value": "Seconde main", "label": "Seconde main" }, { "value": "Création SoVintage", "label": "Création SoVintage" } ] },
+        { "type": "text", "id": "material", "label": "Matière", "default": "Laine peignée" },
+        { "type": "product", "id": "product", "label": "Produit lié", "info": "Prix, tailles (variantes) et ajout au panier viennent du produit." },
+        { "type": "text", "id": "price", "label": "Prix sans produit lié (en euros)", "default": "120" },
+        { "type": "text", "id": "sizes", "label": "Tailles sans produit lié", "default": "48 · pièce unique", "info": "Séparez les tailles par des virgules : S, M, L" },
+        { "type": "image_picker", "id": "image", "label": "Photo de la pièce (détourée de préférence)" },
+        { "type": "select", "id": "visual", "label": "Illustration sans photo", "default": "blazer", "options": [
+          { "value": "blazer", "label": "Blazer / veste" }, { "value": "jacket", "label": "Veste zippée" }, { "value": "furcoat", "label": "Manteau en fourrure" }, { "value": "trousers", "label": "Pantalon" }, { "value": "skirt", "label": "Jupe" }, { "value": "corset", "label": "Corset" },
+          { "value": "tie-ombre", "label": "Cravate Ombre" }, { "value": "tie-brume", "label": "Cravate Brume" }, { "value": "tie-sable", "label": "Cravate Sable" }, { "value": "tie-neige", "label": "Cravate Neige" } ] },
+        { "type": "color", "id": "color", "label": "Couleur de l’illustration", "default": "#1F1E1D" },
+        { "type": "checkbox", "id": "tweed", "label": "Texture tweed", "default": false },
+        { "type": "color", "id": "fur", "label": "Revers en fourrure (couleur)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SVF · Look", "blocks": [ { "type": "piece" } ] }]
+}
+{% endschema %}

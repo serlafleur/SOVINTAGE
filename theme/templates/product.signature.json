@@ -1,0 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "svf-product",
+      "settings": {
+        "kicker": "Crépuscule FW26",
+        "edition_size": 5,
+        "shipping_note": "Livraison 5 €",
+        "fallback_sig": "ombre",
+        "show_others": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
