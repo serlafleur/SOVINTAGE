@@ -11,6 +11,7 @@ Appliqué au thème non publié **SOVINTAGEFRIP — Crépuscule 360** (ID 211137
 `assets/svf-mobile.css`, `assets/svf-mobile.js`, `sections/svf-header.liquid`, `sections/svf-mission.liquid`, `templates/page.mission.json`, `sections/header-group.json` (menu à quatre liens).
 Page créée et publiée : **Notre mission** (`/pages/notre-mission`, modèle `page.mission`).
 Puis, depuis le commit `473a634` : `sections/svf-hero-studio.liquid` (nouvelle bannière) et `templates/index.json` (bannière studio en tête ; ancienne bannière et Matières désactivées).
+Puis, depuis le commit `ce69b75` : `assets/svf.js`, `sections/svf-look.liquid`, les 9 `templates/page.look-*.json` et `templates/page.collection-looks.json` (vraies pièces, descriptions, conseils d’entretien, pièces vendues).
 
 Le thème en ligne reste **Horizon** : tant que Crépuscule 360 n’est pas publié, ces changements se voient avec l’aperçu du thème
 (`https://sovintagefrip.com/?preview_theme_id=211137102214`). Sous Horizon, la page Notre mission s’affiche avec le modèle de page par défaut et son texte de secours.
@@ -77,6 +78,12 @@ Mise en ligne :
 3. Ajouter le lien dans l’en-tête (voir « Menu : quatre entrées » ci-dessus).
 
 Contenu : les phrases reprennent des textes déjà présents sur le site (accueil, sur mesure, contact). Sont nouveaux et à valider : le libellé « Ce qui nous anime », le titre « Trois façons de faire », les verbes « Retrouver / Créer / Accompagner », les titres des trois engagements et les liaisons de phrase. Tout se modifie dans l’éditeur de thème.
+
+## Pages look
+
+Les pièces viennent de la liste fournie par la marque (7 octobre 2026). Deux pièces sont vendues : **Noir Rebelle** (Eliot) et **Bordeaux Impérial** (Florian). Elles restent affichées avec « Vendu », hors sélection et hors panier.
+Les pièces disponibles n’ont pas encore de produit Shopify : elles affichent « Sur demande » et un lien de réservation vers `/pages/contact`. Pour les vendre en ligne, créer le produit (prix, taille) puis le lier au bloc de la pièce dans l’éditeur ; un produit épuisé s’affiche automatiquement comme vendu.
+Les pantalons et vestes d’exemple de la maquette (avec prix d’exemple) ont été retirés. Les cravates Signature restent liées à leurs produits (40,00 €).
 
 ## Aperçu local
 
